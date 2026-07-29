@@ -1,0 +1,87 @@
+.mosaicSection { background: var(--cream-bg); padding: 0; }
+
+.mosaicGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 38vw);
+  max-height: 820px;
+  gap: 10px;
+  padding: 10px;
+}
+
+.cell { position: relative; overflow: hidden; border-radius: var(--radius-md); }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.2rem;
+  transition: background 0.35s;
+}
+
+.overlay span {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: transparent;
+  transition: color 0.35s;
+  background: rgba(247,245,240,0.9);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+}
+
+.cell:hover .overlay { background: rgba(0,0,0,0.1); }
+.cell:hover .overlay span { color: var(--charcoal); }
+
+.textCell, .featureCell {
+  background: var(--cream-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--cream-border);
+}
+
+.textItalic {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--light-gray);
+  margin-bottom: 0.3rem;
+}
+
+.textHeading {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 0.5rem;
+}
+
+.textSub {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--light-gray);
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .mosaicGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 50vw);
+    max-height: none;
+  }
+}
+@media (max-width: 480px) {
+  .mosaicGrid { grid-template-columns: 1fr; grid-template-rows: none; }
+  .cell { height: 68vw; }
+}

@@ -1,0 +1,170 @@
+.shell {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ── Sidebar ─────────────────────────────────── */
+.sidebar {
+  width: 230px;
+  background: #1A1D27;
+  border-right: 1px solid #2E3247;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 50;
+  transition: width 0.25s ease;
+  overflow: hidden;
+}
+
+.collapsed .sidebar { width: 64px; }
+
+.sideTop { padding: 1.2rem 0.8rem; flex: 1; }
+
+.sideLogoRow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.4rem 0.5rem 1.2rem;
+  border-bottom: 1px solid #2E3247;
+  margin-bottom: 1rem;
+}
+
+.sideLogoText {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #C8912B;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Nav ─────────────────────────────────────── */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  color: #8A8FA8;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.navItem:hover { background: #222535; color: #E8EAED; }
+
+.navItem.active {
+  background: rgba(200,145,43,0.12);
+  color: #C8912B;
+  font-weight: 600;
+}
+
+.navIcon { font-size: 1rem; flex-shrink: 0; width: 20px; text-align: center; }
+.navLabel { overflow: hidden; }
+
+/* ── Sidebar bottom ──────────────────────────── */
+.sideBottom {
+  padding: 1rem 0.8rem;
+  border-top: 1px solid #2E3247;
+}
+
+.adminInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.8rem;
+}
+
+.adminAvatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #C8912B;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.adminName {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #E8EAED;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adminEmail {
+  font-size: 0.65rem;
+  color: #8A8FA8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logoutBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  color: #8A8FA8;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.logoutBtn:hover { background: rgba(224,85,85,0.1); color: #E05555; }
+
+/* ── Collapse toggle ─────────────────────────── */
+.collapseBtn {
+  position: fixed;
+  left: 230px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 22px; height: 22px;
+  background: #2E3247;
+  border: 1px solid #3A3F5C;
+  border-radius: 50%;
+  color: #8A8FA8;
+  font-size: 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 51;
+  transition: left 0.25s ease;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.collapsed .collapseBtn { left: 64px; }
+.collapseBtn:hover { background: #C8912B; color: #fff; border-color: #C8912B; }
+
+/* ── Main ────────────────────────────────────── */
+.main {
+  flex: 1;
+  margin-left: 230px;
+  padding: 2rem 2.5rem;
+  min-height: 100vh;
+  background: #0F1117;
+  transition: margin-left 0.25s ease;
+}
+
+.collapsed .main { margin-left: 64px; }
+
+@media (max-width: 768px) {
+  .sidebar { width: 64px; }
+  .main { margin-left: 64px; padding: 1.5rem 1rem; }
+  .collapseBtn { display: none; }
+}

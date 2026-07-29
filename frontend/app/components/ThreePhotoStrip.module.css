@@ -1,0 +1,92 @@
+.section {
+  background: var(--cream, #F5F0E8);
+  padding: 5rem 0;
+  border-top: 1px solid var(--cream-border, #E2DDD5);
+  border-bottom: 1px solid var(--cream-border, #E2DDD5);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2.8rem;
+}
+
+.eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--terracotta, #C86D51);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.title {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+  font-weight: 600;
+  color: #1C1917;
+  letter-spacing: -0.01em;
+}
+
+/* ── 3-COLUMN SHARP SQUARE GRID (ZERO BORDER RADIUS) ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.photoCard {
+  background: #FFFFFF;
+  border-radius: 0;
+  overflow: hidden;
+  border: 1px solid #E2DDD5;
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.photoCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--terracotta, #C86D51);
+}
+
+.imgWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.imgWrap img {
+  transition: transform 0.5s ease;
+}
+
+.photoCard:hover .imgWrap img {
+  transform: scale(1.04);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 18, 16, 0.75) 0%, transparent 45%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.cardTitle {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

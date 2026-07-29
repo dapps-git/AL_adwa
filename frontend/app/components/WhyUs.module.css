@@ -1,0 +1,103 @@
+.section { background: var(--cream-bg); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.title {
+  margin: 0.6rem 0 1rem;
+  font-size: clamp(2rem, 3.5vw, 3rem) !important;
+}
+
+.reasonsList {
+  list-style: none;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.reasonItem {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.rIcon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rTitle {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 0.3rem;
+}
+
+.rDesc {
+  font-size: 0.82rem;
+  color: var(--mid-gray);
+  line-height: 1.65;
+}
+
+/* Photo Mosaic */
+.mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.mosaicCell {
+  position: relative;
+  border-radius: 80px 80px 14px 14px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1.2;
+  transition: var(--transition);
+}
+
+.mosaicCell:hover { transform: translateY(-4px); }
+
+.cellTall {
+  grid-row: 1 / 3;
+  aspect-ratio: auto;
+}
+
+.mosaicTag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(247,245,240,0.9);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  color: var(--charcoal);
+}
+
+.caption {
+  font-family: var(--font-accent);
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+}
+
+.captionSub {
+  font-size: 0.8rem;
+  color: var(--mid-gray);
+}
+
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; gap: 3rem; }
+}

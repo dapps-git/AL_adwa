@@ -1,0 +1,121 @@
+.services {
+  background: var(--blush);
+  padding: 5rem 0 5.5rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.heading {
+  font-size: clamp(0.85rem, 2vw, 1.1rem) !important;
+  letter-spacing: 0.3em !important;
+}
+
+/* 3-column image card grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  margin-bottom: 3.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+}
+
+.imgWrap {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+/* subtle warm overlay on images */
+.imgOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(212, 191, 176, 0.12);
+  transition: background var(--transition);
+}
+.card:hover .imgOverlay { background: rgba(212, 191, 176, 0.0); }
+
+.cardBody {
+  padding: 1.5rem 1.2rem 1.8rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardTitle {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 0.5rem;
+}
+
+.cardRule {
+  width: 24px;
+  height: 1px;
+  background: var(--dusty);
+  margin: 0 auto 0.8rem;
+}
+
+.cardDesc {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+  flex: 1;
+}
+
+.cardBtn {
+  font-size: 0.55rem !important;
+  letter-spacing: 0.2em !important;
+  padding: 0.55rem 1.4rem !important;
+  border: 1px solid var(--dusty) !important;
+  color: var(--mid) !important;
+  margin-top: auto;
+}
+.cardBtn:hover {
+  background: var(--charcoal) !important;
+  border-color: var(--charcoal) !important;
+  color: var(--white) !important;
+}
+
+/* Service pills list */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 0.8rem;
+}
+.pill {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--blush-mid);
+  background: var(--warm-white);
+  transition: var(--transition);
+}
+.pill:hover {
+  background: var(--charcoal);
+  color: var(--white);
+  border-color: var(--charcoal);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 540px) {
+  .grid { grid-template-columns: 1fr; }
+}

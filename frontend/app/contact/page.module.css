@@ -1,0 +1,350 @@
+.main {
+  background: var(--cream);
+}
+
+/* ── 1. HERO SECTION ───────────────────────────── */
+.hero {
+  position: relative;
+  height: 65vh;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 18, 16, 0.4) 0%, rgba(20, 18, 16, 0.65) 100%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  line-height: 1.1;
+  color: #FFFFFF;
+}
+
+.heroSub {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.heroBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 2.2rem;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  transition: all 0.35s ease;
+  margin-top: 0.5rem;
+}
+
+.heroBtn:hover {
+  background: #FFFFFF;
+  color: var(--charcoal);
+  transform: translateY(-2px);
+}
+
+/* ── 2. GET IN TOUCH + FORM ────────────────────── */
+.contactSection {
+  padding: 6.5rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4.5rem;
+  align-items: start;
+}
+
+.eyebrow {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--light);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--charcoal);
+  margin-bottom: 1.2rem;
+}
+
+.desc {
+  font-size: 0.88rem;
+  color: var(--mid);
+  line-height: 1.85;
+  margin-bottom: 2rem;
+}
+
+.infoBlock {
+  margin-bottom: 1.4rem;
+}
+
+.blockLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 0.2rem;
+}
+
+.blockVal {
+  font-size: 0.88rem;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+.link {
+  color: var(--terracotta);
+  transition: color 0.2s;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.socialRow {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.socialRow a {
+  font-size: 1rem;
+  color: var(--mid);
+  transition: color 0.25s;
+}
+
+.socialRow a:hover {
+  color: var(--terracotta);
+}
+
+/* White Form Card */
+.formCard {
+  background: #FFFFFF;
+  padding: 3rem;
+  border-radius: 24px;
+  border: 1px solid var(--cream-border);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.03);
+}
+
+.formTitle {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--charcoal);
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--charcoal);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #E2DDD5;
+  padding: 0.8rem 0;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.input:focus {
+  border-bottom-color: var(--charcoal);
+}
+
+.input::placeholder {
+  color: var(--light);
+}
+
+.submitBtn {
+  align-self: center;
+  padding: 0.75rem 2.8rem;
+  background: var(--charcoal);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  margin-top: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.submitBtn:hover {
+  background: var(--terracotta);
+}
+
+.success {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.success span {
+  font-size: 2rem;
+  color: var(--terracotta);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.success h4 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.success p {
+  font-size: 0.85rem;
+  color: var(--mid);
+}
+
+/* ── 3. 4 ARCH FEATURE CARDS GRID ───────────────────── */
+.archSection {
+  padding-bottom: 5rem;
+}
+
+.archGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+}
+
+.archCard {
+  position: relative;
+  aspect-ratio: 1 / 1.35;
+  border-radius: 120px 120px 16px 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.archOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 18, 16, 0.75) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.archOverlay span {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+/* ── 4. MAP SECTION ──────────────────────────── */
+.mapSection {
+  padding-bottom: 6.5rem;
+}
+
+.mapWrap {
+  position: relative;
+  border-radius: 180px;
+  overflow: hidden;
+  border: 1px solid var(--cream-border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+}
+
+.mapBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(226, 221, 213, 0.8);
+}
+
+.mapBadge span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .archGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mapWrap {
+    border-radius: 40px;
+  }
+}
+
+@media (max-width: 540px) {
+  .archGrid {
+    grid-template-columns: 1fr;
+  }
+  .formCard {
+    padding: 2rem 1.5rem;
+  }
+}

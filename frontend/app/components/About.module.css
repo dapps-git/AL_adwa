@@ -1,0 +1,232 @@
+.about {
+  background: var(--cream-bg);
+}
+
+.topLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.counter {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--light-gray);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+/* ── Image Stack ──────────────────────────────── */
+.imgStack {
+  position: relative;
+}
+
+.mainImgWrap {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 140px 140px 24px 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Overlay card — bottom left floating */
+.overlayCard {
+  position: absolute;
+  bottom: 60px;
+  left: -32px;
+  background: var(--cream-card);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--cream-border);
+  max-width: 230px;
+}
+
+.overlayImgWrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.overlayNum {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--charcoal);
+  display: block;
+  line-height: 1;
+}
+
+.overlayLabel {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--mid-gray);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+/* Location pill */
+.locationPill {
+  position: absolute;
+  top: 24px;
+  right: -16px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--charcoal);
+  color: var(--white);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+}
+
+/* ── Text Content ──────────────────────────────── */
+.content {
+  padding-top: 1rem;
+}
+
+.title {
+  font-size: clamp(2rem, 3.5vw, 3.2rem) !important;
+  margin-bottom: 1.5rem;
+  line-height: 1.15 !important;
+}
+
+.lead {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.body {
+  font-size: 0.9rem;
+  color: var(--mid-gray);
+  line-height: 1.75;
+  margin-bottom: 1.8rem;
+}
+
+.highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+.hItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--charcoal);
+  font-weight: 500;
+}
+
+.hDot {
+  color: var(--amber);
+  font-size: 0.65rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* Contact bar */
+.contactBar {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--cream-border);
+}
+
+.contactItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cLabel {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--light-gray);
+}
+
+.cVal {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background: var(--cream-border);
+  flex-shrink: 0;
+}
+
+/* ── Mission Strip ──────────────────────────────── */
+.missionStrip {
+  background: var(--charcoal);
+  border-radius: var(--radius-lg);
+  padding: 3rem 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.missionText {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.4;
+}
+
+.missionText span {
+  color: var(--amber);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .overlayCard {
+    left: 0;
+    bottom: 24px;
+  }
+
+  .locationPill {
+    right: 0;
+  }
+
+  .missionStrip {
+    flex-direction: column;
+    padding: 2.5rem;
+    text-align: center;
+  }
+}

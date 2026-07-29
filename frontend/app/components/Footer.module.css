@@ -1,0 +1,172 @@
+.footer {
+  background: #161412;
+  color: #E8EAED;
+  padding-top: 4rem;
+}
+
+.topCta {
+  text-align: center;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ctaTagline {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--terracotta-light, #E8A88A);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.ctaTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+}
+
+.line {
+  width: 40px;
+  height: 1px;
+  background: var(--terracotta);
+  margin: 1.2rem auto;
+}
+
+.ctaSub {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.8rem;
+}
+
+.phoneNum {
+  font-family: 'Nirmala UI', 'Segoe UI', system-ui, sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: color 0.25s ease;
+}
+
+.phoneNum:hover {
+  color: var(--terracotta);
+}
+
+/* ── MAIN 3-COLUMN ROW ────────────────────────────── */
+.mainRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.colHeader {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-bottom: 0.6rem;
+}
+
+.lineSmall {
+  width: 24px;
+  height: 1px;
+  background: var(--terracotta);
+  margin-bottom: 1.4rem;
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.navLinks a {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.navLinks a:hover {
+  color: #FFFFFF;
+}
+
+/* Social Row: Icons Only in Single Horizontal Line */
+.socialRowIcons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding-top: 0.2rem;
+  flex-wrap: wrap;
+}
+
+.socialIconOnly {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--terracotta);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.socialIconOnly:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* Location Info Row with Standard SVG Icons */
+.locationInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.locItemRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Nirmala UI', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.locItemRow svg {
+  flex-shrink: 0;
+}
+
+/* ── BOTTOM BAR ───────────────────────────────────── */
+.bottomBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 850px) {
+  .mainRow {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+}

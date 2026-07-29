@@ -1,0 +1,340 @@
+.main {
+  background: #FFFFFF;
+  padding-top: 70px;
+}
+
+/* ── STICKY FILTER TABS BAR ───────────────────────── */
+.filterSection {
+  padding: 1rem 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--cream-border);
+  position: sticky;
+  top: 70px;
+  z-index: 40;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.filterRow {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 0.45rem 1.2rem;
+  border-radius: 0 !important;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--cream-border);
+  background: var(--cream);
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filterBtn:hover {
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+.filterActive {
+  background: var(--terracotta) !important;
+  border-color: var(--terracotta) !important;
+  color: #FFFFFF !important;
+}
+
+/* ── EDITORIAL SPLIT ROW (MATCHING SCREENSHOT 5) ───── */
+.gallerySection {
+  padding: 3rem 0 5rem;
+}
+
+.editorialRow {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* LEFT COLUMN */
+.leftCol {
+  position: sticky;
+  top: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.eyebrow {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 0.6rem;
+}
+
+.title {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 500;
+  line-height: 1.05;
+  color: #1C1917;
+  margin-bottom: 1.4rem;
+  letter-spacing: -0.01em;
+}
+
+.desc {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #66605B;
+  margin-bottom: 2rem;
+}
+
+.bookBtn {
+  display: inline-block;
+  padding: 0.75rem 2.2rem;
+  background: #FCE6D8;
+  color: var(--terracotta);
+  border: none;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.bookBtn:hover {
+  background: var(--terracotta);
+  color: #FFFFFF;
+}
+
+/* RIGHT COLUMN - BENTO GRID (0px BORDER RADIUS) */
+.rightCol {
+  width: 100%;
+}
+
+.emptyGalleryState {
+  padding: 5rem 2rem;
+  text-align: center;
+  border: 1px dashed var(--cream-border);
+  background: var(--cream);
+  border-radius: 0 !important;
+}
+
+.emptyText {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1C1917;
+  margin-bottom: 0.4rem;
+}
+
+.emptySub {
+  font-size: 0.82rem;
+  color: #77706A;
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 0 !important;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--cream-mid);
+}
+
+.img {
+  border-radius: 0 !important;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .img {
+  transform: scale(1.04);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 16, 12, 0.82) 0%, rgba(20, 16, 12, 0.15) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .cardOverlay {
+  opacity: 1;
+}
+
+.catBadge {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta-light, #E8A88A);
+  margin-bottom: 0.25rem;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+/* ── LIGHTBOX MODAL ─────────────────────────── */
+.lightboxBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 16, 14, 0.92);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.lightboxContent {
+  position: relative;
+  max-width: 850px;
+  width: 90vw;
+  background: #1C1915;
+  border-radius: 0 !important;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.lightboxClose {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+  color: #FFFFFF;
+  font-size: 1rem;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.2);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.lightboxClose:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.lightboxImgWrap {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 320px;
+  border-radius: 0 !important;
+}
+
+.lightboxImgWrap img {
+  border-radius: 0 !important;
+}
+
+.lightboxMeta {
+  padding: 1.2rem 1.6rem;
+  background: #1C1915;
+  color: #FFFFFF;
+}
+
+.lightboxCat {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terracotta-light, #E8A88A);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.lightboxTitle {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+/* ── RESPONSIVE ────────────────────────────── */
+@media (max-width: 900px) {
+  .editorialRow {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .leftCol {
+    position: static;
+  }
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .filterRow {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.4rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filterRow::-webkit-scrollbar {
+    display: none;
+  }
+  .filterBtn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.58rem;
+  }
+  .gallerySection {
+    padding: 1.5rem 0 3rem;
+  }
+  .title {
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+  }
+  .desc {
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+  }
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

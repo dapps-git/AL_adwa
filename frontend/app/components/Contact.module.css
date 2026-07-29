@@ -1,0 +1,204 @@
+.contact {
+  background: var(--cream);
+  padding: var(--section-pad);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 5rem;
+  align-items: start;
+  margin-bottom: 5rem;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin-top: 2.2rem;
+}
+
+.infoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--cream-mid);
+  border: 1px solid var(--cream-border);
+  color: var(--terracotta);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.infoLabel {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--light);
+  margin-bottom: 0.4rem;
+}
+
+.infoVal {
+  font-size: 0.88rem;
+  color: var(--charcoal);
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.link {
+  color: var(--terracotta);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--terracotta-dark);
+  text-decoration: underline;
+}
+
+/* Form Wrap */
+.formWrap {
+  background: #FFFFFF;
+  padding: 3rem;
+  border: 1px solid var(--cream-border);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+}
+
+.formTitle {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 2rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--light);
+}
+
+.input {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  border: 1px solid var(--cream-border);
+  background: var(--cream);
+  padding: 0.85rem 1.1rem;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+  appearance: none;
+}
+
+.input:focus {
+  border-color: var(--terracotta);
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 0.6rem;
+  padding: 1rem !important;
+  text-align: center;
+}
+
+.success {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.successIcon {
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--terracotta);
+}
+
+.success h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.success p {
+  font-size: 0.88rem;
+  color: var(--mid);
+}
+
+/* ── MAP CONTAINER ──────────────────────────── */
+.mapContainer {
+  margin-top: 2rem;
+}
+
+.mapHeader {
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.mapLabel {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--light);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.mapTitle {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+}
+
+.mapFrameWrap {
+  border: 1px solid var(--cream-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .formWrap {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

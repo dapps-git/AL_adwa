@@ -1,0 +1,148 @@
+.heroSection {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 580px;
+  max-height: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: center;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── DESKTOP VS MOBILE IMAGE DISPLAY ────────── */
+.desktopImg {
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.mobileImg {
+  display: none !important;
+}
+
+.heroContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+  transform: translateY(20px);
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.2rem;
+  max-width: 720px;
+}
+
+.mainTitle {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+}
+
+.subTitle {
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+  line-height: 1.65;
+  max-width: 600px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
+}
+
+.btnRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+
+/* ── MOBILE VIEW: 100% FULL SCREEN HEIGHT & WIDTH (ZERO EMPTY SPACE) ── */
+@media (max-width: 768px) {
+  .desktopImg {
+    display: none !important;
+  }
+
+  .mobileImg {
+    display: block !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .heroSection {
+    height: 100vh !important;
+    height: 100svh !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  .heroBg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .heroContainer {
+    padding: 0 1.4rem;
+    transform: translateY(20px);
+  }
+
+  .heroContent {
+    gap: 1rem;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .mainTitle {
+    font-size: 2.1rem;
+    color: #FFFFFF;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
+  }
+
+  .subTitle {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+  }
+
+  .btnRow {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btnRow a {
+    padding: 0.85rem 2.5rem;
+  }
+}

@@ -1,0 +1,122 @@
+.section {
+  background: var(--cream);
+  padding: 4rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.imgCol {
+  position: relative;
+}
+
+.imgWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 0 !important;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.imgWrap img {
+  border-radius: 0 !important;
+}
+
+.badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: var(--terracotta);
+  color: var(--white);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  padding: 0.4rem 0.9rem;
+  border-radius: 0 !important;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrowTag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 0.4rem;
+}
+
+.expertName {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--charcoal);
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 1.2rem;
+}
+
+.dividerLine {
+  width: 40px;
+  height: 2px;
+  background: var(--terracotta);
+  margin-bottom: 1.5rem;
+}
+
+.descParagraph {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--charcoal);
+  margin-bottom: 1.8rem;
+}
+
+.paragraphBlock {
+  margin-bottom: 1.6rem;
+  padding-left: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  max-width: 580px;
+}
+
+.blockTitle {
+  font-family: var(--font-heading);
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 0.35rem;
+  line-height: 1.25;
+}
+
+.blockText {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: #55504B;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

@@ -1,0 +1,83 @@
+.process {
+  background: var(--cream-muted);
+  padding: 6.5rem 0;
+}
+
+.stepsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.imgBox {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.2;
+  overflow: hidden;
+  margin-bottom: 1.6rem;
+  border-radius: 80px 80px 16px 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.stepBody { padding: 0 0.5rem; }
+
+.stepNum {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.4rem;
+}
+
+.stepTitle {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 0.6rem;
+}
+
+.stepDesc {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--mid-gray);
+  line-height: 1.75;
+}
+
+.bottom {
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.bottomItalic {
+  font-family: var(--font-accent);
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 1rem;
+}
+
+.bottomCopy {
+  font-size: 0.88rem;
+  color: var(--mid-gray);
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .stepsRow { grid-template-columns: 1fr; gap: 3rem; }
+}

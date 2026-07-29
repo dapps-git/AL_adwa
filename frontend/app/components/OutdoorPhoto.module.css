@@ -1,0 +1,92 @@
+.section {
+  background: var(--cream-muted);
+  padding: 5.5rem 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.desc {
+  max-width: 580px;
+  margin: 1rem auto 0;
+  font-size: 0.88rem;
+  color: var(--mid-gray);
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+
+.card {
+  background: var(--cream);
+  border: 1px solid var(--cream-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.imgWrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.cardBody {
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.subtitle {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--light-gray);
+  margin-bottom: 0.3rem;
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 0.8rem;
+}
+
+.cardDesc {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--mid-gray);
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--cream-border);
+}
+
+.itemBullet {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

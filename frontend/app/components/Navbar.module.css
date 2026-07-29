@@ -1,0 +1,179 @@
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Translucent color background on scroll */
+.scrolled {
+  background: rgba(245, 240, 232, 0.96);
+  border-bottom-color: var(--cream-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navInner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  overflow: visible;
+}
+
+/* ── LEFT LOGO ───────────────────────────── */
+.logoWrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  position: relative;
+  z-index: 10;
+  margin-top: 18px;
+}
+
+.logoImg {
+  object-fit: contain;
+  height: 120px;
+  width: auto;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+}
+
+/* ── RIGHT NAV LINKS ─────────────────────── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Off-white text color by default */
+.navLink {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 0.85rem;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.navLink:hover {
+  color: #FFFFFF;
+}
+
+/* Dark text color when scrolled */
+.scrolled .navLink {
+  color: #1C1917;
+  text-shadow: none;
+}
+
+.scrolled .navLink:hover {
+  color: var(--terracotta);
+}
+
+/* WhatsApp CTA */
+.waBtn {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--terracotta);
+  padding: 0.55rem 1.3rem;
+  border-radius: 2px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
+  margin-left: 0.8rem;
+  text-decoration: none;
+}
+
+.waBtn:hover {
+  background: var(--terracotta-dark);
+  transform: translateY(-1px);
+}
+
+/* Hamburger (Mobile) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+}
+
+.scrolled .hamburger span {
+  background: #1C1917;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile Drawer */
+.drawer {
+  display: none;
+  flex-direction: column;
+  background: rgba(245, 240, 232, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--cream-border);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.drawerOpen { max-height: 600px; }
+
+.drawerLink {
+  padding: 1rem 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  border-bottom: 1px solid var(--cream-border);
+  text-decoration: none;
+}
+
+.drawerLink:hover { color: var(--terracotta); }
+
+.drawerContact {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: var(--cream-mid);
+}
+
+.drawerContact p {
+  font-size: 0.78rem;
+  color: var(--mid);
+}
+
+@media (max-width: 920px) {
+  .navLinks { display: none; }
+  .hamburger { display: flex; }
+  .drawer { display: flex; }
+  .navInner { padding: 0 1.2rem; height: 60px; }
+  .logoWrap { margin-top: 14px; }
+  .logoImg { height: 100px; }
+}

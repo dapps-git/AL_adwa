@@ -1,0 +1,101 @@
+.page { max-width: 1100px; }
+
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.title { font-size: 1.6rem; font-weight: 700; color: #E8EAED; }
+.sub   { font-size: 0.8rem; color: #8A8FA8; margin-top: 0.2rem; }
+
+/* Toolbar */
+.toolbar { margin-bottom: 1.2rem; }
+.searchInput {
+  max-width: 320px;
+  background: #1A1D27;
+  border: 1px solid #2E3247;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  color: #E8EAED;
+  font-size: 0.82rem;
+}
+
+/* Table */
+.tableWrap {
+  background: #1A1D27;
+  border: 1px solid #2E3247;
+  border-radius: 14px;
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8A8FA8;
+  border-bottom: 1px solid #2E3247;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #1F2235;
+  vertical-align: middle;
+}
+
+.table tr:last-child td { border-bottom: none; }
+.table tbody tr:hover { background: #1F2235; }
+
+.blogTitle { font-weight: 500; color: #E8EAED; }
+.blogSlug  { font-size: 0.68rem; color: #8A8FA8; margin-top: 0.15rem; }
+.muted     { color: #8A8FA8; }
+
+.catTag {
+  display: inline-block;
+  background: rgba(200,145,43,0.12);
+  color: #C8912B;
+  border: 1px solid rgba(200,145,43,0.25);
+  border-radius: 999px;
+  padding: 0.18rem 0.65rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.actions { display: flex; gap: 0.5rem; }
+
+/* Empty state */
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #8A8FA8;
+  background: #1A1D27;
+  border: 1px dashed #2E3247;
+  border-radius: 14px;
+}
+
+/* Checkbox row */
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: #E8EAED;
+}
+.checkRow input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: #C8912B;
+  flex-shrink: 0;
+}
