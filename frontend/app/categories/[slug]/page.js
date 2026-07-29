@@ -12,7 +12,7 @@ const CATEGORIES = {
     heroTitle: 'STUDIO SERVICES',
     title: 'Studio Services & Printing',
     sub: 'Indoor Photography & Custom Printed Gifts',
-    img: '/img/studio.webp',
+    img: '/img/indoor.webp',
     intro: 'Al Adhwa Studio provides high quality indoor photography sessions, document photos meeting official government standards, custom printed gifts, framing, photocopying, document lamination, scanning, and full office document support from our Muwailah, Sharjah studio.',
     services: [
       { title: 'PRODUCT SHOOT', img: '/img/photo.png', desc: 'Professional photography services to showcase your products in the best light. From e-commerce to promotional materials, every detail is captured. Customizable packages available.' },
@@ -36,25 +36,26 @@ const CATEGORIES = {
     img: '/img/outdoor.webp',
     intro: 'Capturing moments outdoors with state-of-the-art gear and expert lighting. Al Adhwa Studio covers human subjects, outdoor nature, architectural structures, and commercial objects across the UAE.',
     services: [
-      { title: 'PORTRAIT & EVENT', img: '/img/photogrphy.webp', desc: 'Focuses on human subjects — weddings, fashion shoots, street candid photography, and sports events.', items: ['Weddings & Ceremonies', 'Fashion Shoots', 'Street Candid', 'Sports Coverage'] },
-      { title: 'NATURE & TRAVEL', img: '/img/1.webp', desc: 'Captures the outdoors. Sub-genres include wildlife, astrophotography, macro (extreme close-ups), and aerial/drone shots.', items: ['Wildlife & Landscapes', 'Astrophotography', 'Macro Photography', 'Aerial / Drone Shots'] },
-      { title: 'COMMERCIAL & OBJECT', img: '/img/2.webp', desc: 'Designed to market items or places: architectural, real estate, food, and still-life photography.', items: ['Architectural Photography', 'Real Estate Walkthroughs', 'Food & Cuisine Photography', 'Still-Life Product Photography'] },
+      { title: 'COMMERCIAL & BRAND', img: '/img/outdoor_commercial.webp', desc: 'High-end commercial brand shoots shot outdoors against modern skyline architecture and industrial setups.', items: ['Brand Commercial Shoots', 'Architectural Photography', 'Real Estate & Properties', 'Food & Culinary Scenes'] },
+      { title: 'CORPORATE EXECUTIVE', img: '/img/outdoor_corporate.webp', desc: 'Corporate group sessions, team portraits, executive headshots, and leadership photography outdoors.', items: ['Executive Leadership Photos', 'Company Team Shoots', 'Annual Report Imagery', 'Corporate Campus Photography'] },
+      { title: 'EVENTS & GALAS', img: '/img/outdoor_events.webp', desc: 'Vibrant outdoor gala celebrations, VIP summits, award ceremonies, and festival crowd photography.', items: ['Conferences & Summits', 'Gala Dinners', 'Award Ceremonies', 'Outdoor Festivals'] },
+      { title: 'PERSONAL & PORTRAIT', img: '/img/outdoor_personal.webp', desc: 'Stunning outdoor portraits during golden hour in urban settings or UAE desert landscapes.', items: ['Personal Lifestyle Portraits', 'Fashion & Editorial', 'Engagement & Couples', 'Desert Golden Hour Shoots'] },
     ],
-    checklist: [],
+    checklist: ['COMMERCIAL SHOOT', 'CORPORATE HEADSHOTS', 'OUTDOOR EVENTS', 'PORTRAIT SHOOT', 'CREATIVE ARCHITECTURE', 'DIGITAL PHOTOGRAPHY'],
   },
   'outdoor-videography': {
     num: '03',
     heroTitle: 'VIDEOGRAPHY',
     title: 'Outdoor Videography',
     sub: 'Commercial, Events & Digital Production',
-    img: '/img/photostudio.webp',
+    img: '/img/outdoor.webp',
     intro: 'Commercial, event, and documentary video production covering everything from corporate promotions to personal milestones and creative storytelling across Dubai and the wider UAE.',
     services: [
-      { title: 'COMMERCIAL & CORPORATE', img: '/img/photostudio.webp', desc: 'TV or online ads promoting products and services, corporate videos (internal communications, training guides, company overviews), and real estate property tours.', items: ['TV & Online Commercials', 'Corporate Videos & Training', 'Real Estate Property Tours'] },
-      { title: 'EVENTS & PERSONAL', img: '/img/3.webp', desc: 'Weddings (ceremonies, receptions, highlight reels), live events (concerts, conferences, sports highlights), and personal milestones (birthdays, graduations, celebrations).', items: ['Weddings & Highlight Reels', 'Concerts & Conferences', 'Parties & Milestones'] },
-      { title: 'CREATIVE & DIGITAL', img: '/img/promptclients.webp', desc: 'Documentaries (real-world stories, interviews, investigative features), social media content (TikToks, Reels, Shorts), and artistic music videos.', items: ['Documentaries & Features', 'TikToks, Shorts & Instagram Reels', 'Artistic Music Videos'] },
+      { title: 'COMMERCIAL & CORPORATE VIDEO', img: '/img/video_commercial.webp', desc: 'TV and online video commercials, corporate brand films, property walkthroughs, and promotional ads filmed with cinema cameras.', items: ['TV & Digital Video Commercials', 'Corporate Brand Films', 'Real Estate Property Tours', 'Industrial Feature Videos'] },
+      { title: 'EVENTS & LIVE COVERAGE', img: '/img/outdoor_events.webp', desc: 'Live event coverage, corporate summits, music concerts, and milestone celebrations filmed in 4K multi-cam format.', items: ['Multi-Cam Live Coverage', 'Conferences & Summits', 'Concerts & Shows', 'Highlight Reels'] },
+      { title: 'CREATIVE & REELS', img: '/img/outdoor_commercial.webp', desc: 'High impact social media video production (TikToks, Shorts, Reels), artistic brand documentaries, and music videos.', items: ['Documentaries & Features', 'TikToks, Shorts & Instagram Reels', 'Artistic Music Videos'] },
     ],
-    checklist: [],
+    checklist: ['COMMERCIAL VIDEO', 'CORPORATE FILM', 'EVENT COVERAGE', 'DIGITAL REELS', 'DOCUMENTARY PRODUCTION'],
   },
   'teleprompter-services': {
     num: '04',
@@ -64,11 +65,11 @@ const CATEGORIES = {
     img: '/img/teleprompt.webp',
     intro: 'With over 14 years of UAE experience, Najeeb Abdul Noor is the leading Dubai Autocue Teleprompter Expert. A trusted partner for TV commercials, COP28, and large-scale international speaker events. AL ADHWA STUDIO provides both on-camera and presidential podium teleprompters.',
     services: [
-      { title: 'PRESIDENTIAL PODIUM PROMPTERS', img: '/img/podcast.webp', desc: 'Stand-alone transparent glass panels placed on either side of a lectern. Allows Presidents, CEOs, and keynote speakers to address crowds naturally — no memorization required.', items: ['Dual Reflective Glass Panels', 'Public Speeches & Summits', 'CEO & Shareholder Presentations'] },
-      { title: 'CAMERA-MOUNTED AUTOCUE RIGS', img: '/img/teleprompt.webp', desc: 'Beam-splitter glass mounted directly in front of the camera lens so TV anchors, news readers, and commercial presenters maintain 100% natural eye contact with viewers.', items: ['Studio Broadcast Rigs', 'DSLR / Mirrorless Prompters', 'Mobile & Tablet Mounts'] },
-      { title: 'FLOOR & SPECIALIZED MONITORS', img: '/img/4.webp', desc: 'Angled floor confidence monitors for stage performers, multi-prompter sync systems for global summits, and smart eyewear projecting scrolling text into the user\'s field of vision.', items: ['Floor / Stage Confidence Monitors', 'Multi-Teleprompter Sync Systems', 'Smart Eyewear Prompters'] },
+      { title: 'PRESIDENTIAL PODIUM PROMPTERS', img: '/img/teleprompter_podium.webp', desc: 'Stand-alone transparent glass panels placed on either side of a lectern. Allows Presidents, CEOs, and keynote speakers to address crowds naturally — no memorization required.', items: ['Dual Reflective Glass Panels', 'Public Speeches & Summits', 'CEO & Shareholder Presentations'] },
+      { title: 'CAMERA-MOUNTED AUTOCUE RIGS', img: '/img/teleprompter_rig.webp', desc: 'Beam-splitter glass mounted directly in front of the camera lens so TV anchors, news readers, and commercial presenters maintain 100% natural eye contact with viewers.', items: ['Studio Broadcast Rigs', 'DSLR / Mirrorless Prompters', 'Mobile & Tablet Mounts'] },
+      { title: 'FLOOR & STAGE CONFIDENCE MONITORS', img: '/img/teleprompter_podium.webp', desc: 'Angled floor confidence monitors for stage performers, multi-prompter sync systems for global summits, and smart eyewear projecting scrolling text into the user\'s field of vision.', items: ['Floor / Stage Confidence Monitors', 'Multi-Teleprompter Sync Systems', 'Smart Eyewear Prompters'] },
     ],
-    checklist: [],
+    checklist: ['PRESIDENTIAL PODIUM PROMPTERS', 'CAMERA MOUNTED AUTOCUE', 'FLOOR CONFIDENCE MONITORS', 'MULTI-CAM PROMPTER SYNC'],
   },
 };
 
@@ -154,7 +155,7 @@ export default function CategoryDetailPage({ params }) {
                 <div key={idx} className={styles.svcCard}>
                   {svc.img && (
                     <div className={styles.svcImgWrap}>
-                      <Image src={svc.img} alt={svc.title} fill sizes="(max-width:768px) 100vw, 33vw" />
+                      <Image src={svc.img} alt={svc.title} fill sizes="(max-width:768px) 100vw, 33vw" unoptimized style={{ objectFit: 'cover' }} />
                     </div>
                   )}
                   <div className={styles.svcBody}>
