@@ -38,15 +38,16 @@ const pillars = [
   },
 ];
 
-const FALLBACK_SLIDES = [
-  { _id: 'f1', title: 'Studio Portrait Session', imageUrl: '/img/indoor.webp', category: 'Studio' },
-  { _id: 'f2', title: 'Outdoor Commercial Shoot', imageUrl: '/img/com.webp', category: 'Outdoor' },
-  { _id: 'f3', title: 'Broadcast Teleprompter Rig', imageUrl: '/img/teleprompt.webp', category: 'Teleprompter' },
-  { _id: 'f4', title: 'Video Production & Editing', imageUrl: '/img/outdoor.webp', category: 'Videography' },
+const DEFAULT_GALLERY_SLIDES = [
+  { _id: 'f1', title: 'Studio Production & Setup', imageUrl: '/gallery.webp', category: 'Studio' },
+  { _id: 'f2', title: 'Outdoor Commercial Shoot', imageUrl: '/gallery1.webp', category: 'Outdoor' },
+  { _id: 'f3', title: 'Broadcast Teleprompter Rig', imageUrl: '/gallery2.webp', category: 'Teleprompter' },
+  { _id: 'f4', title: 'Video Production & Editing', imageUrl: '/gallery3.webp', category: 'Videography' },
+  { _id: 'f5', title: 'Custom Printed Gifts & Framing', imageUrl: '/gallery4.webp', category: 'Printing' },
 ];
 
 export default function Categories() {
-  const [slides, setSlides] = useState(FALLBACK_SLIDES);
+  const [slides, setSlides] = useState(DEFAULT_GALLERY_SLIDES);
   const [activeIdx, setActiveIdx] = useState(0);
 
   // ── Fetch dynamic gallery images from backend ────────────────
@@ -55,7 +56,10 @@ export default function Categories() {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          setSlides(data);
+          const valid = data.filter((i) => Boolean(i.imageUrl && i.imageUrl.trim()));
+          if (valid.length > 0) {
+            setSlides(valid);
+          }
         }
       })
       .catch(() => {});
@@ -115,7 +119,7 @@ export default function Categories() {
             >
               <div className={styles.slideImgWrap}>
                 <Image
-                  src={slide.imageUrl || slide.url || '/img/indoor.webp'}
+                  src={slide.imageUrl || '/gallery.webp'}
                   alt={slide.title || 'Gallery Preview'}
                   fill
                   sizes="100vw"
