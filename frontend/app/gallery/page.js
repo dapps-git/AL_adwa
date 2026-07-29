@@ -25,7 +25,8 @@ export default function GalleryPage() {
       .then(r => r.json())
       .then(d => {
         if (Array.isArray(d) && d.length > 0) {
-          setImages(d);
+          const valid = d.filter(i => Boolean(i.imageUrl && i.imageUrl.trim()));
+          if (valid.length > 0) setImages(valid);
         }
       })
       .catch(() => {});
@@ -56,7 +57,7 @@ export default function GalleryPage() {
           </div>
         </section>
 
-        {/* ── EDITORIAL SPLIT GALLERY (MATCHING SCREENSHOT 5 REFERENCE) ── */}
+        {/* ── EDITORIAL SPLIT GALLERY ── */}
         <section className={styles.gallerySection}>
           <div className="container">
             <div className={styles.editorialRow}>
@@ -88,7 +89,7 @@ export default function GalleryPage() {
                         onClick={() => setLightbox(img)}
                       >
                         <Image
-                          src={img.imageUrl || img.url || '/img/gallery.webp'}
+                          src={img.imageUrl || '/img/gallery.webp'}
                           alt={img.title || 'Gallery image'}
                           fill
                           sizes="(max-width:768px) 100vw, 33vw"
@@ -116,7 +117,7 @@ export default function GalleryPage() {
           <div className={styles.lightboxContent} onClick={e => e.stopPropagation()}>
             <button className={styles.lightboxClose} onClick={() => setLightbox(null)}>✕</button>
             <div className={styles.lightboxImgWrap}>
-              <Image src={lightbox.imageUrl || lightbox.url || '/img/gallery.webp'} alt={lightbox.title} fill sizes="90vw" unoptimized priority />
+              <Image src={lightbox.imageUrl || '/img/gallery.webp'} alt={lightbox.title} fill sizes="90vw" unoptimized priority />
             </div>
             <div className={styles.lightboxMeta}>
               <span className={styles.lightboxCat}>{lightbox.category}</span>
