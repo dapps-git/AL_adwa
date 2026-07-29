@@ -104,7 +104,7 @@
   margin-bottom: 3.5rem;
 }
 
-/* ── DYNAMIC GALLERY PREVIEW SLIDER (100% FULL BLEED EDGE-TO-EDGE) ── */
+/* ── DYNAMIC GALLERY PREVIEW SLIDER ── */
 .sliderSection {
   margin-top: 3rem;
   width: 100%;
@@ -114,17 +114,18 @@
   padding-bottom: 3.5rem;
 }
 
+/* Reduced size & square/constrained container on Desktop/Laptop for maximum image clarity */
 .sliderContainer {
   position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  height: 560px;
-  border-radius: 0 !important;
+  width: 100%;
+  max-width: 650px;
+  height: 520px;
+  margin: 0 auto;
+  border-radius: 6px !important;
   overflow: hidden;
   background: var(--cream-mid);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--cream-border);
 }
 
 .slide {
@@ -183,7 +184,7 @@
   margin-top: 2rem;
 }
 
-/* ── TABLET & MOBILE VIEW ─────────────────── */
+/* ── TABLET & MOBILE VIEW (Keep full-width edge-to-edge view on mobile) ── */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
@@ -191,7 +192,19 @@
   }
   .container { padding: 0 1.2rem; }
   .imgWrap { aspect-ratio: 16/10; }
-  .sliderContainer { height: 380px; }
+  
+  .sliderContainer {
+    width: 100vw;
+    max-width: none;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: 380px;
+    border-radius: 0 !important;
+    border: none;
+  }
+  
   .slideOverlay { padding: 1.5rem; }
   .slideItemTitle { font-size: 1.2rem; }
 }
