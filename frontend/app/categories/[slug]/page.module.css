@@ -45,7 +45,7 @@
 
 /* ── 3-COLUMN SERVICES GRID (LAPTOP, DESKTOP & TABLET VIEW) ── */
 .servicesSection {
-  padding: 3rem 0 4.5rem;
+  padding: 2.5rem 0 4rem;
   background: var(--cream);
 }
 
@@ -158,6 +158,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   color: #1C1917;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 /* ── CTA STRIP ──────────────────────────────── */
@@ -197,8 +198,8 @@
 /* ── RESPONSIVE ────────────────────────────── */
 @media (max-width: 960px) {
   .servicesGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
@@ -206,28 +207,58 @@
   .main { padding-top: 60px; }
   .sectionHeaderCenter {
     padding-top: 0.2rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
   }
   .sectionHeading {
-    font-size: clamp(2rem, 7vw, 2.6rem);
+    font-size: clamp(1.8rem, 6.5vw, 2.4rem);
     margin-bottom: 0.4rem;
   }
   .dividerLine {
-    margin: 0.6rem auto 1rem;
+    margin: 0.5rem auto 0.8rem;
   }
   .categoryIntroText {
-    font-size: 0.9rem;
-    line-height: 1.65;
+    font-size: 0.88rem;
+    line-height: 1.6;
   }
   .servicesSection {
-    padding: 1.8rem 0 3rem;
+    padding: 1.5rem 0 2.5rem;
   }
   .servicesGrid {
     grid-template-columns: 1fr;
-    gap: 1.8rem;
+    gap: 1.5rem;
   }
+
+  /* Clean 2-column mobile grid for All Included Services tag cloud */
+  .checklistSection {
+    padding: 1.8rem 0 2.2rem;
+  }
+  .checklistTitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .tagCloud {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .tag {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 0.3rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .ctaContent {
     flex-direction: column;
     text-align: center;
+    gap: 1.2rem;
+  }
+  .ctaBtns {
+    width: 100%;
+    justify-content: center;
   }
 }
