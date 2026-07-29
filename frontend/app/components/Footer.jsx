@@ -23,6 +23,24 @@ const socials = [
     )
   },
   {
+    name: 'TikTok',
+    url: 'https://www.tiktok.com/@aladhwastudio',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+      </svg>
+    )
+  },
+  {
+    name: 'X (Twitter)',
+    url: 'https://x.com/ALADHWASTUDIO',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.767-9.233M13.233 9.233L20 4"/>
+      </svg>
+    )
+  },
+  {
     name: 'LinkedIn',
     url: 'http://www.linkedin.com/in/aladhwastudio',
     icon: (

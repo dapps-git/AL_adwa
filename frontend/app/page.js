@@ -2,6 +2,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AdriannaWelcome from './components/AdriannaWelcome';
 import Categories from './components/Categories';
+import MainServicesShowcase from './components/MainServicesShowcase';
 import TeleprompterExpert from './components/TeleprompterExpert';
 import ThreePhotoStrip from './components/ThreePhotoStrip';
 import EarthyMosaic from './components/EarthyMosaic';
@@ -22,20 +23,23 @@ export default function Home() {
         {/* 3. 4-column Category Product Grid */}
         <Categories />
 
-        {/* 4. Teleprompter Specialist Feature Showcase (Najeeb Abdul Noor) */}
+        {/* 4. Homepage Main Services Cards Showcase */}
+        <MainServicesShowcase />
+
+        {/* 5. Teleprompter Specialist Feature Showcase (Najeeb Abdul Noor) */}
         <TeleprompterExpert />
 
-        {/* 5. 3-Column Photo Strip (Placed right after Najeeb Abdul Noor section) */}
+        {/* 6. 3-Column Photo Strip */}
         <ThreePhotoStrip />
 
-        {/* 6. 2x2 Terracotta/Sage Split Mosaic */}
+        {/* 7. 2x2 Terracotta/Sage Split Mosaic */}
         <EarthyMosaic />
 
-        {/* 7. Newsletter Subscription Strip */}
+        {/* 8. Newsletter Subscription Strip */}
         <NewsletterStrip />
       </main>
 
-      {/* 8. Dark Footer */}
+      {/* 9. Dark Footer */}
       <Footer />
     </>
   );
