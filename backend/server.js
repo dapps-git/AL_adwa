@@ -27,10 +27,13 @@ app.use('/api/categories', require('./routes/categories'));
 app.use('/api/blogs',      require('./routes/blogs'));
 app.use('/api/gallery',    require('./routes/gallery'));
 
-// ── Health check ──────────────────────────────────────────
+// ── Health & Root check ───────────────────────────────────
+app.get('/', (req, res) => res.status(200).send('AL ADHWA Studio API Running'));
 app.get('/api/health', (req, res) => res.json({ ok: true, ts: new Date() }));
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`🚀  Backend running on http://localhost:${PORT}`));
+if (require.main === module) {
+  app.listen(PORT, () => console.log(`🚀  Backend running on http://localhost:${PORT}`));
+}
 
 module.exports = app;
