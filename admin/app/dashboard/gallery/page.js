@@ -13,7 +13,12 @@ const FIXED_CATEGORIES = [
 
 function Toast({ msg, type, onClose }) {
   useEffect(() => { const t = setTimeout(onClose, 3000); return () => clearTimeout(t); }, []);
-  return <div className={`toast ${type}`}>{msg}</div>;
+  return (
+    <div className={`toast ${type}`}>
+      <span>{type === 'error' ? '✕' : '✓'}</span>
+      <span>{msg}</span>
+    </div>
+  );
 }
 
 const EMPTY = { category: 'Studio Services & Printing', imageUrl: '', description: '', featured: false };
@@ -29,6 +34,7 @@ function GalleryAdminContent() {
   const [toast,    setToast]    = useState(null);
   const [filter,   setFilter]   = useState('All');
   const [preview,  setPreview]  = useState('');
+  const [isDragging, setIsDragging] = useState(false);
 
   const token   = () => localStorage.getItem('admin_token');
   const headers = () => ({ 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` });
@@ -49,7 +55,7 @@ function GalleryAdminContent() {
     }
   }, [load, searchParams]);
 
-  function openNew(cat)   { 
+  function openNew(cat) { 
     setEditing(null); 
     setForm({ ...EMPTY, category: cat || FIXED_CATEGORIES[0] }); 
     setPreview(''); 
@@ -77,9 +83,11 @@ function GalleryAdminContent() {
     if (name === 'imageUrl') setPreview(value);
   }
 
-  function handleFileChange(e) {
-    const file = e.target.files[0];
-    if (!file) return;
+  function processFile(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      showToast('Please select a valid image file', 'error');
+      return;
+    }
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result;
@@ -87,6 +95,19 @@ function GalleryAdminContent() {
       setPreview(base64);
     };
     reader.readAsDataURL(file);
+  }
+
+  function handleFileChange(e) {
+    const file = e.target.files[0];
+    processFile(file);
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      processFile(e.dataTransfer.files[0]);
+    }
   }
 
   async function handleSave(e) {
@@ -112,69 +133,101 @@ function GalleryAdminContent() {
         const d = await res.json();
         throw new Error(d.message || 'Failed to save content');
       }
-      showToast(editing ? 'Content updated successfully!' : 'New content added successfully!');
+      showToast(editing ? 'Photo updated successfully!' : 'New photo added successfully!');
       closeModal();
       load();
     } catch (err) {
-      showToast(err.message || 'Error saving content', 'error');
+      showToast(err.message || 'Error saving photo', 'error');
     } finally { setSaving(false); }
   }
 
   async function handleDelete(id) {
-    if (!confirm('Remove this content item from the category?')) return;
+    if (!confirm('Are you sure you want to remove this photo from the gallery?')) return;
     setDeleting(id);
     try {
       const res = await fetch(`${API}/gallery/${id}`, { method: 'DELETE', headers: headers() });
       if (!res.ok) {
         const d = await res.json();
-        throw new Error(d.message || 'Failed to delete');
+        throw new Error(d.message || 'Failed to delete photo');
       }
-      showToast('Content removed');
+      showToast('Photo removed from gallery');
       load();
-    } catch (err) { showToast(err.message || 'Error deleting', 'error'); }
+    } catch (err) { showToast(err.message || 'Error deleting photo', 'error'); }
     finally { setDeleting(null); }
   }
 
   const filtered = filter === 'All' ? images : images.filter(i => i.category === filter);
+  const featuredCount = images.filter(i => i.featured).length;
 
   return (
     <div className={styles.page}>
       {toast && <Toast msg={toast.msg} type={toast.type} onClose={() => setToast(null)} />}
 
-      {/* Header */}
+      {/* Header Banner */}
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>Category Content Management</h1>
-          <p className={styles.sub}>Manage and upload media items across the 4 fixed studio categories</p>
+          <h1 className={styles.title}>Gallery Photo Management</h1>
+          <p className={styles.sub}>Upload, organize, and showcase studio photography across categories</p>
         </div>
-        <button className="btn-primary" onClick={() => openNew()}>+ Add New Content</button>
+        <button className="btn-primary" onClick={() => openNew()}>
+          <span>+</span> Upload New Photo
+        </button>
+      </div>
+
+      {/* Stats Summary Bar */}
+      <div className={styles.statsGrid}>
+        <div className={styles.statCard}>
+          <div className={styles.statIcon}>🖼️</div>
+          <div>
+            <span className={styles.statValue}>{images.length}</span>
+            <span className={styles.statLabel}>Total Photos</span>
+          </div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statIcon}>📁</div>
+          <div>
+            <span className={styles.statValue}>{FIXED_CATEGORIES.length}</span>
+            <span className={styles.statLabel}>Active Categories</span>
+          </div>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statIcon}>★</div>
+          <div>
+            <span className={styles.statValue}>{featuredCount}</span>
+            <span className={styles.statLabel}>Featured on Homepage</span>
+          </div>
+        </div>
       </div>
 
       {/* Filter tabs */}
-      <div className={styles.filters}>
-        <button
-          className={`${styles.filterBtn} ${filter === 'All' ? styles.filterActive : ''}`}
-          onClick={() => setFilter('All')}
-        >
-          All Content ({images.length})
-        </button>
-        {FIXED_CATEGORIES.map(cat => (
+      <div className={styles.filtersSection}>
+        <div className={styles.filters}>
           <button
-            key={cat}
-            className={`${styles.filterBtn} ${filter === cat ? styles.filterActive : ''}`}
-            onClick={() => setFilter(cat)}
+            className={`${styles.filterBtn} ${filter === 'All' ? styles.filterActive : ''}`}
+            onClick={() => setFilter('All')}
           >
-            {cat} ({images.filter(i => i.category === cat).length})
+            All Photos ({images.length})
           </button>
-        ))}
+          {FIXED_CATEGORIES.map(cat => (
+            <button
+              key={cat}
+              className={`${styles.filterBtn} ${filter === cat ? styles.filterActive : ''}`}
+              onClick={() => setFilter(cat)}
+            >
+              {cat} ({images.filter(i => i.category === cat).length})
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Grid */}
+      {/* Photo Grid */}
       {filtered.length === 0 ? (
         <div className={styles.empty}>
-          <p>No content added to {filter === 'All' ? 'any category' : filter} yet.</p>
-          <button className="btn-primary" onClick={() => openNew(filter === 'All' ? null : filter)} style={{ marginTop: '1rem' }}>
-            + Add Content to {filter === 'All' ? 'Category' : filter}
+          <div className={styles.emptyIcon}>📷</div>
+          <h3>No photos in this category</h3>
+          <p>Click below to upload the first photo to {filter === 'All' ? 'the gallery' : filter}.</p>
+          <button className="btn-primary" onClick={() => openNew(filter === 'All' ? null : filter)}>
+            + Upload Photo to {filter === 'All' ? 'Gallery' : filter}
           </button>
         </div>
       ) : (
@@ -189,9 +242,9 @@ function GalleryAdminContent() {
                 )}
                 {img.featured && <span className={styles.featuredBadge}>★ Homepage</span>}
                 <div className={styles.imgOverlay}>
-                  <button className="btn-ghost" onClick={() => openEdit(img)}>Edit</button>
+                  <button className="btn-ghost" onClick={() => openEdit(img)}>✏ Edit</button>
                   <button className="btn-danger" onClick={() => handleDelete(img._id)} disabled={deleting === img._id}>
-                    {deleting === img._id ? '…' : 'Remove'}
+                    {deleting === img._id ? '…' : '🗑 Delete'}
                   </button>
                 </div>
               </div>
@@ -209,12 +262,12 @@ function GalleryAdminContent() {
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && closeModal()}>
           <div className="modal-box">
             <div className="modal-header">
-              <h3>{editing ? 'Edit Category Content' : 'Add New Category Content'}</h3>
+              <h3>{editing ? 'Edit Gallery Photo' : 'Upload New Gallery Photo'}</h3>
               <button className="btn-ghost" onClick={closeModal}>✕</button>
             </div>
             <form onSubmit={handleSave}>
               <div className="modal-body">
-                {/* 1. Category Dropdown (Required - FIRST FIELD) */}
+                {/* 1. Category Dropdown */}
                 <div className="form-group">
                   <label className="form-label">Select Category *</label>
                   <select name="category" value={form.category} onChange={onChange} required style={{ fontWeight: '600' }}>
@@ -222,46 +275,73 @@ function GalleryAdminContent() {
                   </select>
                 </div>
 
-                {/* 2. Image Upload */}
+                {/* 2. Drag & Drop File Uploader Zone */}
                 <div className="form-group">
-                  <label className="form-label">Upload Image File *</label>
-                  <input type="file" accept="image/*" onChange={handleFileChange} style={{ padding: '0.4rem 0' }} />
+                  <label className="form-label">Photo File Upload *</label>
+                  <div
+                    className={`${styles.dropZone} ${isDragging ? styles.dropZoneActive : ''}`}
+                    onDragOver={e => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={() => setIsDragging(false)}
+                    onDrop={handleDrop}
+                  >
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleFileChange} 
+                      className={styles.fileInputHidden}
+                      id="photo-upload-input"
+                    />
+                    <label htmlFor="photo-upload-input" className={styles.dropZoneLabel}>
+                      <span className={styles.dropIcon}>📁</span>
+                      <span className={styles.dropTitle}>Click or Drag photo file here</span>
+                      <span className={styles.dropSub}>PNG, JPG, WEBP formats supported</span>
+                    </label>
+                  </div>
                 </div>
 
+                {/* Image URL fallback */}
                 <div className="form-group">
-                  <label className="form-label">Or Image URL</label>
-                  <input name="imageUrl" value={form.imageUrl} onChange={onChange} required placeholder="https://… or Base64 data" />
+                  <label className="form-label">Or Direct Image URL</label>
+                  <input 
+                    name="imageUrl" 
+                    value={form.imageUrl} 
+                    onChange={onChange} 
+                    required 
+                    placeholder="https://… or image data string" 
+                  />
                 </div>
 
+                {/* Preview Frame */}
                 {preview && (
                   <div className={styles.previewWrap}>
+                    <span className={styles.previewTag}>Photo Preview</span>
                     <img src={preview} alt="preview" className={styles.previewImg} onError={() => setPreview('')} />
                   </div>
                 )}
 
-                {/* 3. Description (Optional) */}
+                {/* 3. Description */}
                 <div className="form-group">
-                  <label className="form-label">Description (Optional)</label>
+                  <label className="form-label">Photo Description / Highlights (Optional)</label>
                   <textarea
                     name="description"
                     value={form.description}
                     onChange={onChange}
                     rows={3}
-                    placeholder="Enter short description or highlights for this category item"
-                    style={{ width: '100%', padding: '0.6rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0', fontFamily: 'inherit', fontSize: '0.88rem' }}
+                    placeholder="Enter short description or highlights for this gallery item"
                   />
                 </div>
 
                 {/* 4. Show on Homepage Checkbox */}
                 <label className={styles.checkRow}>
                   <input type="checkbox" name="featured" checked={form.featured} onChange={onChange} />
-                  <span>Show on Homepage Gallery Showcase</span>
+                  <span>Feature on Homepage Gallery Preview Slider</span>
                 </label>
               </div>
+
               <div className="modal-footer">
                 <button type="button" className="btn-ghost" onClick={closeModal}>Cancel</button>
                 <button type="submit" className="btn-primary" disabled={saving}>
-                  {saving ? 'Saving…' : editing ? 'Update Content' : 'Save Content'}
+                  {saving ? 'Saving…' : editing ? 'Update Photo' : 'Save Photo'}
                 </button>
               </div>
             </form>
@@ -274,7 +354,7 @@ function GalleryAdminContent() {
 
 export default function GalleryAdmin() {
   return (
-    <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center', color: '#64748B' }}>Loading gallery...</div>}>
+    <Suspense fallback={<div style={{ padding: '3rem', textAlign: 'center', color: '#8E95A8' }}>Loading Gallery Dashboard...</div>}>
       <GalleryAdminContent />
     </Suspense>
   );

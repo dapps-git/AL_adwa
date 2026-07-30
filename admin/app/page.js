@@ -36,62 +36,84 @@ export default function LoginPage() {
 
   return (
     <div className={styles.page}>
-      {/* Background pattern */}
-      <div className={styles.bg} />
+      {/* Background ambient lighting */}
+      <div className={styles.bgGlow1} />
+      <div className={styles.bgGlow2} />
+      <div className={styles.gridOverlay} />
 
       <div className={styles.card}>
-        {/* Logo */}
+        {/* Brand Header */}
         <div className={styles.logoArea}>
           <div className={styles.logoIcon}>
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <rect width="28" height="28" rx="8" fill="#C8912B"/>
+            <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="url(#brandGrad)"/>
               <path d="M7 21L14 7L21 21" stroke="white" strokeWidth="2.2" strokeLinejoin="round"/>
               <path d="M9.5 16.5H18.5" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              <defs>
+                <linearGradient id="brandGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#F3C663"/>
+                  <stop offset="1" stopColor="#B27B1E"/>
+                </linearGradient>
+              </defs>
             </svg>
           </div>
           <div>
             <h1 className={styles.brand}>AL ADHWA STUDIO</h1>
-            <p className={styles.brandSub}>Admin Panel</p>
+            <p className={styles.brandSub}>Content Management System</p>
           </div>
         </div>
 
-        <h2 className={styles.title}>Welcome back</h2>
-        <p className={styles.sub}>Sign in to manage your content</p>
+        <div className={styles.headingBlock}>
+          <h2 className={styles.title}>Admin Portal</h2>
+          <p className={styles.sub}>Sign in to manage studio media &amp; portfolio content</p>
+        </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="form-label">Email address</label>
-            <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="aladhwastudio@admin.com"
-              required
-              autoFocus
-            />
+            <label className="form-label">Email Address</label>
+            <div className={styles.inputWrap}>
+              <span className={styles.inputIcon}>✉</span>
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="admin@aladhwastudio.com"
+                required
+                autoFocus
+              />
+            </div>
           </div>
 
           <div className="form-group">
             <label className="form-label">Password</label>
-            <input
-              type="password"
-              value={pass}
-              onChange={e => setPass(e.target.value)}
-              placeholder="••••••••••••"
-              required
-            />
+            <div className={styles.inputWrap}>
+              <span className={styles.inputIcon}>🔒</span>
+              <input
+                type="password"
+                value={pass}
+                onChange={e => setPass(e.target.value)}
+                placeholder="••••••••••••"
+                required
+              />
+            </div>
           </div>
 
-          {error && <p className={styles.error}>⚠ {error}</p>}
+          {error && (
+            <div className={styles.errorBanner}>
+              <span>⚠</span> {error}
+            </div>
+          )}
 
           <button type="submit" className={`btn-primary ${styles.submitBtn}`} disabled={loading}>
-            {loading ? 'Signing in…' : 'Sign In →'}
+            {loading ? 'Authenticating…' : 'Sign In to Dashboard →'}
           </button>
         </form>
 
-        <p className={styles.hint}>
-          AL ADHWA Studio · Sharjah, UAE
-        </p>
+        <div className={styles.footerNote}>
+          <span>📍 Sharjah, UAE</span>
+          <span className={styles.dot}>•</span>
+          <span>AL ADHWA Media</span>
+        </div>
       </div>
     </div>
   );
