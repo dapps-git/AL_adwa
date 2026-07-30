@@ -7,8 +7,8 @@ const protect = require('../middleware/auth');
 router.get('/', async (req, res) => {
   try {
     const blogs = await Blog.find({ published: true }).sort({ createdAt: -1 });
-    res.json(blogs);
-  } catch (err) { res.status(500).json({ message: err.message }); }
+    res.json(blogs || []);
+  } catch (err) { res.json([]); }
 });
 
 // ── PUBLIC: GET blog by slug ───────────────────────────────

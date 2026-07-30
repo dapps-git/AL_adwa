@@ -7,8 +7,11 @@ const protect = require('../middleware/auth');
 router.get('/', async (req, res) => {
   try {
     const images = await Gallery.find().sort({ order: 1, createdAt: -1 });
-    res.json(images);
-  } catch (err) { res.status(500).json({ message: err.message }); }
+    res.json(images || []);
+  } catch (err) {
+    console.error('Gallery fetch error:', err.message);
+    res.json([]);
+  }
 });
 
 // ── ADMIN: CREATE gallery image ───────────────────────────
