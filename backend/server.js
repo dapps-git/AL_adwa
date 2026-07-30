@@ -22,14 +22,28 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/aladhwa_s
   .catch(err => console.error('❌  MongoDB error:', err));
 
 // ── Routes ────────────────────────────────────────────────
-app.use('/api/auth',       require('./routes/auth'));
-app.use('/api/categories', require('./routes/categories'));
-app.use('/api/blogs',      require('./routes/blogs'));
-app.use('/api/gallery',    require('./routes/gallery'));
+const authRoutes       = require('./routes/auth');
+const categoriesRoutes = require('./routes/categories');
+const blogsRoutes      = require('./routes/blogs');
+const galleryRoutes    = require('./routes/gallery');
+
+// Standard API Routes
+app.use('/api/auth',       authRoutes);
+app.use('/api/categories', categoriesRoutes);
+app.use('/api/blogs',      blogsRoutes);
+app.use('/api/gallery',    galleryRoutes);
+
+// cPanel Subpath Routes (e.g. /aladhwastudio/api/...)
+app.use('/aladhwastudio/api/auth',       authRoutes);
+app.use('/aladhwastudio/api/categories', categoriesRoutes);
+app.use('/aladhwastudio/api/blogs',      blogsRoutes);
+app.use('/aladhwastudio/api/gallery',    galleryRoutes);
 
 // ── Health & Root check ───────────────────────────────────
 app.get('/', (req, res) => res.status(200).send('AL ADHWA Studio API Running'));
+app.get('/aladhwastudio', (req, res) => res.status(200).send('AL ADHWA Studio API Running'));
 app.get('/api/health', (req, res) => res.json({ ok: true, ts: new Date() }));
+app.get('/aladhwastudio/api/health', (req, res) => res.json({ ok: true, ts: new Date() }));
 
 const PORT = process.env.PORT || 4000;
 if (require.main === module) {
