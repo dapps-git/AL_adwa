@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { API_URL } from '../config';
 import styles from './Categories.module.css';
 
 const pillars = [
@@ -52,7 +53,7 @@ export default function Categories() {
 
   // ── Fetch dynamic gallery images from backend ────────────────
   useEffect(() => {
-    fetch('http://localhost:4000/api/gallery')
+    fetch(`${API_URL}/gallery`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

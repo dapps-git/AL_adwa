@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { API_URL } from '../config';
 import styles from './page.module.css';
 
 const FALLBACK_POSTS = [
@@ -42,7 +43,7 @@ export default function BlogPage() {
   const [posts, setPosts] = useState(FALLBACK_POSTS);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/blog')
+    fetch(`${API_URL}/blogs`)
       .then(res => res.json())
       .then(data => {
         if (data && data.length > 0) setPosts(data);

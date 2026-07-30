@@ -3,6 +3,7 @@ import { use, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { API_URL } from '../../config';
 import styles from './page.module.css';
 
 // ── STATIC CATEGORY METADATA ──────────────────────────
@@ -80,7 +81,7 @@ export default function CategoryDetailPage({ params }) {
 
   useEffect(() => {
     if (!category) return;
-    fetch('http://localhost:4000/api/gallery')
+    fetch(`${API_URL}/gallery`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

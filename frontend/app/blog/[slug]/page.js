@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { API_URL } from '../../config';
 import styles from './page.module.css';
 
 const FALLBACK_ARTICLE = {
@@ -32,7 +33,7 @@ export default function BlogPostPage({ params }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/blog/${params.slug}`)
+    fetch(`${API_URL}/blogs/${params.slug}`)
       .then(res => res.json())
       .then(data => {
         if (data && data.title) setPost(data);

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { API_URL } from '../config';
 import styles from './page.module.css';
 
 const CATEGORIES = ['All Work', 'Studio', 'Outdoor', 'Videography', 'Teleprompter', 'Printing'];
@@ -21,7 +22,7 @@ export default function GalleryPage() {
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/gallery')
+    fetch(`${API_URL}/gallery`)
       .then(r => r.json())
       .then(d => {
         if (Array.isArray(d) && d.length > 0) {

@@ -1,13 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { API_URL } from '../config';
 import styles from './BlogSection.module.css';
 
 export default function BlogSection() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/blog')
+    fetch(`${API_URL}/blogs`)
       .then(res => res.json())
       .then(data => setPosts(data.slice(0, 3)))
       .catch(() => {

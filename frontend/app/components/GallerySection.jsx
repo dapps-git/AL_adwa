@@ -1,13 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { API_URL } from '../config';
 import styles from './GallerySection.module.css';
 
 export default function GallerySection() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/gallery')
+    fetch(`${API_URL}/gallery`)
       .then(res => res.json())
       .then(data => setImages(data))
       .catch(() => {
