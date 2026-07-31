@@ -7,7 +7,20 @@ dotenv.config();
 
 const app = express();
 
-// ── CORS ──────────────────────────────────────────────────
+// ── BULLETPROOF CORS INTERCEPTOR ─────────────────────────
+app.use((req, res, next) => {
+  const origin = req.headers.origin || '*';
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, access-control-allow-origin');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+  next();
+});
+
 app.use(cors({
   origin: true,
   credentials: true,
