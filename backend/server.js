@@ -7,28 +7,33 @@ dotenv.config();
 
 const app = express();
 
-// ── BULLETPROOF CORS INTERCEPTOR ─────────────────────────
+// ── CORS ──────────────────────────────────────────────────
+const ALLOWED_ORIGINS = [
+  'https://admin.aladhwastudio.com',
+  'https://aladhwastudio.com',
+  'http://localhost:3000',
+  'http://localhost:3001',
+];
+
 app.use((req, res, next) => {
-  const origin = req.headers.origin || '*';
-  res.setHeader('Access-Control-Allow-Origin', origin);
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else if (!origin) {
+    // Direct requests (e.g. curl, Postman) — allow
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, access-control-allow-origin');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
+  res.setHeader('Access-Control-Max-Age', '86400');
+
+  // Handle preflight immediately — never pass OPTIONS to route handlers
   if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+    return res.sendStatus(200);
   }
   next();
 });
-
-app.use(cors({
-  origin: true,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'Access-Control-Allow-Origin'],
-}));
-
-app.options('*', cors());
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
