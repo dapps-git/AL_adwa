@@ -48,10 +48,10 @@ export const metadata = {
     siteName: 'AL ADHWA Studio',
     images: [
       {
-        url: '/img/hero.webp',
-        width: 1200,
-        height: 630,
-        alt: 'AL ADHWA Studio Facility',
+        url: '/img/logo.webp',
+        width: 800,
+        height: 600,
+        alt: 'AL ADHWA Studio Logo',
       },
     ],
     locale: 'en_US',
