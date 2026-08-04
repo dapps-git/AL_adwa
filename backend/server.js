@@ -48,18 +48,21 @@ const authRoutes       = require('./routes/auth');
 const categoriesRoutes = require('./routes/categories');
 const blogsRoutes      = require('./routes/blogs');
 const galleryRoutes    = require('./routes/gallery');
+const contactRoutes    = require('./routes/contact');
 
 // Standard API Routes
 app.use('/api/auth',       authRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/blogs',      blogsRoutes);
 app.use('/api/gallery',    galleryRoutes);
+app.use('/api/contact',    contactRoutes);
 
 // cPanel Subpath Routes (e.g. /aladhwastudio/api/...)
 app.use('/aladhwastudio/api/auth',       authRoutes);
 app.use('/aladhwastudio/api/categories', categoriesRoutes);
 app.use('/aladhwastudio/api/blogs',      blogsRoutes);
 app.use('/aladhwastudio/api/gallery',    galleryRoutes);
+app.use('/aladhwastudio/api/contact',    contactRoutes);
 
 // ── Health & Root check ───────────────────────────────────
 app.get('/', (req, res) => res.status(200).send('AL ADHWA Studio API Running'));
