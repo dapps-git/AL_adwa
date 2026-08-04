@@ -1,11 +1,13 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AdriannaWelcome from './components/AdriannaWelcome';
+import SchoolPhotography from './components/SchoolPhotography';
 import Categories from './components/Categories';
 import TeleprompterExpert from './components/TeleprompterExpert';
 import ThreePhotoStrip from './components/ThreePhotoStrip';
 import EarthyMosaic from './components/EarthyMosaic';
-import NewsletterStrip from './components/NewsletterStrip';
+
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function Home() {
@@ -16,12 +18,14 @@ export default function Home() {
         {/* 1. Full-screen Studio Setup Hero Banner */}
         <Hero />
 
-        {/* 2. Editorial Welcome text block */}
+        {/* 2. Editorial Welcome / About text block */}
         <AdriannaWelcome />
 
-        {/* 3. 4-column Category Product Grid */}
-        <Categories />
+        {/* 3. School & Educational Photography (Primary Focus) */}
+        <SchoolPhotography />
 
+        {/* 4. 4-column Category Product Grid */}
+        <Categories />
 
         {/* 5. Teleprompter Specialist Feature Showcase (Najeeb Abdul Noor) */}
         <TeleprompterExpert />
@@ -32,11 +36,12 @@ export default function Home() {
         {/* 7. 2x2 Terracotta/Sage Split Mosaic */}
         <EarthyMosaic />
 
-        {/* 8. Newsletter Subscription Strip */}
-        <NewsletterStrip />
+
+        {/* 9. Contact & Reach Out Section */}
+        <Contact />
       </main>
 
-      {/* 9. Dark Footer */}
+      {/* 10. Dark Footer */}
       <Footer />
     </>
   );

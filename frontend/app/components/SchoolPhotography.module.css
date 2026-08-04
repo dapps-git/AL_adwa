@@ -1,0 +1,142 @@
+.section {
+  background: var(--cream);
+  padding: 4.5rem 0;
+  border-top: 1px solid var(--cream-border);
+  border-bottom: 1px solid var(--cream-border);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+/* LEFT COLUMN: Single Image — hidden on mobile */
+.imgCol {
+  width: 100%;
+}
+
+/* Mobile-only image inside textCol */
+.mobileImgWrap {
+  display: none;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  border: 1px solid var(--cream-border);
+  margin-bottom: 1.5rem;
+}
+
+.mobileSchoolImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.imgWrap {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--cream-border);
+  background: #FFFFFF;
+}
+
+.schoolImg {
+  width: 100%;
+  height: auto !important;
+  display: block;
+  object-fit: contain;
+}
+
+/* RIGHT COLUMN: Text */
+.textCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1C1917;
+  line-height: 1.15;
+  margin-bottom: 1.8rem;
+  white-space: nowrap;
+}
+
+.bodyText {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #4A443E;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.btnRow {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 3rem 0;
+  }
+
+  /* Hide desktop image column on mobile */
+  .imgCol {
+    display: none;
+  }
+
+  /* Show mobile image inside textCol */
+  .mobileImgWrap {
+    display: block;
+  }
+
+  /* Override .container padding */
+  :global(.container) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .textCol {
+    order: 1;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem 0 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    white-space: normal;
+    letter-spacing: 0.06em;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1.2rem;
+  }
+
+  .bodyText {
+    font-size: 0.95rem;
+    text-align: justify;
+    text-align-last: left;
+  }
+
+  .btnRow {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}

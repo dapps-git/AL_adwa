@@ -6,11 +6,9 @@
   max-height: none;
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
   margin-top: 0;
   padding-top: 0;
-  text-align: center;
 }
 
 .heroBg {
@@ -20,129 +18,217 @@
   height: 100%;
 }
 
-/* ── DESKTOP VS MOBILE IMAGE DISPLAY ────────── */
-.desktopImg {
-  display: block !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-  width: 100% !important;
-  height: 100% !important;
+/* ── DESKTOP BACKGROUND ── */
+.desktopBg {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/hero.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 70% 35%;
 }
 
-.mobileImg {
-  display: none !important;
+/* ── MOBILE BACKGROUND (CSS — no zoom/parallax) ── */
+.mobileBg {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/mobile.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+
+/* ── TABLET BACKGROUND (769–1024px) ── */
+.tabBg {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/tab.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
 }
 
 .heroContainer {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 900px;
+  max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   display: flex;
-  justify-content: center;
-  transform: translateY(20px);
+  justify-content: flex-start;
 }
 
 .heroContent {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.2rem;
-  max-width: 720px;
+  align-items: flex-start;
+  text-align: left;
+  gap: 1.4rem;
+  max-width: 470px;
+  margin-left: 5rem;
 }
 
 .mainTitle {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
-  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
   font-weight: 700;
-  color: #FFFFFF;
-  line-height: 1.12;
+  color: #4A2810;
+  line-height: 1.1;
   letter-spacing: -0.01em;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
 }
 
 .subTitle {
-  font-size: clamp(0.95rem, 2vw, 1.2rem);
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 400;
-  line-height: 1.65;
-  max-width: 600px;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  color: #6B4228;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 480px;
 }
 
 .btnRow {
   display: flex;
-  justify-content: center;
-  margin-top: 0.8rem;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
 }
 
-/* ── MOBILE VIEW: 100% FULL SCREEN HEIGHT & WIDTH (ZERO EMPTY SPACE) ── */
-@media (max-width: 768px) {
-  .desktopImg {
-    display: none !important;
-  }
-
-  .mobileImg {
+/* ── TABLET VIEW (769px – 1024px): tab.webp ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .desktopBg  { display: none !important; }
+  .mobileBg   { display: none !important; }
+  .tabBg {
     display: block !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    width: 100% !important;
-    height: 100% !important;
+    background-size: cover !important;
+    background-position: center center !important;
   }
 
   .heroSection {
-    height: 100vh !important;
-    height: 100svh !important;
-    min-height: 100vh !important;
-    max-height: none !important;
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-  }
-
-  .heroBg {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    align-items: center;
+    -webkit-overflow-scrolling: auto;
   }
 
   .heroContainer {
-    padding: 0 1.4rem;
-    transform: translateY(20px);
+    padding: 0 1.5rem;
+    justify-content: center;
   }
 
   .heroContent {
-    gap: 1rem;
-    max-width: 100%;
     align-items: center;
     text-align: center;
+    gap: 1.1rem;
+    max-width: 100%;
+    margin-left: 0;
   }
 
   .mainTitle {
-    font-size: 2.1rem;
+    font-size: clamp(2.2rem, 4vw, 3rem);
     color: #FFFFFF;
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  }
+
+  .subTitle {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    color: #FFFFFF;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+    text-align: center;
+    max-width: 560px;
+  }
+
+  .btnRow {
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.8rem;
+  }
+
+  .btnRow a {
+    background: var(--terracotta) !important;
+    border: none !important;
+    color: #FFFFFF !important;
+    transition: all 0.3s ease;
+  }
+
+  .btnRow a:hover {
+    background: #8B3A1A !important;
+    color: #FFFFFF !important;
+  }
+}
+
+/* ── MOBILE VIEW (≤ 768px): mobile.webp ── */
+@media (max-width: 768px) {
+  .desktopBg { display: none !important; }
+  .tabBg     { display: none !important; }
+  .mobileBg {
+    display: block !important;
+    background-size: cover !important;
+    background-position: center top !important;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+
+  .heroSection {
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    align-items: center;
+    -webkit-overflow-scrolling: auto;
+  }
+
+  .heroContainer {
+    padding: 0 1.5rem;
+    justify-content: center;
+  }
+
+  .heroContent {
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .mainTitle {
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    color: #FFFFFF;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
 
   .subTitle {
     font-size: 0.92rem;
-    color: rgba(255, 255, 255, 0.95);
-    line-height: 1.6;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+    color: #FFFFFF;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    text-align: center;
   }
 
   .btnRow {
-    width: 100%;
     justify-content: center;
+    width: 100%;
   }
 
   .btnRow a {
-    padding: 0.85rem 2.5rem;
+    background: var(--terracotta) !important;
+    border: none !important;
+    color: #FFFFFF !important;
+    transition: all 0.3s ease;
+  }
+
+  .btnRow a:hover {
+    background: #8B3A1A !important;
+    color: #FFFFFF !important;
   }
 }

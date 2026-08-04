@@ -1,0 +1,35 @@
+.scannerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+  margin: 2rem 0 1rem;
+}
+
+.scannerImgWrap {
+  width: 240px;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--cream-border);
+  background: #FFFFFF;
+  padding: 8px;
+}
+
+.scannerImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.scannerText {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  letter-spacing: 0.02em;
+}

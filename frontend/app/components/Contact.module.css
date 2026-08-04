@@ -59,6 +59,35 @@
   text-decoration: underline;
 }
 
+.socialIconRow {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-top: 0.4rem;
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cream-border);
+  color: var(--charcoal);
+  background: var(--cream-mid);
+  transition: color 0.25s, background 0.25s, border-color 0.25s, transform 0.2s;
+  text-decoration: none;
+}
+
+.socialIcon:hover {
+  color: var(--terracotta);
+  background: var(--cream);
+  border-color: var(--terracotta);
+  transform: translateY(-2px);
+}
+
 /* Form Wrap */
 .formWrap {
   background: #FFFFFF;
@@ -180,6 +209,12 @@
   color: var(--charcoal);
 }
 
+.contactHeading {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+}
+
 .mapFrameWrap {
   border: 1px solid var(--cream-border);
   border-radius: var(--radius-sm);
@@ -200,5 +235,24 @@
 @media (max-width: 540px) {
   .row {
     grid-template-columns: 1fr;
+  }
+  .mapTitle {
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+  .contactHeading {
+    font-size: 1.15rem !important;
+    white-space: nowrap;
+  }
+  .socialIconRow {
+    gap: 0.45rem;
+  }
+  .socialIcon {
+    width: 28px;
+    height: 28px;
+  }
+  .socialIcon svg {
+    width: 13px;
+    height: 13px;
   }
 }

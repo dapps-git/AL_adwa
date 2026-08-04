@@ -7,25 +7,12 @@ export default function Hero() {
     <section className={styles.heroSection} id="home">
       {/* ── RESPONSIVE BACKGROUND IMAGES ───────────── */}
       <div className={styles.heroBg}>
-        {/* Desktop / Laptop View Image (lapview1.webp) */}
-        <Image
-          src="/img/lapview1.webp"
-          alt="AL ADHWA Studio Desktop Banner"
-          fill
-          priority
-          unoptimized
-          className={styles.desktopImg}
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
-        {/* Mobile View Image (mobileview3.png) */}
-        <Image
-          src="/img/mobileview3.webp"
-          alt="AL ADHWA Studio Mobile Banner"
-          fill
-          priority
-          unoptimized
-          className={styles.mobileImg}
-        />
+        {/* Desktop: CSS background */}
+        <div className={styles.desktopBg} aria-hidden="true" />
+        {/* Tablet (769–1024px): tab.webp */}
+        <div className={styles.tabBg} aria-hidden="true" />
+        {/* Mobile: CSS background — no iOS zoom/parallax */}
+        <div className={styles.mobileBg} aria-hidden="true" />
       </div>
 
       {/* ── CENTERED OVERLAY CONTENT ───────────────── */}
@@ -33,7 +20,7 @@ export default function Hero() {
         <div className={styles.heroContent}>
           <h1 className={styles.mainTitle}>Premium Media &amp; Studio Production</h1>
           <p className={styles.subTitle}>
-            Studio ,  Photography, Videography &amp; Autocue Teleprompter Solutions with State-of-the-Art Facilities
+            Studio Photography, Videography &amp; Autocue Teleprompter Solutions with State-of-the-Art Facilities
           </p>
           <div className={styles.btnRow}>
             <a href="/#categories" className="btn-terracotta">Explore Services ↗</a>

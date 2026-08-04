@@ -89,4 +89,8 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+  .title {
+    font-size: clamp(0.9rem, 5vw, 1.4rem);
+    white-space: nowrap;
+  }
 }

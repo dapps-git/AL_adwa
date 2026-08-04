@@ -69,16 +69,17 @@
 .svcImgWrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
   overflow: hidden;
   margin-bottom: 1rem;
-  border-radius: 0 !important;
-  background: var(--cream-mid);
+  border-radius: 4px;
+  background: #002b1b; /* Matching dark green background of graphic cards */
 }
 
 .svcImgWrap img {
-  border-radius: 0 !important;
+  border-radius: 4px;
   object-fit: cover;
+  object-position: top center;
   transition: transform 0.45s ease;
 }
 
@@ -193,6 +194,8 @@
 .ctaBtns {
   display: flex;
   gap: 1rem;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 /* ── RESPONSIVE ────────────────────────────── */
@@ -260,5 +263,13 @@
   .ctaBtns {
     width: 100%;
     justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+  }
+  .ctaBtns a {
+    padding: 0.65rem 1rem !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.1em !important;
+    white-space: nowrap;
   }
 }

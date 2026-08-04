@@ -58,6 +58,8 @@
   line-height: 1.85;
   color: rgba(255, 255, 255, 0.85);
   font-weight: 300;
+  text-align: justify;
+  text-align-last: left;
 }
 
 @media (max-width: 900px) {

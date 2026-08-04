@@ -1,17 +1,26 @@
 'use client';
 import Image from 'next/image';
+import { useTypewriter } from '../hooks/useTypewriter';
 import styles from './TeleprompterExpert.module.css';
 
 export default function TeleprompterExpert() {
+  const nameText = 'NAJEEB ABDUL NOOR';
+  const { ref, typedText, isVisible } = useTypewriter(nameText, 65, 0.2);
+  const isDone = typedText.length === nameText.length;
+
   return (
-    <section className={`${styles.section} section`} id="teleprompter-expert">
+    <section
+      className={`${styles.section} section reveal-on-scroll ${isVisible ? 'is-visible' : ''}`}
+      id="teleprompter-expert"
+      ref={ref}
+    >
       <div className="container">
         <div className={styles.grid}>
           {/* LEFT: Image */}
           <div className={styles.imgCol}>
             <div className={styles.imgWrap}>
               <Image
-                src="/img/teleprompt.webp"
+                src="/img/najeeb.webp"
                 alt="Najeeb Abdul Noor - Teleprompter Expert"
                 fill
                 sizes="(max-width:768px) 100vw, 45vw"
@@ -22,11 +31,11 @@ export default function TeleprompterExpert() {
             </div>
           </div>
 
-          {/* RIGHT: Detailed Bio & Tech Info — Clean Paragraphs, No Separate Boxes */}
+          {/* RIGHT: Detailed Bio & Tech Info */}
           <div className={styles.textCol}>
             <span className={styles.eyebrowTag}>Autocue &amp; Teleprompter Specialist</span>
-            <h2 className={styles.expertName}>
-              NAJEEB ABDUL NOOR
+            <h2 className={`${styles.expertName} typewriter-title ${isDone ? 'typing-done' : ''}`}>
+              {typedText}
             </h2>
             <p className={styles.subtitle}>Leading Dubai Autocue Teleprompter Expert &amp; Technical Operator</p>
 
@@ -62,3 +71,4 @@ export default function TeleprompterExpert() {
     </section>
   );
 }
+

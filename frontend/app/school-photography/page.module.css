@@ -1,0 +1,299 @@
+.main {
+  background: var(--cream);
+  min-height: 100vh;
+  padding-top: 90px;
+}
+
+.heroSection {
+  background: linear-gradient(135deg, #1C1917 0%, #2D2825 100%);
+  color: #FFFFFF;
+  padding: 5rem 0 4.5rem;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eyebrowTag {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta-light, #E8A88A);
+  margin-bottom: 0.6rem;
+}
+
+.mainHeading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.dividerLine {
+  width: 60px;
+  height: 2px;
+  background: var(--terracotta);
+  margin: 0 auto 1.5rem;
+}
+
+.heroDesc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 2rem;
+}
+
+.ctaRow {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Features Section */
+.featuresSection {
+  padding: 4rem 0;
+  background: #F7F5F0;
+  border-bottom: 1px solid var(--cream-border);
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.featCard {
+  background: #FFFFFF;
+  padding: 2rem 1.8rem;
+  border-radius: 4px;
+  border: 1px solid var(--cream-border);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+  text-align: center;
+}
+
+.featIcon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.featCard h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 0.6rem;
+}
+
+.featCard p {
+  font-size: 0.88rem;
+  color: #66605B;
+  line-height: 1.6;
+}
+
+/* Gallery Section */
+.gallerySection {
+  padding: 2.5rem 0 4rem;
+}
+
+.sectionHeaderCenter {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+
+.sectionHeading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 540px) {
+  .sectionHeading {
+    font-size: clamp(0.75rem, 4.2vw, 1.1rem);
+    white-space: nowrap;
+  }
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.card {
+  background: #FFFFFF;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.imgWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+
+.cardBody {
+  padding: 1.2rem 1.5rem;
+}
+
+.cardCat {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-top: 0.3rem;
+}
+
+/* CTA Strip */
+.ctaStrip {
+  background: var(--charcoal);
+  color: #FFFFFF;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.ctaInner h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 540px) {
+  .ctaInner h2 {
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+  }
+  .ctaInner p {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+}
+
+.ctaInner p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 1.8rem;
+}
+
+/* Lightbox Modal */
+.lightboxBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.lightboxContent {
+  position: relative;
+  max-width: 90vw;
+  width: 90vw;
+  background: #1C1917;
+  border-radius: 6px;
+  overflow: hidden;
+  color: #FFFFFF;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.lightboxImgWrap {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  max-height: 75vh;
+  background: #000;
+}
+
+.lightboxImgWrap img {
+  object-fit: contain !important;
+}
+
+.lightboxMeta {
+  padding: 1.2rem 1.8rem;
+}
+
+.lightboxCat {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--terracotta-light, #E8A88A);
+}
+
+.lightboxTitle {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 900px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .lightboxBackdrop {
+    padding: 0.5rem;
+  }
+  .lightboxImgWrap {
+    height: 55vh;
+  }
+}

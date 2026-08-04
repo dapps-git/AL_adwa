@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useTypewriter } from '../hooks/useTypewriter';
 import styles from './ThreePhotoStrip.module.css';
 
 const photos = [
@@ -9,12 +10,21 @@ const photos = [
 ];
 
 export default function ThreePhotoStrip() {
+  const stripTitle = 'VISUAL EXCELLENCE IN ACTION';
+  const { ref, typedText, isVisible } = useTypewriter(stripTitle, 60, 0.2);
+  const isDone = typedText.length === stripTitle.length;
+
   return (
-    <section className={styles.section}>
+    <section
+      className={`${styles.section} reveal-on-scroll ${isVisible ? 'is-visible' : ''}`}
+      ref={ref}
+    >
       <div className="container">
         <div className={styles.header}>
           <span className={styles.eyebrow}>SELECTED WORK</span>
-          <h2 className={styles.title}>Visual Excellence in Action</h2>
+          <h2 className={`${styles.title} typewriter-title ${isDone ? 'typing-done' : ''}`}>
+            {typedText}
+          </h2>
         </div>
 
         {/* ── 3-COLUMN SIDE-BY-SIDE PHOTO GRID (MATCHING USER REF) ── */}
@@ -41,3 +51,4 @@ export default function ThreePhotoStrip() {
     </section>
   );
 }
+

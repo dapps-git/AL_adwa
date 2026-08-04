@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import { API_URL } from '../config';
 import styles from './page.module.css';
 
-const CATEGORIES = ['All Work', 'Studio', 'Outdoor', 'Videography', 'Teleprompter', 'Printing'];
+const CATEGORIES = ['All Work', 'School', 'Studio', 'Outdoor', 'Videography', 'Teleprompter', 'Printing'];
 
 const DEFAULT_GALLERY_IMAGES = [
   { _id: 'g0', title: 'Studio Production & Setup', imageUrl: '/img/gallery.webp', category: 'Studio' },

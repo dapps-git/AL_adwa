@@ -3,6 +3,7 @@ import { use, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import CategoryWhatsAppFloat from '../../components/CategoryWhatsAppFloat';
 import { API_URL } from '../../config';
 import styles from './page.module.css';
 
@@ -16,18 +17,24 @@ const CATEGORIES = {
     img: '/img/indoor.webp',
     intro: 'Al Adhwa Studio provides high quality indoor photography sessions, document photos meeting official government standards, custom printed gifts, framing, photocopying, document lamination, scanning, and full office document support from our Muwailah, Sharjah studio.',
     services: [
-      { title: 'PRODUCT SHOOT', img: '/img/photo.png', desc: 'Professional photography services to showcase your products in the best light. From e-commerce to promotional materials, every detail is captured. Customizable packages available.' },
-      { title: 'CORPORATE HEADSHOTS', img: '/img/data.png', desc: 'Professional headshot photography for LinkedIn, company websites, or marketing materials. Polished, high-quality results that make a great first impression in various styles and settings.' },
-      { title: 'FAMILY PHOTO SHOOT', img: '/img/photo.webp', desc: 'Studio sessions capturing beautiful, timeless moments with your loved ones. Custom packages with prints and framing options to preserve your memories forever.' },
-      { title: 'PASSPORT & EMIRATES ID PHOTOS', img: '/img/imageq.webp', desc: 'High-quality, professionally sized passport photos meeting all official requirements. We provide all countries passport and visa size photos. Fast, reliable service ready immediately.' },
-      { title: 'PHOTO FRAMES', img: '/img/1.webp', desc: 'Readymade and custom frames: 4x6, 5x7, 6x8, 8x10, A4, A3, A2, A1, 8X12, 12x16 up to 24x100 inches. Acrylic Frame, Wood Lamination in White, Black, Gold, Brown.' },
-      { title: 'MUG PRINTING & MAGIC MUGS', img: '/img/gift.webp', desc: 'Custom printing on high-quality ceramic mugs with vibrant colors. Heat-sensitive magic mugs change color when hot liquid is poured in — ideal for personal & corporate gifting.' },
-      { title: 'T-SHIRT PRINTING', img: '/img/image.webp', desc: 'Custom-designed t-shirts for corporate events, promotional campaigns, or employee uniforms. Sharp, vibrant, long-lasting prints that communicate your brand effectively.' },
-      { title: 'PILLOW PRINTING', img: '/img/image3.webp', desc: 'Designs printed on high-quality fabric pillows with vibrant, long-lasting colors for promotional purposes, corporate gifts, or home decor.' },
-      { title: 'CV / RESUME MAKING', img: '/img/images.webp', desc: 'Professional and polished CVs crafted to align with your career goals. From design to content, clear, impactful, and perfectly formatted to make a lasting impression.' },
-      { title: 'DOCUMENT SERVICES', img: '/img/images.webp', desc: 'Photocopy/Xerox, Document Scanning, Document Lamination, Company Seal Printing, Business Card Printing, and Key Chain Printing all available at one location.' },
+      { title: 'PASSPORT & EMIRATES ID PHOTOS', img: '/studio/passport.jpg', desc: 'High-quality, professionally sized passport photos meeting all official requirements for UAE Emirates ID, Visa, and all international passports. Fast, reliable service ready immediately.' },
+      { title: 'CORPORATE HEADSHOTS', img: '/studio/corporateheadshots.jpg', desc: 'Professional headshot photography for LinkedIn, company websites, executive profiles, or marketing materials in studio lighting.' },
+      { title: 'FAMILY PHOTO SHOOT', img: '/studio/familyshoot.jpg', desc: 'Warm indoor studio sessions capturing beautiful, timeless family moments. Custom packages with high-resolution digital copies and framed prints.' },
+      { title: 'PRODUCT PHOTOGRAPHY', img: '/studio/productphotography.jpg', desc: 'Studio product photography to showcase your products for e-commerce, Amazon, Instagram, or promotional catalogs in crisp detail.' },
+      { title: 'MUG PRINTING & MAGIC MUGS', img: '/studio/mugprinting.jpg', desc: 'Custom printing on ceramic mugs with vibrant, long-lasting colors. Heat-sensitive magic mugs change color when hot liquid is poured.' },
+      { title: 'T-SHIRT PRINTING', img: '/studio/tshirtprinting.jpg', desc: 'Custom-designed t-shirts for corporate events, promotional campaigns, sports teams, or uniform branding.' },
+      { title: 'CUSTOMIZED PILLOW PRINTING', img: '/studio/customizedpillow.jpg', desc: 'Custom photo and text designs printed on high-quality fabric pillows — ideal for gifts, decor, and special occasions.' },
+      { title: 'KEYCHAIN PRINTING', img: '/studio/keychain.jpg', desc: 'Personalized acrylic, metal, and wooden keychains printed with custom photos, logos, or personalized text.' },
+      { title: 'MOBILE COVER PRINTING', img: '/studio/mobilecover.jpg', desc: 'Custom phone back covers printed with your favorite photos, artistic patterns, or personal branding.' },
+      { title: 'WATER BOTTLE PRINTING', img: '/studio/waterbottleprinting.jpg', desc: 'Durable custom printing on stainless steel and aluminum water bottles for school, sports, or corporate giveaways.' },
+      { title: 'CAP PRINTING', img: '/studio/cap.jpg', desc: 'Custom printed caps and hats with company logos, event branding, or personalized artwork.' },
+      { title: 'POLAROIDS & PRINTS', img: '/studio/polariods.jpg', desc: 'Retro Polaroid-style photo prints, mini prints, and custom photo wall displays preserved on premium photo paper.' },
+      { title: 'BUSINESS CARD PRINTING', img: '/studio/businesscard.jpg', desc: 'Premium quality business cards in matte, glossy, textured, and spot UV finishes for a striking professional impression.' },
+      { title: 'GRAPHIC DESIGN SERVICES', img: '/studio/graphicdesign.jpg', desc: 'Creative graphic design for logos, flyers, brochures, social media banners, company profiles, and promotional media.' },
+      { title: 'CV / RESUME MAKING', img: '/studio/resume.jpg', desc: 'Professional and polished CV crafting aligned with modern ATS and HR standards to help you stand out.' },
+      { title: 'POUCH LAMINATION & DOCS', img: '/studio/pouchlamination.jpg', desc: 'Pouch lamination, document scanning, high-speed photocopying/xerox, and company seal stamps at one convenient location.' },
     ],
-    checklist: ['EMIRATES ID PHOTO','PASSPORT PHOTO','FAMILY PHOTO','PHOTO PRINTING','MUG PRINTING','MAGIC MUGS','T-SHIRT PRINTING','PILLOW PRINTING','KEY CHAIN PRINTING','PHOTO FRAMES','BUSINESS CARD PRINTING','CV/RESUME TYPING','COMPANY SEAL PRINTING','DOCUMENT SCANNING','DOCUMENT LAMINATION','PHOTOCOPY/XEROX'],
+    checklist: ['EMIRATES ID PHOTO','PASSPORT PHOTO','FAMILY PHOTO','PRODUCT SHOOT','CORPORATE HEADSHOTS','MUG PRINTING','MAGIC MUGS','T-SHIRT PRINTING','PILLOW PRINTING','KEY CHAIN PRINTING','MOBILE COVER PRINTING','WATER BOTTLE PRINTING','CAP PRINTING','POLAROIDS','BUSINESS CARDS','GRAPHIC DESIGN','CV/RESUME TYPING','POUCH LAMINATION','PHOTOCOPY/XEROX'],
   },
   'outdoor-photography': {
     num: '02',
@@ -38,37 +45,41 @@ const CATEGORIES = {
     intro: 'Capturing moments outdoors with state-of-the-art gear and expert lighting. Al Adhwa Studio covers human subjects, outdoor nature, architectural structures, and commercial objects across the UAE.',
     services: [
       { title: 'COMMERCIAL & BRAND', img: '/img/outdoor_commercial.webp', desc: 'High-end commercial brand shoots shot outdoors against modern skyline architecture and industrial setups.', items: ['Brand Commercial Shoots', 'Architectural Photography', 'Real Estate & Properties', 'Food & Culinary Scenes'] },
+      { title: 'WEDDING PHOTOGRAPHY', img: '/img/1.webp', desc: 'Capturing unforgettable wedding moments with artistic storytelling, romantic couple portraits, and full ceremony coverage.', items: ['Bridal & Groom Portraits', 'Ceremony & Reception Coverage', 'Pre-Wedding & Engagement Shoots', 'High-Resolution Albums'] },
+      { title: 'BIRTHDAY PHOTOGRAPHY', img: '/img/2.webp', desc: 'Vibrant and joyful birthday party photography for kids, adults, and milestone celebrations across the UAE.', items: ['Kids Birthday Parties', 'Milestone Celebrations', 'Cake Smash Sessions', 'Party Highlight Photography'] },
       { title: 'CORPORATE EXECUTIVE', img: '/img/outdoor_corporate.webp', desc: 'Corporate group sessions, team portraits, executive headshots, and leadership photography outdoors.', items: ['Executive Leadership Photos', 'Company Team Shoots', 'Annual Report Imagery', 'Corporate Campus Photography'] },
       { title: 'EVENTS & GALAS', img: '/img/outdoor_events.webp', desc: 'Vibrant outdoor gala celebrations, VIP summits, award ceremonies, and festival crowd photography.', items: ['Conferences & Summits', 'Gala Dinners', 'Award Ceremonies', 'Outdoor Festivals'] },
       { title: 'PERSONAL & PORTRAIT', img: '/img/outdoor_personal.webp', desc: 'Stunning outdoor portraits during golden hour in urban settings or UAE desert landscapes.', items: ['Personal Lifestyle Portraits', 'Fashion & Editorial', 'Engagement & Couples', 'Desert Golden Hour Shoots'] },
     ],
-    checklist: ['COMMERCIAL SHOOT', 'CORPORATE HEADSHOTS', 'OUTDOOR EVENTS', 'PORTRAIT SHOOT', 'CREATIVE ARCHITECTURE', 'DIGITAL PHOTOGRAPHY'],
+    checklist: ['COMMERCIAL SHOOT', 'WEDDING PHOTOGRAPHY', 'BIRTHDAY PHOTOGRAPHY', 'CORPORATE HEADSHOTS', 'OUTDOOR EVENTS', 'PORTRAIT SHOOT', 'CREATIVE ARCHITECTURE', 'DIGITAL PHOTOGRAPHY'],
   },
   'outdoor-videography': {
     num: '03',
     heroTitle: 'VIDEOGRAPHY',
     title: 'Outdoor Videography',
-    sub: 'Commercial, Events & Digital Production',
+    sub: 'Commercial, Events, Weddings, Birthdays & Digital Production',
     img: '/img/outdoor.webp',
-    intro: 'Commercial, event, and documentary video production covering everything from corporate promotions to personal milestones and creative storytelling across Dubai and the wider UAE.',
+    intro: 'Commercial, event, wedding, birthday, and documentary video production covering everything from corporate promotions to personal milestones and creative storytelling across Dubai and the wider UAE.',
     services: [
       { title: 'COMMERCIAL & CORPORATE VIDEO', img: '/img/video_commercial.webp', desc: 'TV and online video commercials, corporate brand films, property walkthroughs, and promotional ads filmed with cinema cameras.', items: ['TV & Digital Video Commercials', 'Corporate Brand Films', 'Real Estate Property Tours', 'Industrial Feature Videos'] },
+      { title: 'WEDDING VIDEOGRAPHY', img: '/img/1.webp', desc: 'Cinematic wedding films, bridal prep, emotional ceremony vows, and reception highlight videos filmed in 4K.', items: ['Cinematic Wedding Highlights', 'Bridal Prep Coverage', 'Full Ceremony Film', 'Pre-Wedding Video Story'] },
+      { title: 'BIRTHDAY VIDEOGRAPHY', img: '/img/2.webp', desc: 'Vibrant birthday video coverage for kids and adult milestone celebrations with highlight reels and social media edits.', items: ['Kids Birthday Highlights', 'Adult Milestone Films', 'Party Atmosphere Recaps', 'Reels & Shorts Edits'] },
       { title: 'EVENTS & LIVE COVERAGE', img: '/img/outdoor_events.webp', desc: 'Live event coverage, corporate summits, music concerts, and milestone celebrations filmed in 4K multi-cam format.', items: ['Multi-Cam Live Coverage', 'Conferences & Summits', 'Concerts & Shows', 'Highlight Reels'] },
       { title: 'CREATIVE & REELS', img: '/img/outdoor_commercial.webp', desc: 'High impact social media video production (TikToks, Shorts, Reels), artistic brand documentaries, and music videos.', items: ['Documentaries & Features', 'TikToks, Shorts & Instagram Reels', 'Artistic Music Videos'] },
     ],
-    checklist: ['COMMERCIAL VIDEO', 'CORPORATE FILM', 'EVENT COVERAGE', 'DIGITAL REELS', 'DOCUMENTARY PRODUCTION'],
+    checklist: ['COMMERCIAL VIDEO', 'WEDDING VIDEOGRAPHY', 'BIRTHDAY VIDEOGRAPHY', 'CORPORATE FILM', 'EVENT COVERAGE', 'DIGITAL REELS', 'DOCUMENTARY PRODUCTION'],
   },
   'teleprompter-services': {
     num: '04',
     heroTitle: 'TELEPROMPTER',
     title: 'Teleprompter Services',
     sub: 'Camera Rigs, Presidential Podium & Stage Floor Displays',
-    img: '/img/teleprompt.webp',
+    img: '/img/tele.webp',
     intro: 'With over 14 years of UAE experience, Najeeb Abdul Noor is the leading Dubai Autocue Teleprompter Expert. A trusted partner for TV commercials, COP28, and large-scale international speaker events. AL ADHWA STUDIO provides both on-camera and presidential podium teleprompters.',
     services: [
       { title: 'PRESIDENTIAL PODIUM PROMPTERS', img: '/img/teleprompter_podium.webp', desc: 'Stand-alone transparent glass panels placed on either side of a lectern. Allows Presidents, CEOs, and keynote speakers to address crowds naturally — no memorization required.', items: ['Dual Reflective Glass Panels', 'Public Speeches & Summits', 'CEO & Shareholder Presentations'] },
       { title: 'CAMERA-MOUNTED AUTOCUE RIGS', img: '/img/teleprompter_rig.webp', desc: 'Beam-splitter glass mounted directly in front of the camera lens so TV anchors, news readers, and commercial presenters maintain 100% natural eye contact with viewers.', items: ['Studio Broadcast Rigs', 'DSLR / Mirrorless Prompters', 'Mobile & Tablet Mounts'] },
-      { title: 'FLOOR & STAGE CONFIDENCE MONITORS', img: '/img/teleprompter_podium.webp', desc: 'Angled floor confidence monitors for stage performers, multi-prompter sync systems for global summits, and smart eyewear projecting scrolling text into the user\'s field of vision.', items: ['Floor / Stage Confidence Monitors', 'Multi-Teleprompter Sync Systems', 'Smart Eyewear Prompters'] },
+      { title: 'FLOOR & STAGE CONFIDENCE MONITORS', img: '/img/floor.webp', desc: 'Angled floor confidence monitors for stage performers, multi-prompter sync systems for global summits, and smart eyewear projecting scrolling text into the user\'s field of vision.', items: ['Floor / Stage Confidence Monitors', 'Multi-Teleprompter Sync Systems', 'Smart Eyewear Prompters'] },
     ],
     checklist: ['PRESIDENTIAL PODIUM PROMPTERS', 'CAMERA MOUNTED AUTOCUE', 'FLOOR CONFIDENCE MONITORS', 'MULTI-CAM PROMPTER SYNC'],
   },
@@ -191,23 +202,11 @@ export default function CategoryDetailPage({ params }) {
             </div>
           </section>
         )}
-
-        {/* ── BOOK CTA STRIP ─────────────────────────── */}
-        <section className={styles.ctaStrip}>
-          <div className="container">
-            <div className={styles.ctaContent}>
-              <div>
-                <h3 className={styles.ctaTitle}>Ready to book?</h3>
-                <p className={styles.ctaSub}>Contact AL ADHWA Studio for packages, pricing & bookings.</p>
-              </div>
-              <div className={styles.ctaBtns}>
-                <a href="/#contact" className="btn-terracotta">Get in Touch ↗</a>
-                <a href="https://wa.me/971557544582" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp Us</a>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
+
+      {/* Floating Bottom-Left WhatsApp button ONLY on 4 category pages */}
+      <CategoryWhatsAppFloat slug={slug} />
+
       <Footer />
     </>
   );

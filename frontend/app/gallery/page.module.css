@@ -215,7 +215,7 @@
 
 .lightboxContent {
   position: relative;
-  max-width: 850px;
+  max-width: 90vw;
   width: 90vw;
   background: #1C1915;
   border-radius: 0 !important;
@@ -251,13 +251,15 @@
 .lightboxImgWrap {
   position: relative;
   width: 100%;
-  height: 60vh;
-  min-height: 320px;
+  height: 70vh;
+  max-height: 75vh;
   border-radius: 0 !important;
+  background: #000;
 }
 
 .lightboxImgWrap img {
   border-radius: 0 !important;
+  object-fit: contain !important;
 }
 
 .lightboxMeta {

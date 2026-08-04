@@ -1,4 +1,5 @@
 import { Cormorant_Garamond, Jost } from 'next/font/google';
+import ImageProtection from './components/ImageProtection';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -35,6 +36,11 @@ export const metadata = {
   ],
   authors: [{ name: 'AL ADHWA Studio' }],
   creator: 'AL ADHWA Studio',
+  icons: {
+    icon: '/img/logo.webp',
+    shortcut: '/img/logo.webp',
+    apple: '/img/logo.webp',
+  },
   openGraph: {
     title: 'AL ADHWA Studio | Photography, Videography & Teleprompter – Sharjah, UAE',
     description: 'Premier studio for photography, videography, broadcast teleprompters, and custom gift printing in Sharjah & Dubai, UAE.',
@@ -42,7 +48,7 @@ export const metadata = {
     siteName: 'AL ADHWA Studio',
     images: [
       {
-        url: '/img/studio.webp',
+        url: '/img/hero.webp',
         width: 1200,
         height: 630,
         alt: 'AL ADHWA Studio Facility',
@@ -102,7 +108,10 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ImageProtection />
+        {children}
+      </body>
     </html>
   );
 }

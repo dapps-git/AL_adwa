@@ -11,7 +11,7 @@
 
 .sectionHeader {
   margin-bottom: 2rem;
-  text-align: left;
+  text-align: center;
 }
 
 .eyebrow {
@@ -65,7 +65,8 @@
 .cardInfo {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: 0.3rem;
   padding-top: 0.2rem;
 }
@@ -78,24 +79,38 @@
   text-transform: uppercase;
   color: var(--charcoal);
   line-height: 1.25;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.1rem;
+}
+
+.cardSub {
+  font-size: 0.78rem;
+  color: #66605B;
+  margin-bottom: 0.3rem;
+  line-height: 1.35;
 }
 
 .seeMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: lowercase;
-  color: var(--charcoal);
-  border-bottom: 1px solid var(--charcoal);
-  width: fit-content;
-  padding-bottom: 2px;
-  transition: color 0.25s, border-color 0.25s;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  background: rgba(193, 68, 14, 0.06);
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(193, 68, 14, 0.25);
+  margin-top: 0.4rem;
+  transition: all 0.3s ease;
 }
 
 .card:hover .seeMore {
-  color: var(--terracotta);
+  background: var(--terracotta);
+  color: #FFFFFF;
   border-color: var(--terracotta);
+  transform: translateY(-1px);
 }
 
 .ctaWrap {

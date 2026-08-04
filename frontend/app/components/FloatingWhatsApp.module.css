@@ -1,0 +1,53 @@
+.floatBtn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s;
+}
+
+.floatBtn:hover {
+  transform: scale(1.1);
+  background: #20BA5A;
+}
+
+.tooltip {
+  position: absolute;
+  right: 70px;
+  background: #1C1917;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s, visibility 0.25s;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.floatBtn:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .floatBtn {
+    bottom: 20px;
+    right: 20px;
+    width: 54px;
+    height: 54px;
+  }
+}

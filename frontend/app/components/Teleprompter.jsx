@@ -4,7 +4,7 @@ import styles from './Teleprompter.module.css';
 const teleprompterTypes = [
   {
     type: 'Camera-Mounted Teleprompters',
-    img: '/img/teleprompt.webp',
+    img: '/img/tele.webp',
     details: [
       { name: 'Studio Rigs', desc: 'Large units attached to heavy broadcast cameras in TV studios.' },
       { name: 'DSLR / Mirrorless Prompters', desc: 'Smaller, portable glass-and-hood systems built for content creators and field videographers.' },
@@ -13,7 +13,7 @@ const teleprompterTypes = [
   },
   {
     type: 'Presidential (Podium) Teleprompters',
-    img: '/img/podcast.webp',
+    img: '/img/teleprompter_podium.webp',
     details: [
       { name: 'Stand-alone Glass Panels', desc: 'Tall, transparent glass pieces placed on either side of a lectern for public speeches.' },
       { name: 'Concealed Floor Displays', desc: 'Monitors hidden at ground level reflect text upward onto glass so speakers look outward at crowds.' },
@@ -21,7 +21,7 @@ const teleprompterTypes = [
   },
   {
     type: 'Floor & Specialized Monitors',
-    img: '/img/4.webp',
+    img: '/img/floor.webp',
     details: [
       { name: 'Floor / Confidence Monitors', desc: 'Angled screens placed on stage floors so performers or speakers can glance down for cues.' },
       { name: 'Smart Eyewear Prompters', desc: 'Modern transparent smart glasses projecting scrolling text directly into the field of vision.' },

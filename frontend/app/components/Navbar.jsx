@@ -1,9 +1,11 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import styles from './Navbar.module.css';
 
 const servicesList = [
+  { name: 'School Photography', href: '/school-photography' },
   { name: 'Product Shoot', href: '/categories/studio-services' },
   { name: 'Corporate Video', href: '/categories/outdoor-videography' },
   { name: 'TV Commercial', href: '/categories/outdoor-videography' },
@@ -21,11 +23,16 @@ const servicesList = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const isLightNav = scrolled || !isHomePage;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -45,7 +52,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`} id="navbar">
+    <header className={`${styles.navbar} ${isLightNav ? styles.scrolled : ''}`} id="navbar">
       <div className={styles.navInner}>
         {/* ── LEFT LOGO ───────────────────────────── */}
         <a href="/" className={styles.logoWrap} id="brand-logo">
@@ -101,8 +108,8 @@ export default function Navbar() {
 
           <a href="/#categories" className={styles.navLink}>Categories</a>
           <a href="/gallery" className={styles.navLink}>Gallery</a>
-          <a href="/blog" className={styles.navLink}>The Blog</a>
-          <a href="/contact" className={styles.navLink}>Contact</a>
+          <a href="/school-photography" className={styles.navLink}>School Gallery</a>
+          <a href="/#contact" className={styles.navLink}>Contact</a>
           <a href="https://wa.me/971557544582" target="_blank" rel="noopener noreferrer" className={styles.waBtn}>
             WhatsApp
           </a>
@@ -154,8 +161,8 @@ export default function Navbar() {
 
         <a href="/#categories" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>Categories</a>
         <a href="/gallery" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>Gallery</a>
-        <a href="/blog" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>The Blog</a>
-        <a href="/contact" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>Contact</a>
+        <a href="/school-photography" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>School Gallery</a>
+        <a href="/#contact" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>Contact</a>
         <a href="https://wa.me/971557544582" target="_blank" rel="noopener noreferrer" className={styles.drawerLink}>
           WhatsApp Us
         </a>
