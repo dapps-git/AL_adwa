@@ -22,15 +22,20 @@ export default function GalleryPage() {
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
+    console.log('[Gallery] Fetching from:', `${API_URL}/gallery`);
     fetch(`${API_URL}/gallery`)
       .then(r => r.json())
       .then(d => {
+        console.log('[Gallery] API response:', d);
         if (Array.isArray(d) && d.length > 0) {
           const valid = d.filter(i => Boolean(i.imageUrl && i.imageUrl.trim()));
+          console.log('[Gallery] Valid images:', valid.length);
           if (valid.length > 0) setImages(valid);
+        } else {
+          console.log('[Gallery] No images returned from API, using defaults');
         }
       })
-      .catch(() => {});
+      .catch(err => console.error('[Gallery] Fetch error:', err));
   }, []);
 
   const filtered = active === 'All Work' 
