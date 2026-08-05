@@ -36,11 +36,11 @@ export default function GallerySection() {
 
         <div className={styles.grid}>
           {images.map((img) => (
-            <div key={img._id || img.url} className={styles.card}>
-              <Image src={img.url} alt={img.title} fill sizes="(max-width:768px) 50vw, 33vw" />
+            <div key={img._id || img.url || img.imageUrl} className={styles.card}>
+              <Image src={img.imageUrl || img.url} alt={img.title || 'Gallery Image'} fill sizes="(max-width:768px) 50vw, 33vw" unoptimized />
               <div className={styles.overlay}>
                 <span className={styles.catTag}>{img.category}</span>
-                <h4 className={styles.imgTitle}>{img.title}</h4>
+                {img.title && <h4 className={styles.imgTitle}>{img.title}</h4>}
               </div>
             </div>
           ))}
