@@ -101,8 +101,8 @@ safeLoadRoute('/api/categories', './routes/categories');
 safeLoadRoute('/api/blogs', './routes/blogs');
 safeLoadRoute('/api/gallery', './routes/gallery');
 
-// Fallback Root Router Catch-All
-app.use('*', (req, res) => {
+// Fallback Root Router Catch-All (Node 22 path-to-regexp safe)
+app.use((req, res) => {
   res.json({ status: 'ok', server: 'AL ADHWA API', message: 'Endpoint active', path: req.originalUrl });
 });
 
