@@ -35,7 +35,8 @@ export default function SchoolPhotographyPage() {
             ((i.category || '').toLowerCase().includes('school') || (i.title || '').toLowerCase().includes('school'))
           );
           if (schoolFilter.length > 0) {
-            setImages([...STUDENT_GALLERY_IMAGES, ...schoolFilter]);
+            // DB uploaded school photos come FIRST
+            setImages([...schoolFilter, ...STUDENT_GALLERY_IMAGES]);
           }
         }
       })

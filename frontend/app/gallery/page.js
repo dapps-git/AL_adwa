@@ -6,14 +6,21 @@ import Footer from '../components/Footer';
 import { API_URL } from '../config';
 import styles from './page.module.css';
 
-const CATEGORIES = ['All Work', 'School', 'Studio', 'Outdoor', 'Videography', 'Teleprompter', 'Printing'];
+const CATEGORIES = [
+  'All Work',
+  'School Photography',
+  'Studio Services & Printing',
+  'Outdoor Photography',
+  'Outdoor Videography',
+  'Teleprompter Services',
+];
 
 const DEFAULT_GALLERY_IMAGES = [
-  { _id: 'g0', title: 'Studio Production & Setup', imageUrl: '/img/gallery.webp', category: 'Studio' },
-  { _id: 'g1', title: 'Outdoor Commercial Photography', imageUrl: '/img/gallery1.webp', category: 'Outdoor' },
-  { _id: 'g2', title: 'Teleprompter Broadcast Rig', imageUrl: '/img/gallery2.webp', category: 'Teleprompter' },
-  { _id: 'g3', title: 'Corporate Video & Editing', imageUrl: '/img/gallery3.webp', category: 'Videography' },
-  { _id: 'g4', title: 'Custom Printed Gifts & Framing', imageUrl: '/img/gallery4.webp', category: 'Printing' },
+  { _id: 'g0', title: 'Studio Production & Setup', imageUrl: '/img/gallery.webp', category: 'Studio Services & Printing' },
+  { _id: 'g1', title: 'Outdoor Commercial Photography', imageUrl: '/img/gallery1.webp', category: 'Outdoor Photography' },
+  { _id: 'g2', title: 'Teleprompter Broadcast Rig', imageUrl: '/img/gallery2.webp', category: 'Teleprompter Services' },
+  { _id: 'g3', title: 'Corporate Video & Editing', imageUrl: '/img/gallery3.webp', category: 'Outdoor Videography' },
+  { _id: 'g4', title: 'Custom Printed Gifts & Framing', imageUrl: '/img/gallery4.webp', category: 'Studio Services & Printing' },
 ];
 
 export default function GalleryPage() {
@@ -22,17 +29,15 @@ export default function GalleryPage() {
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
-    console.log('[Gallery] Fetching from:', `${API_URL}/gallery`);
     fetch(`${API_URL}/gallery`)
       .then(r => r.json())
       .then(d => {
-        console.log('[Gallery] API response:', d);
         if (Array.isArray(d) && d.length > 0) {
           const valid = d.filter(i => Boolean(i.imageUrl && i.imageUrl.trim()));
-          console.log('[Gallery] Valid images:', valid.length);
-          if (valid.length > 0) setImages(valid);
-        } else {
-          console.log('[Gallery] No images returned from API, using defaults');
+          if (valid.length > 0) {
+            // Put DB uploaded images first, followed by default placeholders
+            setImages([...valid, ...DEFAULT_GALLERY_IMAGES]);
+          }
         }
       })
       .catch(err => console.error('[Gallery] Fetch error:', err));
