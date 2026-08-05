@@ -1,13 +1,1 @@
-# ── Let Node.js handle ALL CORS headers & requests dynamically ──────
 RewriteEngine On
-
-<IfModule mod_headers.c>
-    # Echo back incoming origin dynamically in Apache if mod_headers is active
-    SetEnvIf Origin "(.*)" CORS_ORIGIN=$1
-    Header always set Access-Control-Allow-Origin "%{CORS_ORIGIN}e" env=CORS_ORIGIN
-    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    Header always set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    Header always set Access-Control-Allow-Credentials "true"
-    Header always set Access-Control-Max-Age "86400"
-    Header merge Vary Origin
-</IfModule>
