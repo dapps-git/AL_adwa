@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
 
   if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+    return res.status(200).end();
   }
   next();
 });
@@ -38,7 +38,7 @@ const ADMIN_PASS  = 'admin@aladhwastudio1234';
 const SECRET      = process.env.JWT_SECRET || 'al_adhwa_secret_key_2026_sharp';
 const EXPIRE      = process.env.JWT_EXPIRE  || '30d';
 
-// DIRECT LOGIN ENDPOINT — Listens on ALL path aliases
+// DIRECT LOGIN ENDPOINT — Listens on ALL path variations
 const loginHandler = async (req, res) => {
   try {
     const { email, password } = req.body || {};
@@ -69,7 +69,7 @@ app.post('/aladhwastudio/api/auth/login', loginHandler);
 app.post('/aladhwastudio/auth/login', loginHandler);
 app.post('/login', loginHandler);
 
-// Health Check Endpoint — Listens on ALL path aliases
+// Health Check Endpoint — Listens on ALL path variations
 const healthHandler = (req, res) => {
   res.json({ status: 'ok', server: 'AL ADHWA API', timestamp: new Date().toISOString() });
 };
@@ -100,6 +100,11 @@ safeLoadRoute('/api/contact', './routes/contact');
 safeLoadRoute('/api/categories', './routes/categories');
 safeLoadRoute('/api/blogs', './routes/blogs');
 safeLoadRoute('/api/gallery', './routes/gallery');
+
+// Fallback Root Router Catch-All
+app.use('*', (req, res) => {
+  res.json({ status: 'ok', server: 'AL ADHWA API', message: 'Endpoint active', path: req.originalUrl });
+});
 
 // Connect to MongoDB
 const PORT = process.env.PORT || 5000;
