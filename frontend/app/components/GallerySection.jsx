@@ -9,7 +9,7 @@ export default function GallerySection() {
 
   useEffect(() => {
     let isMounted = true;
-    fetch(`${API_URL}/gallery`)
+    fetch(`${API_URL}/gallery?t=${Date.now()}`, { cache: 'no-store' })
       .then(res => (res.ok ? res.json() : []))
       .then(data => {
         if (isMounted && Array.isArray(data) && data.length > 0) {

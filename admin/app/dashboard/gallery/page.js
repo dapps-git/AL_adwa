@@ -45,7 +45,7 @@ function GalleryAdminContent() {
 
   const load = useCallback(async () => {
     try {
-      const res = await fetch(`${API}/gallery`, { headers: { Authorization: `Bearer ${token()}` } });
+      const res = await fetch(`${API}/gallery?t=${Date.now()}`, { headers: { Authorization: `Bearer ${token()}` }, cache: 'no-store' });
       const data = await res.json();
       setImages(Array.isArray(data) ? data : []);
     } catch { setImages([]); }

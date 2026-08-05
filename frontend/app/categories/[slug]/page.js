@@ -96,7 +96,7 @@ export default function CategoryDetailPage({ params }) {
 
   useEffect(() => {
     if (!category) return;
-    fetch(`${API_URL}/gallery`)
+    fetch(`${API_URL}/gallery?t=${Date.now()}`, { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

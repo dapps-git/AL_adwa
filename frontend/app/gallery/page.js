@@ -30,7 +30,7 @@ export default function GalleryPage() {
 
   useEffect(() => {
     let isMounted = true;
-    fetch(`${API_URL}/gallery`)
+    fetch(`${API_URL}/gallery?t=${Date.now()}`, { cache: 'no-store' })
       .then(r => (r.ok ? r.json() : []))
       .then(d => {
         if (isMounted && Array.isArray(d) && d.length > 0) {
