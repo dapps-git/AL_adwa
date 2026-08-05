@@ -37,35 +37,40 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 // Static uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Routes with safe loading
+// Safe Route Loading with cPanel Passenger Path Aliases (/api/* and /*)
 try {
   const authRoutes = require('./routes/auth');
   app.use('/api/auth', authRoutes);
+  app.use('/auth', authRoutes);
 } catch (e) { console.error('Error loading auth routes:', e.message); }
 
 try {
   const contactRoutes = require('./routes/contact');
   app.use('/api/contact', contactRoutes);
+  app.use('/contact', contactRoutes);
 } catch (e) { console.error('Error loading contact routes:', e.message); }
 
 try {
   const categoryRoutes = require('./routes/categories');
   app.use('/api/categories', categoryRoutes);
+  app.use('/categories', categoryRoutes);
 } catch (e) { console.error('Error loading category routes:', e.message); }
 
 try {
   const blogRoutes = require('./routes/blogs');
   app.use('/api/blogs', blogRoutes);
+  app.use('/blogs', blogRoutes);
 } catch (e) { console.error('Error loading blog routes:', e.message); }
 
 try {
   const galleryRoutes = require('./routes/gallery');
   app.use('/api/gallery', galleryRoutes);
+  app.use('/gallery', galleryRoutes);
 } catch (e) { console.error('Error loading gallery routes:', e.message); }
 
 // Health Check Endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get(['/api/health', '/health', '/'], (req, res) => {
+  res.json({ status: 'ok', server: 'AL ADHWA API', timestamp: new Date().toISOString() });
 });
 
 // Connect to MongoDB & Start Server
