@@ -14,6 +14,16 @@ try {
   console.log('cors package not found, using built-in CORS middleware');
 }
 
+// Universal Subdirectory Prefix Normalizer for cPanel Phusion Passenger
+app.use((req, res, next) => {
+  if (req.url.startsWith('/aladhwastudio/api')) {
+    req.url = req.url.replace('/aladhwastudio/api', '/api');
+  } else if (req.url.startsWith('/aladhwastudio')) {
+    req.url = req.url.replace('/aladhwastudio', '');
+  }
+  next();
+});
+
 // Universal CORS & No-Cache Middleware — Runs on every single request
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,39 +47,44 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 // Static uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Safe Route Loading with cPanel Passenger Path Aliases (/api/* and /*)
+// Safe Route Loading with All Path Aliases (/api/*, /*, /aladhwastudio/api/*)
 try {
   const authRoutes = require('./routes/auth');
   app.use('/api/auth', authRoutes);
   app.use('/auth', authRoutes);
+  app.use('/aladhwastudio/api/auth', authRoutes);
 } catch (e) { console.error('Error loading auth routes:', e.message); }
 
 try {
   const contactRoutes = require('./routes/contact');
   app.use('/api/contact', contactRoutes);
   app.use('/contact', contactRoutes);
+  app.use('/aladhwastudio/api/contact', contactRoutes);
 } catch (e) { console.error('Error loading contact routes:', e.message); }
 
 try {
   const categoryRoutes = require('./routes/categories');
   app.use('/api/categories', categoryRoutes);
   app.use('/categories', categoryRoutes);
+  app.use('/aladhwastudio/api/categories', categoryRoutes);
 } catch (e) { console.error('Error loading category routes:', e.message); }
 
 try {
   const blogRoutes = require('./routes/blogs');
   app.use('/api/blogs', blogRoutes);
   app.use('/blogs', blogRoutes);
+  app.use('/aladhwastudio/api/blogs', blogRoutes);
 } catch (e) { console.error('Error loading blog routes:', e.message); }
 
 try {
   const galleryRoutes = require('./routes/gallery');
   app.use('/api/gallery', galleryRoutes);
   app.use('/gallery', galleryRoutes);
+  app.use('/aladhwastudio/api/gallery', galleryRoutes);
 } catch (e) { console.error('Error loading gallery routes:', e.message); }
 
 // Health Check Endpoint
-app.get(['/api/health', '/health', '/'], (req, res) => {
+app.get(['/api/health', '/health', '/', '/aladhwastudio/api/health'], (req, res) => {
   res.json({ status: 'ok', server: 'AL ADHWA API', timestamp: new Date().toISOString() });
 });
 
