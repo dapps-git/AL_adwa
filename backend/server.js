@@ -6,17 +6,20 @@ require('dotenv').config();
 
 const app = express();
 
-// Wildcard CORS Middleware for LiteSpeed/cPanel compatibility
+// Enable standard cors package with wildcard origin
+app.use(cors({ origin: '*', methods: '*', allowedHeaders: '*' }));
+
+// Additional custom CORS & No-Cache middleware
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.header('Pragma', 'no-cache');
+  res.header('Expires', '0');
 
   if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+    return res.sendStatus(200);
   }
   next();
 });

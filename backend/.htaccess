@@ -1,24 +1,7 @@
-# ============================================================
-# AL ADHWA STUDIO BACKEND — LITESPEED / APACHE CACHE DISABLE & CORS
-# ============================================================
-
 RewriteEngine On
 
-# Disable LiteSpeed RAM Caching for API endpoints
-<IfModule mod_litespeed.c>
-    CacheDisable public /
-    CacheDisable private /
-</IfModule>
-
-# Force Access-Control-Allow-Origin * at Web Server level
 <IfModule mod_headers.c>
-    Header always unset Access-Control-Allow-Origin
-    Header always set Access-Control-Allow-Origin "*"
-    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    Header always set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    Header always set Access-Control-Allow-Credentials "true"
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "*"
+    Header set Access-Control-Allow-Headers "*"
 </IfModule>
-
-# Handle OPTIONS preflight requests directly in LiteSpeed / Apache
-RewriteCond %{REQUEST_METHOD} OPTIONS
-RewriteRule ^(.*)$ $1 [R=204,L]
