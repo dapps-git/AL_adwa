@@ -1,10 +1,10 @@
-# ============================================================
-# AL ADHWA STUDIO BACKEND — CPANEL PASSENGER & LITESPEED
-# ============================================================
-
-PassengerEnabled on
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/tweaxzow/repositories/AL_adwa/backend"
+PassengerBaseURI "/aladhwastudio/api"
+PassengerNodejs "/home/tweaxzow/nodevenv/repositories/AL_adwa/backend/22/bin/node"
 PassengerAppType node
 PassengerStartupFile server.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
 
 DirectoryIndex server.js app.js index.html
 
