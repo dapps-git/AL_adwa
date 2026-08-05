@@ -16,6 +16,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Vary', 'Origin');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
 
   if (req.method === 'OPTIONS') {
     return res.status(204).end();
@@ -28,21 +29,40 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Routes
+// Routes — Mounted on /api/*, /*, and /aladhwastudio/api/* for 100% cPanel Passenger URL compatibility
 const authRoutes = require('./routes/auth');
 const contactRoutes = require('./routes/contact');
 const categoryRoutes = require('./routes/categories');
 const blogRoutes = require('./routes/blogs');
 const galleryRoutes = require('./routes/gallery');
 
+// Auth routes
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+app.use('/aladhwastudio/api/auth', authRoutes);
+
+// Contact routes
 app.use('/api/contact', contactRoutes);
+app.use('/contact', contactRoutes);
+app.use('/aladhwastudio/api/contact', contactRoutes);
+
+// Category routes
 app.use('/api/categories', categoryRoutes);
+app.use('/categories', categoryRoutes);
+app.use('/aladhwastudio/api/categories', categoryRoutes);
+
+// Blog routes
 app.use('/api/blogs', blogRoutes);
+app.use('/blogs', blogRoutes);
+app.use('/aladhwastudio/api/blogs', blogRoutes);
+
+// Gallery routes
 app.use('/api/gallery', galleryRoutes);
+app.use('/gallery', galleryRoutes);
+app.use('/aladhwastudio/api/gallery', galleryRoutes);
 
 // Health Check Endpoint
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health', '/', '/aladhwastudio/api/health'], (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
