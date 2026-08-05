@@ -6,16 +6,11 @@ require('dotenv').config();
 
 const app = express();
 
-// Universal CORS Middleware — Allows all origins (www.aladhwastudio.com, admin.aladhwastudio.com, aladhwastudio.com & localhost)
+// Wildcard CORS Middleware for LiteSpeed/cPanel compatibility
 app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  
-  // Dynamically reflect origin or default to wildcard to prevent LiteSpeed cache mismatch
-  res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Vary', 'Origin');
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
