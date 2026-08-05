@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
 const cloudinary = require('../config/cloudinary');
-
+console.log("✅ Gallery routes loaded");
 // Inline / Fallback Gallery Item Schema
 const gallerySchema = new mongoose.Schema({
   title: { type: String, default: '' },
@@ -63,6 +63,8 @@ router.post('/', async (req, res) => {
 
 // POST /api/gallery/upload — Direct Cloudinary Upload Route (Returns { imageUrl })
 router.post('/upload', (req, res) => {
+  console.log("✅ Upload route hit");
+
   upload.any()(req, res, async (multerErr) => {
     if (multerErr) {
       console.error('Multer error:', multerErr.message);
