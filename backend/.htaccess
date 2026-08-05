@@ -1,21 +1,18 @@
-# ── CORS: Handle both admin and frontend origins ────────────────────
+# ── Let Node.js handle ALL requests including OPTIONS preflight ───────
+# Node.js already handles CORS headers correctly in server.js
+# DO NOT intercept OPTIONS here — it prevents Node.js from adding headers
+
+RewriteEngine On
+
+# If mod_headers is available, add CORS as a safety net for both origins
 <IfModule mod_headers.c>
-    # Set CORS for admin origin
     SetEnvIf Origin "^https://admin\.aladhwastudio\.com$" CORS_ORIGIN=$0
-    # Set CORS for frontend origin
-    SetEnvIf Origin "^https://aladhwastudio\.com$" CORS_ORIGIN=$0
+    SetEnvIf Origin "^https://aladhwastudio\.com$"        CORS_ORIGIN=$0
 
-    Header always set Access-Control-Allow-Origin "%{CORS_ORIGIN}e" env=CORS_ORIGIN
-    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    Header always set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    Header always set Access-Control-Allow-Origin    "%{CORS_ORIGIN}e"                                     env=CORS_ORIGIN
+    Header always set Access-Control-Allow-Methods   "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    Header always set Access-Control-Allow-Headers   "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     Header always set Access-Control-Allow-Credentials "true"
-    Header always set Access-Control-Max-Age "86400"
-
-    # Avoid duplicate headers if Node.js also sets them
+    Header always set Access-Control-Max-Age         "86400"
     Header merge Vary Origin
 </IfModule>
-
-# ── OPTIONS preflight: respond immediately with 204 + headers ────────
-RewriteEngine On
-RewriteCond %{REQUEST_METHOD} OPTIONS
-RewriteRule .* - [R=204,L]
