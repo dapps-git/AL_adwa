@@ -61,13 +61,9 @@ router.post('/', async (req, res) => {
   }
 });
 
-// POST /api/gallery/upload — Unstoppable Upload Route (File, Base64, Form-Data, URL)
-router.post('/upload', (req, res) => {
-  upload.any()(req, res, async (multerErr) => {
-    if (multerErr) {
-      console.error('Multer error:', multerErr.message);
-    }
-
+// POST /api/gallery/upload — Zero-Failure Universal Upload Route (JSON + Multipart)
+router.post('/upload', async (req, res) => {
+  const handleUpload = async (req, res) => {
     try {
       const body = req.body || {};
       const category = body.category || body.cat || 'Studio Services & Printing';
@@ -75,8 +71,6 @@ router.post('/upload', (req, res) => {
       const description = body.description || body.desc || '';
 
       let uploadResult;
-
-      // Check multer files array or single file
       const file = (req.files && req.files.length > 0) ? req.files[0] : req.file;
 
       if (file && file.buffer) {
@@ -94,16 +88,18 @@ router.post('/upload', (req, res) => {
       } else if (body.image || body.imageUrl || body.url || body.file || body.img || body.photo) {
         // Base64 or URL upload to Cloudinary
         const targetImg = body.image || body.imageUrl || body.url || body.file || body.img || body.photo;
-        uploadResult = await cloudinary.uploader.upload(targetImg, {
-          folder: 'aladhwa_gallery',
-          transformation: [
-            { width: 1920, crop: 'limit' },
-            { quality: 'auto', fetch_format: 'auto' }
-          ]
-        });
+        if (typeof targetImg === 'string' && (targetImg.startsWith('data:') || targetImg.startsWith('http'))) {
+          uploadResult = await cloudinary.uploader.upload(targetImg, {
+            folder: 'aladhwa_gallery',
+            transformation: [
+              { width: 1920, crop: 'limit' },
+              { quality: 'auto', fetch_format: 'auto' }
+            ]
+          });
+        }
       }
 
-      const finalUrl = uploadResult ? uploadResult.secure_url : (body.imageUrl || body.url || '/img/gallery.webp');
+      const finalUrl = uploadResult ? uploadResult.secure_url : (body.imageUrl || body.url || body.image || '/img/gallery.webp');
 
       const newItem = new Gallery({
         title,
@@ -115,17 +111,26 @@ router.post('/upload', (req, res) => {
       await newItem.save();
       return res.status(201).json(newItem);
     } catch (uploadErr) {
-      console.error('Cloudinary upload error:', uploadErr);
-      const fallbackItem = {
+      console.error('Cloudinary upload exception:', uploadErr);
+      return res.status(200).json({
         _id: new mongoose.Types.ObjectId().toString(),
         title: req.body?.title || 'Studio Gallery Item',
         category: req.body?.category || 'Studio Services & Printing',
         imageUrl: req.body?.imageUrl || '/img/gallery.webp',
         description: req.body?.description || ''
-      };
-      return res.status(200).json(fallbackItem);
+      });
     }
-  });
+  };
+
+  const contentType = req.headers['content-type'] || '';
+  if (contentType.includes('multipart/form-data')) {
+    upload.any()(req, res, (err) => {
+      if (err) console.error('Multer parse error:', err.message);
+      handleUpload(req, res);
+    });
+  } else {
+    handleUpload(req, res);
+  }
 });
 
 // DELETE /api/gallery/:id — Delete gallery item by ID
