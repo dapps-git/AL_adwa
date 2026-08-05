@@ -21,22 +21,25 @@ router.post('/upload', protect, upload.single('image'), async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'No image file provided' });
 
-    // Stream buffer → Cloudinary (convert to WebP, auto quality)
+    // Stream buffer → Cloudinary (fast direct upload, CDN handles webp/compression on delivery)
     const result = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         {
           folder: 'aladhwa_gallery',
           resource_type: 'image',
-          format: 'webp',
-          quality: 'auto:good',
-          transformation: [{ width: 1920, crop: 'limit' }],
         },
         (err, result) => { if (err) reject(err); else resolve(result); }
       );
       stream.end(req.file.buffer);
     });
 
-    res.json({ imageUrl: result.secure_url, publicId: result.public_id });
+    // Apply Cloudinary's dynamic fast delivery transformations (f_auto = auto WebP/AVIF, q_auto = smart compression)
+    let optimizedUrl = result.secure_url;
+    if (optimizedUrl.includes('/upload/')) {
+      optimizedUrl = optimizedUrl.replace('/upload/', '/upload/f_auto,q_auto,w_1920,c_limit/');
+    }
+
+    res.json({ imageUrl: optimizedUrl, publicId: result.public_id });
   } catch (err) {
     console.error('Cloudinary upload error:', err.message);
     res.status(500).json({ message: err.message || 'Upload failed' });
