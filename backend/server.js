@@ -7,27 +7,13 @@ dotenv.config();
 
 const app = express();
 
-// ── CORS ──────────────────────────────────────────────────
-const ALLOWED_ORIGINS = [
-  'https://admin.aladhwastudio.com',
-  'https://aladhwastudio.com',
-  'https://www.aladhwastudio.com',
-  'http://localhost:3000',
-  'http://localhost:3001',
-];
-
+// ── CORS: Always allow incoming origin dynamically ───────────────
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  const isAllowed = !origin || 
-                    ALLOWED_ORIGINS.includes(origin) || 
-                    origin.endsWith('.aladhwastudio.com') || 
-                    origin.endsWith('.vercel.app') || 
-                    origin.includes('localhost');
-
-  if (isAllowed) {
-    res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  if (origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
   } else {
-    res.setHeader('Access-Control-Allow-Origin', 'https://aladhwastudio.com');
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
 
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');

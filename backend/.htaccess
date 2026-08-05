@@ -1,16 +1,13 @@
-# ── Let Node.js handle ALL requests including OPTIONS preflight ───────
+# ── Let Node.js handle ALL CORS headers & requests dynamically ──────
 RewriteEngine On
 
-# If mod_headers is available, add CORS for all aladhwastudio.com origins & vercel apps
 <IfModule mod_headers.c>
-    SetEnvIf Origin "^https://(.*\.)?aladhwastudio\.com$" CORS_ORIGIN=$0
-    SetEnvIf Origin "^https://.*\.vercel\.app$"            CORS_ORIGIN=$0
-    SetEnvIf Origin "^http://localhost(:\d+)?$"           CORS_ORIGIN=$0
-
-    Header always set Access-Control-Allow-Origin    "%{CORS_ORIGIN}e" env=CORS_ORIGIN
-    Header always set Access-Control-Allow-Methods   "GET, POST, PUT, DELETE, OPTIONS, PATCH"
-    Header always set Access-Control-Allow-Headers   "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    # Echo back incoming origin dynamically in Apache if mod_headers is active
+    SetEnvIf Origin "(.*)" CORS_ORIGIN=$1
+    Header always set Access-Control-Allow-Origin "%{CORS_ORIGIN}e" env=CORS_ORIGIN
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    Header always set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     Header always set Access-Control-Allow-Credentials "true"
-    Header always set Access-Control-Max-Age         "86400"
+    Header always set Access-Control-Max-Age "86400"
     Header merge Vary Origin
 </IfModule>
