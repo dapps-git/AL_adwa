@@ -1,5 +1,5 @@
 # ============================================================
-# CPANEL PASSENGER & LITESPEED NODE.JS ROUTING
+# AL ADHWA STUDIO BACKEND — CPANEL PASSENGER & LITESPEED
 # ============================================================
 
 PassengerEnabled on
@@ -7,13 +7,6 @@ PassengerAppType node
 PassengerStartupFile server.js
 
 DirectoryIndex server.js app.js index.html
-
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ server.js [QSA,L]
-</IfModule>
 
 <IfModule mod_headers.c>
     Header always set Access-Control-Allow-Origin "*"
