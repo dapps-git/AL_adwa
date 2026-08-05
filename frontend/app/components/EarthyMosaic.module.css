@@ -13,6 +13,21 @@
   position: relative;
   width: 100%;
   min-height: 480px;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  opacity: 1;
+}
+
+.slideFromLeft {
+  transform: translateX(0);
+}
+
+.slideFromRight {
+  transform: translateX(0);
+}
+
+.cellVisible {
+  opacity: 1;
+  transform: translateX(0) !important;
 }
 
 /* Terracotta Block (Top Right) */
@@ -23,6 +38,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  opacity: 1;
 }
 
 /* Sage Green Block (Bottom Left) */
@@ -33,6 +50,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  opacity: 1;
 }
 
 .cellContent {

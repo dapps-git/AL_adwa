@@ -9,7 +9,7 @@ export default function EarthyMosaic() {
 
   // First hook owns the ref/observer
   const { ref, typedText: typed1, isVisible } = useTypewriter(title1Text, 60, 0.15);
-  // Second hook reuses the same isVisible — no need for its own observer
+  // Second hook reuses the same isVisible
   const { typedText: typed2 } = useTypewriter(title2Text, 60, 0.15, isVisible);
 
   const isDone1 = typed1.length === title1Text.length;
@@ -17,13 +17,13 @@ export default function EarthyMosaic() {
 
   return (
     <section
-      className={`${styles.section} reveal-on-scroll ${isVisible ? 'is-visible' : ''}`}
+      className={`${styles.section} ${isVisible ? styles.visible : ''}`}
       id="mosaic"
       ref={ref}
     >
       <div className={styles.mosaicGrid}>
-        {/* TOP LEFT: Image Cell with ABOUT1.webp */}
-        <div className={styles.imgCellTall}>
+        {/* TOP LEFT: Image Cell with ABOUT1.webp (Slides from LEFT) */}
+        <div className={`${styles.imgCellTall} ${styles.slideFromLeft} ${isVisible ? styles.cellVisible : ''}`}>
           <Image
             src="/ABOUT1.webp"
             alt="AL ADHWA Visual Storytelling"
@@ -34,11 +34,11 @@ export default function EarthyMosaic() {
           />
         </div>
 
-        {/* TOP RIGHT: Terracotta Block — WHERE SERENITY MEETS STYLE */}
-        <div className={styles.terracottaCell}>
+        {/* TOP RIGHT: Terracotta Block — WHERE SERENITY MEETS STYLE (Slides from RIGHT) */}
+        <div className={`${styles.terracottaCell} ${styles.slideFromRight} ${isVisible ? styles.cellVisible : ''}`}>
           <div className={styles.cellContent}>
             <h2 className={`${styles.cellTitle} typewriter-title ${isDone1 ? 'typing-done' : ''}`}>
-              {typed1}
+              {typed1 || title1Text}
             </h2>
             <p className={styles.cellDesc}>
               At AL ADHWA Studio, we specialize in elevated visual storytelling — where natural lighting, authentic emotions, and artisan details come together in perfect harmony.
@@ -47,11 +47,11 @@ export default function EarthyMosaic() {
           </div>
         </div>
 
-        {/* BOTTOM LEFT: Sage Green Block — CREATIVE BY HEART */}
-        <div className={styles.sageCell}>
+        {/* BOTTOM LEFT: Sage Green Block — CREATIVE BY HEART (Slides from LEFT) */}
+        <div className={`${styles.sageCell} ${styles.slideFromLeft} ${isVisible ? styles.cellVisible : ''}`}>
           <div className={styles.cellContent}>
             <h2 className={`${styles.cellTitle} typewriter-title ${isDone2 ? 'typing-done' : ''}`}>
-              {typed2}
+              {typed2 || title2Text}
             </h2>
             <p className={styles.cellDesc}>
               Our approach is deeply collaborative, rooted in understanding your brand lifestyle, values, and vision. The result? Media that feels as good as it looks.
@@ -60,8 +60,8 @@ export default function EarthyMosaic() {
           </div>
         </div>
 
-        {/* BOTTOM RIGHT: Image Cell with ABOUT.webp */}
-        <div className={styles.imgCell}>
+        {/* BOTTOM RIGHT: Image Cell with ABOUT.webp (Slides from RIGHT) */}
+        <div className={`${styles.imgCell} ${styles.slideFromRight} ${isVisible ? styles.cellVisible : ''}`}>
           <Image
             src="/ABOUT.webp"
             alt="Studio Setting"
@@ -75,4 +75,3 @@ export default function EarthyMosaic() {
     </section>
   );
 }
-

@@ -35,16 +35,38 @@
   gap: 1.2rem;
 }
 
+@keyframes fadeInSlide {
+  from {
+    opacity: 0.3;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fadeImg {
+  animation: fadeInSlide 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .photoCard {
   background: #FFFFFF;
   border-radius: 0;
   overflow: hidden;
   border: 1px solid #E2DDD5;
-  transition: transform 0.35s ease, border-color 0.35s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .photoCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) !important;
   border-color: var(--terracotta, #C86D51);
 }
 
@@ -54,6 +76,24 @@
   aspect-ratio: 3/4;
   overflow: hidden;
   border-radius: 0;
+  background: #1C1917;
+}
+
+.slideLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.layerActive {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 .imgWrap img {

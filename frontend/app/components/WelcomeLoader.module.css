@@ -1,0 +1,66 @@
+.loaderOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #F5F0E8; /* Premium Off-White Cream */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: all;
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.loaderContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  color: #4A2810;
+}
+
+.welcomeText {
+  font-family: var(--font-heading), 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 3.2vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #4A2810;
+  margin: 0 0 0.85rem 0;
+}
+
+/* 5-Dot Loading Indicator — Slower, Gentle 1.2s Cycle */
+.dotsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4A2810;
+  opacity: 0.2;
+  transform: scale(0.8);
+  animation: dotAppear 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.dot1 { animation-delay: 0s; }
+.dot2 { animation-delay: 0.18s; }
+.dot3 { animation-delay: 0.36s; }
+.dot4 { animation-delay: 0.54s; }
+.dot5 { animation-delay: 0.72s; }
+
+@keyframes dotAppear {
+  0% { opacity: 0.2; transform: scale(0.8); }
+  35% { opacity: 1; transform: scale(1.35); background: #C86D51; }
+  70% { opacity: 0.2; transform: scale(0.8); }
+  100% { opacity: 0.2; transform: scale(0.8); }
+}

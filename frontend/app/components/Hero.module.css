@@ -17,6 +17,14 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
+  opacity: 0;
+  transform: translateX(70px);
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heroBgVisible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* ── DESKTOP BACKGROUND ── */
@@ -97,6 +105,10 @@
   letter-spacing: -0.01em;
 }
 
+.titleLine {
+  display: block;
+}
+
 .subTitle {
   font-size: clamp(0.88rem, 1.35vw, 1.02rem);
   color: #6B4228;
@@ -138,15 +150,20 @@
     align-items: flex-start;
     text-align: left;
     gap: 0.9rem;
-    max-width: 410px;
-    margin-left: 2rem;
+    max-width: 320px;
+    margin-left: 1rem;
   }
 
   .mainTitle {
-    font-size: clamp(2.1rem, 3.6vw, 2.8rem);
+    font-size: clamp(2rem, 3.5vw, 2.7rem);
     color: #4A2810;
-    text-shadow: none;
     line-height: 1.15;
+    white-space: normal;
+  }
+
+  .titleLine {
+    display: block;
+    white-space: nowrap;
   }
 
   .subTitle {

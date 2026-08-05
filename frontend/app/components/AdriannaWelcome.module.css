@@ -27,6 +27,14 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  opacity: 0;
+  transform: translateX(70px);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contentColVisible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .eyebrow {
@@ -117,6 +125,14 @@
   width: 100%;
   max-width: 420px;
   margin-left: auto;
+  opacity: 0;
+  transform: translateX(-70px);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.imgColVisible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .imgWrap {

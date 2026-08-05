@@ -1,12 +1,11 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 
-export function useTypewriter(fullText, speed = 65, threshold = 0.2, externalVisible = null) {
+export function useTypewriter(fullText, speed = 65, threshold = 0.15, externalVisible = null) {
   const [typedText, setTypedText] = useState('');
   const [internalVisible, setInternalVisible] = useState(false);
   const ref = useRef(null);
 
-  // Only run IntersectionObserver when no external trigger is provided
   useEffect(() => {
     if (externalVisible !== null) return;
 
@@ -14,6 +13,10 @@ export function useTypewriter(fullText, speed = 65, threshold = 0.2, externalVis
       ([entry]) => {
         if (entry.isIntersecting) {
           setInternalVisible(true);
+        } else {
+          // Reset visibility and typed text when out of view so it re-triggers on every scroll
+          setInternalVisible(false);
+          setTypedText('');
         }
       },
       { threshold }
@@ -29,7 +32,10 @@ export function useTypewriter(fullText, speed = 65, threshold = 0.2, externalVis
   const isVisible = externalVisible !== null ? externalVisible : internalVisible;
 
   useEffect(() => {
-    if (!isVisible || !fullText) return;
+    if (!isVisible || !fullText) {
+      if (!isVisible) setTypedText('');
+      return;
+    }
 
     let index = 0;
     const timer = setInterval(() => {

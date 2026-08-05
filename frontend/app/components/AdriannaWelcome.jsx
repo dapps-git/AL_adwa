@@ -14,9 +14,13 @@ export default function AdriannaWelcome() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+        } else {
+          // Reset visibility on scroll out so animation re-triggers every scroll
+          setIsVisible(false);
+          setTypedTitle('');
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -28,7 +32,10 @@ export default function AdriannaWelcome() {
 
   // Typewriter writing animation when section becomes visible
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible) {
+      setTypedTitle('');
+      return;
+    }
 
     let index = 0;
     const timer = setInterval(() => {
@@ -46,12 +53,12 @@ export default function AdriannaWelcome() {
   return (
     <section className={`${styles.section} ${isVisible ? styles.visible : ''}`} id="about" ref={sectionRef}>
       <div className={styles.inner}>
-        {/* LEFT COLUMN: Text Content */}
-        <div className={styles.contentCol}>
+        {/* LEFT COLUMN: Text Content (Slides in from Right) */}
+        <div className={`${styles.contentCol} ${isVisible ? styles.contentColVisible : ''}`}>
           <span className={styles.eyebrow}>Hey dear friends,</span>
 
           {/* Writing Typewriter Title */}
-          <h2 className={styles.title}>{typedTitle}</h2>
+          <h2 className={styles.title}>{typedTitle || fullText}</h2>
 
           <p className={styles.scriptTagline}>We believe there's extraordinary beauty</p>
           <span className={styles.taglineCap}>In the simplest of moments</span>
@@ -88,8 +95,8 @@ export default function AdriannaWelcome() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Studio Image */}
-        <div className={styles.imgCol}>
+        {/* RIGHT COLUMN: Studio Image (Slides in from LEFT) */}
+        <div className={`${styles.imgCol} ${isVisible ? styles.imgColVisible : ''}`}>
           <div className={styles.imgWrap}>
             <Image
               src="/img/welcome.webp"
