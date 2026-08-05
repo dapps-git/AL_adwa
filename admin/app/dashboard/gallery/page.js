@@ -34,8 +34,10 @@ function GalleryAdminContent() {
   const [deleting, setDeleting] = useState(null);
   const [toast,    setToast]    = useState(null);
   const [filter,   setFilter]   = useState('All');
-  const [preview,  setPreview]  = useState('');
-  const [isDragging, setIsDragging] = useState(false);
+  const [preview,    setPreview]    = useState('');
+  const [isDragging,  setIsDragging]  = useState(false);
+  const [uploading,   setUploading]   = useState(false);
+  const [uploadError, setUploadError] = useState('');
 
   const token   = () => localStorage.getItem('admin_token');
   const headers = () => ({ 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` });
@@ -84,23 +86,43 @@ function GalleryAdminContent() {
     if (name === 'imageUrl') setPreview(value);
   }
 
-  function processFile(file) {
+  async function processFile(file) {
     if (!file || !file.type.startsWith('image/')) {
       showToast('Please select a valid image file', 'error');
       return;
     }
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64 = reader.result;
-      setForm(f => ({ ...f, imageUrl: base64 }));
-      setPreview(base64);
-    };
-    reader.readAsDataURL(file);
+    // Show local preview immediately while uploading
+    const localUrl = URL.createObjectURL(file);
+    setPreview(localUrl);
+    setUploadError('');
+    setUploading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+      const res = await fetch(`${API}/gallery/upload`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token()}` },
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Upload failed');
+      setForm(f => ({ ...f, imageUrl: data.imageUrl }));
+      setPreview(data.imageUrl);
+      showToast('Image uploaded successfully!');
+    } catch (err) {
+      setUploadError(err.message || 'Upload to Cloudinary failed');
+      showToast(err.message || 'Image upload failed', 'error');
+      setPreview('');
+      setForm(f => ({ ...f, imageUrl: '' }));
+    } finally {
+      setUploading(false);
+    }
   }
 
   function handleFileChange(e) {
     const file = e.target.files[0];
-    processFile(file);
+    if (file) processFile(file);
   }
 
   function handleDrop(e) {
@@ -116,6 +138,10 @@ function GalleryAdminContent() {
     if (!token()) {
       showToast('Session expired. Please log in again.', 'error');
       setTimeout(() => { window.location.href = '/'; }, 1500);
+      return;
+    }
+    if (!form.imageUrl || !form.imageUrl.trim()) {
+      showToast('Please upload an image or paste an image URL', 'error');
       return;
     }
     setSaving(true);
@@ -278,37 +304,42 @@ function GalleryAdminContent() {
 
                 {/* 2. Drag & Drop File Uploader Zone */}
                 <div className="form-group">
-                  <label className="form-label">Photo File Upload *</label>
+                  <label className="form-label">
+                    Photo File Upload {uploading ? '— Uploading to Cloudinary…' : '*'}
+                  </label>
                   <div
-                    className={`${styles.dropZone} ${isDragging ? styles.dropZoneActive : ''}`}
-                    onDragOver={e => { e.preventDefault(); setIsDragging(true); }}
+                    className={`${styles.dropZone} ${isDragging ? styles.dropZoneActive : ''} ${uploading ? styles.dropZoneUploading : ''}`}
+                    onDragOver={e => { e.preventDefault(); if (!uploading) setIsDragging(true); }}
                     onDragLeave={() => setIsDragging(false)}
-                    onDrop={handleDrop}
+                    onDrop={e => { if (!uploading) handleDrop(e); }}
                   >
                     <input 
                       type="file" 
                       accept="image/*" 
-                      onChange={handleFileChange} 
+                      onChange={handleFileChange}
+                      disabled={uploading}
                       className={styles.fileInputHidden}
                       id="photo-upload-input"
                     />
-                    <label htmlFor="photo-upload-input" className={styles.dropZoneLabel}>
-                      <span className={styles.dropIcon}>📁</span>
-                      <span className={styles.dropTitle}>Click or Drag photo file here</span>
-                      <span className={styles.dropSub}>PNG, JPG, WEBP formats supported</span>
+                    <label htmlFor="photo-upload-input" className={styles.dropZoneLabel} style={{ cursor: uploading ? 'not-allowed' : 'pointer' }}>
+                      <span className={styles.dropIcon}>{uploading ? '⏳' : '📁'}</span>
+                      <span className={styles.dropTitle}>
+                        {uploading ? 'Uploading… please wait' : 'Click or Drag photo file here'}
+                      </span>
+                      <span className={styles.dropSub}>PNG, JPG, WEBP — max 20MB</span>
                     </label>
                   </div>
+                  {uploadError && <span style={{ color: 'var(--danger)', fontSize: '0.78rem' }}>{uploadError}</span>}
                 </div>
 
                 {/* Image URL fallback */}
                 <div className="form-group">
-                  <label className="form-label">Or Direct Image URL</label>
+                  <label className="form-label">Or paste Direct Image URL</label>
                   <input 
                     name="imageUrl" 
                     value={form.imageUrl} 
                     onChange={onChange} 
-                    required 
-                    placeholder="https://… or image data string" 
+                    placeholder="https://res.cloudinary.com/… or any image URL" 
                   />
                 </div>
 
@@ -341,8 +372,8 @@ function GalleryAdminContent() {
 
               <div className="modal-footer">
                 <button type="button" className="btn-ghost" onClick={closeModal}>Cancel</button>
-                <button type="submit" className="btn-primary" disabled={saving}>
-                  {saving ? 'Saving…' : editing ? 'Update Photo' : 'Save Photo'}
+                <button type="submit" className="btn-primary" disabled={saving || uploading}>
+                  {uploading ? '⏳ Uploading Image…' : saving ? 'Saving…' : editing ? 'Update Photo' : 'Save Photo'}
                 </button>
               </div>
             </form>
