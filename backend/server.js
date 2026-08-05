@@ -6,32 +6,16 @@ require('dotenv').config();
 
 const app = express();
 
-// Allowed Origins List
-const allowedOrigins = [
-  'https://www.aladhwastudio.com',
-  'https://aladhwastudio.com',
-  'https://admin.aladhwastudio.com',
-  'http://localhost:3000',
-  'http://localhost:3001',
-  'http://localhost:3002',
-];
-
-// Universal CORS Middleware with Vary: Origin header to prevent LiteSpeed cache pollution
+// Universal CORS Middleware — Allows all origins (www.aladhwastudio.com, admin.aladhwastudio.com, aladhwastudio.com & localhost)
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   
-  // Set Vary: Origin so cPanel / LiteSpeed caches separate responses per origin
-  res.setHeader('Vary', 'Origin');
-
-  if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
-    res.setHeader('Access-Control-Allow-Origin', origin || '*');
-  } else {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-  }
-
+  // Dynamically reflect origin or default to wildcard to prevent LiteSpeed cache mismatch
+  res.setHeader('Access-Control-Allow-Origin', origin || '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Vary', 'Origin');
 
   if (req.method === 'OPTIONS') {
     return res.status(204).end();

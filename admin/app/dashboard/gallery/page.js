@@ -5,11 +5,11 @@ import styles from './page.module.css';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 const FIXED_CATEGORIES = [
-  'School Photography',
-  'Studio Services & Printing',
   'Outdoor Photography',
   'Outdoor Videography',
   'Teleprompter Services',
+  'Studio Services & Printing',
+  'School Photography',
 ];
 
 function Toast({ msg, type, onClose }) {
