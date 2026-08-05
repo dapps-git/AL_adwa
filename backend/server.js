@@ -11,18 +11,25 @@ const app = express();
 const ALLOWED_ORIGINS = [
   'https://admin.aladhwastudio.com',
   'https://aladhwastudio.com',
+  'https://www.aladhwastudio.com',
   'http://localhost:3000',
   'http://localhost:3001',
 ];
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (origin && ALLOWED_ORIGINS.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else if (!origin) {
-    // Direct requests (e.g. curl, Postman) — allow
-    res.setHeader('Access-Control-Allow-Origin', '*');
+  const isAllowed = !origin || 
+                    ALLOWED_ORIGINS.includes(origin) || 
+                    origin.endsWith('.aladhwastudio.com') || 
+                    origin.endsWith('.vercel.app') || 
+                    origin.includes('localhost');
+
+  if (isAllowed) {
+    res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://aladhwastudio.com');
   }
+
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
