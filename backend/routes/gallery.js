@@ -21,10 +21,16 @@ router.post('/upload', protect, upload.single('image'), async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'No image file provided' });
 
-    // Stream buffer → Cloudinary
+    // Stream buffer → Cloudinary (convert to WebP, auto quality)
     const result = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
-        { folder: 'aladhwa_gallery', resource_type: 'image' },
+        {
+          folder: 'aladhwa_gallery',
+          resource_type: 'image',
+          format: 'webp',
+          quality: 'auto:good',
+          transformation: [{ width: 1920, crop: 'limit' }],
+        },
         (err, result) => { if (err) reject(err); else resolve(result); }
       );
       stream.end(req.file.buffer);
