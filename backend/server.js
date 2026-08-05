@@ -1,25 +1,31 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
 const app = express();
 
-// Enable standard cors package with wildcard origin
-app.use(cors({ origin: '*', methods: '*', allowedHeaders: '*' }));
+// Try requiring cors npm package safely
+let cors;
+try {
+  cors = require('cors');
+  app.use(cors({ origin: '*', methods: '*', allowedHeaders: '*' }));
+} catch (e) {
+  console.log('cors package not found, using built-in CORS middleware');
+}
 
-// Additional custom CORS & No-Cache middleware
+// Universal CORS & No-Cache Middleware — Runs on every single request
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-  res.header('Pragma', 'no-cache');
-  res.header('Expires', '0');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
 
   if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
+    return res.status(200).end();
   }
   next();
 });
@@ -27,20 +33,35 @@ app.use((req, res, next) => {
 // Middleware
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+
+// Static uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Routes
-const authRoutes = require('./routes/auth');
-const contactRoutes = require('./routes/contact');
-const categoryRoutes = require('./routes/categories');
-const blogRoutes = require('./routes/blogs');
-const galleryRoutes = require('./routes/gallery');
+// Routes with safe loading
+try {
+  const authRoutes = require('./routes/auth');
+  app.use('/api/auth', authRoutes);
+} catch (e) { console.error('Error loading auth routes:', e.message); }
 
-app.use('/api/auth', authRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/api/categories', categoryRoutes);
-app.use('/api/blogs', blogRoutes);
-app.use('/api/gallery', galleryRoutes);
+try {
+  const contactRoutes = require('./routes/contact');
+  app.use('/api/contact', contactRoutes);
+} catch (e) { console.error('Error loading contact routes:', e.message); }
+
+try {
+  const categoryRoutes = require('./routes/categories');
+  app.use('/api/categories', categoryRoutes);
+} catch (e) { console.error('Error loading category routes:', e.message); }
+
+try {
+  const blogRoutes = require('./routes/blogs');
+  app.use('/api/blogs', blogRoutes);
+} catch (e) { console.error('Error loading blog routes:', e.message); }
+
+try {
+  const galleryRoutes = require('./routes/gallery');
+  app.use('/api/gallery', galleryRoutes);
+} catch (e) { console.error('Error loading gallery routes:', e.message); }
 
 // Health Check Endpoint
 app.get('/api/health', (req, res) => {
