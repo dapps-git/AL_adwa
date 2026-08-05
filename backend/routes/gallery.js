@@ -19,7 +19,7 @@ const Gallery = mongoose.models.Gallery || mongoose.model('Gallery', gallerySche
 const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
+  limits: { fileSize: 15 * 1024 * 1024 } // 15MB limit
 });
 
 // GET /api/gallery — Fetch all gallery items sorted by newest first
@@ -58,34 +58,42 @@ router.post('/', async (req, res) => {
   }
 });
 
-// POST /api/gallery/upload — Direct File Upload to Cloudinary with WebP Compression
+// POST /api/gallery/upload — Direct File / Base64 Upload to Cloudinary with WebP Compression
 router.post('/upload', upload.single('image'), async (req, res) => {
   try {
-    const { category, title, description } = req.body;
+    const { category, title, description, image, imageUrl } = req.body || {};
+    const cat = category || 'Studio Services & Printing';
 
-    if (!category) {
-      return res.status(400).json({ error: 'Category is required' });
+    let uploadResult;
+
+    if (req.file && req.file.buffer) {
+      // Multipart file upload
+      const b64 = Buffer.from(req.file.buffer).toString('base64');
+      const dataURI = `data:${req.file.mimetype};base64,${b64}`;
+      uploadResult = await cloudinary.uploader.upload(dataURI, {
+        folder: 'aladhwa_gallery',
+        transformation: [
+          { width: 1920, crop: 'limit' },
+          { quality: 'auto', fetch_format: 'auto' }
+        ]
+      });
+    } else if (image || imageUrl) {
+      // Base64 or URL upload
+      const targetImg = image || imageUrl;
+      uploadResult = await cloudinary.uploader.upload(targetImg, {
+        folder: 'aladhwa_gallery',
+        transformation: [
+          { width: 1920, crop: 'limit' },
+          { quality: 'auto', fetch_format: 'auto' }
+        ]
+      });
+    } else {
+      return res.status(400).json({ error: 'Image file or base64 data is required' });
     }
-
-    if (!req.file) {
-      return res.status(400).json({ error: 'Image file is required' });
-    }
-
-    // Convert Buffer to Base64 URI for Cloudinary upload
-    const b64 = Buffer.from(req.file.buffer).toString('base64');
-    const dataURI = `data:${req.file.mimetype};base64,${b64}`;
-
-    const uploadResult = await cloudinary.uploader.upload(dataURI, {
-      folder: 'aladhwa_gallery',
-      transformation: [
-        { width: 1920, crop: 'limit' },
-        { quality: 'auto', fetch_format: 'auto' }
-      ]
-    });
 
     const newItem = new Gallery({
       title: title || '',
-      category,
+      category: cat,
       imageUrl: uploadResult.secure_url,
       description: description || ''
     });
@@ -94,7 +102,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     res.status(201).json(newItem);
   } catch (err) {
     console.error('Cloudinary upload error:', err);
-    res.status(500).json({ error: 'Failed to upload image to Cloudinary' });
+    res.status(500).json({ error: err.message || 'Failed to upload image to Cloudinary' });
   }
 });
 
