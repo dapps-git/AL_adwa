@@ -14,10 +14,12 @@ const CATEGORIES = {
     heroTitle: 'STUDIO SERVICES',
     title: 'Studio Services & Printing',
     sub: 'Indoor Photography & Custom Printed Gifts',
-    img: '/img/indoor.webp',
+    img: '/studio/studio.webp',
     intro: 'Al Adhwa Studio provides high quality indoor photography sessions, document photos meeting official government standards, custom printed gifts, framing, photocopying, document lamination, scanning, and full office document support from our Muwailah, Sharjah studio.',
     services: [
       { title: 'PASSPORT & EMIRATES ID PHOTOS', img: '/studio/passport.jpg', desc: 'High-quality, professionally sized passport photos meeting all official requirements for UAE Emirates ID, Visa, and all international passports. Fast, reliable service ready immediately.' },
+      { title: 'CUSTOM PHOTO FRAMES & WALL ART', img: '/studio/frames.webp', desc: 'High quality wooden, metallic, and canvas photo framing for family portraits, certificates, art prints, and decorative wall displays.' },
+      { title: 'ROCK SLATE PHOTO PRINTING', img: '/studio/rock.webp', desc: 'Unique natural rock slate photo printing with vibrant color finish — handcrafted durable stone keepsakes for gifts and desk displays.' },
       { title: 'CORPORATE HEADSHOTS', img: '/studio/corporateheadshots.jpg', desc: 'Professional headshot photography for LinkedIn, company websites, executive profiles, or marketing materials in studio lighting.' },
       { title: 'FAMILY PHOTO SHOOT', img: '/studio/familyshoot.jpg', desc: 'Warm indoor studio sessions capturing beautiful, timeless family moments. Custom packages with high-resolution digital copies and framed prints.' },
       { title: 'PRODUCT PHOTOGRAPHY', img: '/studio/productphotography.jpg', desc: 'Studio product photography to showcase your products for e-commerce, Amazon, Instagram, or promotional catalogs in crisp detail.' },
@@ -34,19 +36,19 @@ const CATEGORIES = {
       { title: 'CV / RESUME MAKING', img: '/studio/resume.jpg', desc: 'Professional and polished CV crafting aligned with modern ATS and HR standards to help you stand out.' },
       { title: 'POUCH LAMINATION & DOCS', img: '/studio/pouchlamination.jpg', desc: 'Pouch lamination, document scanning, high-speed photocopying/xerox, and company seal stamps at one convenient location.' },
     ],
-    checklist: ['EMIRATES ID PHOTO','PASSPORT PHOTO','FAMILY PHOTO','PRODUCT SHOOT','CORPORATE HEADSHOTS','MUG PRINTING','MAGIC MUGS','T-SHIRT PRINTING','PILLOW PRINTING','KEY CHAIN PRINTING','MOBILE COVER PRINTING','WATER BOTTLE PRINTING','CAP PRINTING','POLAROIDS','BUSINESS CARDS','GRAPHIC DESIGN','CV/RESUME TYPING','POUCH LAMINATION','PHOTOCOPY/XEROX'],
+    checklist: ['EMIRATES ID PHOTO','PASSPORT PHOTO','CUSTOM PHOTO FRAMES','ROCK SLATE PRINTING','FAMILY PHOTO','PRODUCT SHOOT','CORPORATE HEADSHOTS','MUG PRINTING','MAGIC MUGS','T-SHIRT PRINTING','PILLOW PRINTING','KEY CHAIN PRINTING','MOBILE COVER PRINTING','WATER BOTTLE PRINTING','CAP PRINTING','POLAROIDS','BUSINESS CARDS','GRAPHIC DESIGN','CV/RESUME TYPING','POUCH LAMINATION','PHOTOCOPY/XEROX'],
   },
   'outdoor-photography': {
     num: '02',
     heroTitle: 'PHOTOGRAPHY',
     title: 'Outdoor Photography',
     sub: 'Portrait, Travel, Architecture & Commercial',
-    img: '/img/outdoor.webp',
+    img: '/studio/outdoorphoto.webp',
     intro: 'Capturing moments outdoors with state-of-the-art gear and expert lighting. Al Adhwa Studio covers human subjects, outdoor nature, architectural structures, and commercial objects across the UAE.',
     services: [
       { title: 'COMMERCIAL & BRAND', img: '/img/outdoor_commercial.webp', desc: 'High-end commercial brand shoots shot outdoors against modern skyline architecture and industrial setups.', items: ['Brand Commercial Shoots', 'Architectural Photography', 'Real Estate & Properties', 'Food & Culinary Scenes'] },
-      { title: 'WEDDING PHOTOGRAPHY', img: '/img/1.webp', desc: 'Capturing unforgettable wedding moments with artistic storytelling, romantic couple portraits, and full ceremony coverage.', items: ['Bridal & Groom Portraits', 'Ceremony & Reception Coverage', 'Pre-Wedding & Engagement Shoots', 'High-Resolution Albums'] },
-      { title: 'BIRTHDAY PHOTOGRAPHY', img: '/img/2.webp', desc: 'Vibrant and joyful birthday party photography for kids, adults, and milestone celebrations across the UAE.', items: ['Kids Birthday Parties', 'Milestone Celebrations', 'Cake Smash Sessions', 'Party Highlight Photography'] },
+      { title: 'WEDDING PHOTOGRAPHY', img: '/img/wedding.webp', desc: 'Capturing unforgettable wedding moments with artistic storytelling, romantic couple portraits, and full ceremony coverage.', items: ['Bridal & Groom Portraits', 'Ceremony & Reception Coverage', 'Pre-Wedding & Engagement Shoots', 'High-Resolution Albums'] },
+      { title: 'BIRTHDAY PHOTOGRAPHY', img: '/img/birthday.webp', desc: 'Vibrant and joyful birthday party photography for kids, adults, and milestone celebrations across the UAE.', items: ['Kids Birthday Parties', 'Milestone Celebrations', 'Cake Smash Sessions', 'Party Highlight Photography'] },
       { title: 'CORPORATE EXECUTIVE', img: '/img/outdoor_corporate.webp', desc: 'Corporate group sessions, team portraits, executive headshots, and leadership photography outdoors.', items: ['Executive Leadership Photos', 'Company Team Shoots', 'Annual Report Imagery', 'Corporate Campus Photography'] },
       { title: 'EVENTS & GALAS', img: '/img/outdoor_events.webp', desc: 'Vibrant outdoor gala celebrations, VIP summits, award ceremonies, and festival crowd photography.', items: ['Conferences & Summits', 'Gala Dinners', 'Award Ceremonies', 'Outdoor Festivals'] },
       { title: 'PERSONAL & PORTRAIT', img: '/img/outdoor_personal.webp', desc: 'Stunning outdoor portraits during golden hour in urban settings or UAE desert landscapes.', items: ['Personal Lifestyle Portraits', 'Fashion & Editorial', 'Engagement & Couples', 'Desert Golden Hour Shoots'] },
@@ -58,23 +60,25 @@ const CATEGORIES = {
     heroTitle: 'VIDEOGRAPHY',
     title: 'Outdoor Videography',
     sub: 'Commercial, Events, Weddings, Birthdays & Digital Production',
-    img: '/img/outdoor.webp',
+    img: '/studio/outdoorvideo.webp',
     intro: 'Commercial, event, wedding, birthday, and documentary video production covering everything from corporate promotions to personal milestones and creative storytelling across Dubai and the wider UAE.',
     services: [
       { title: 'COMMERCIAL & CORPORATE VIDEO', img: '/img/video_commercial.webp', desc: 'TV and online video commercials, corporate brand films, property walkthroughs, and promotional ads filmed with cinema cameras.', items: ['TV & Digital Video Commercials', 'Corporate Brand Films', 'Real Estate Property Tours', 'Industrial Feature Videos'] },
-      { title: 'WEDDING VIDEOGRAPHY', img: '/img/1.webp', desc: 'Cinematic wedding films, bridal prep, emotional ceremony vows, and reception highlight videos filmed in 4K.', items: ['Cinematic Wedding Highlights', 'Bridal Prep Coverage', 'Full Ceremony Film', 'Pre-Wedding Video Story'] },
-      { title: 'BIRTHDAY VIDEOGRAPHY', img: '/img/2.webp', desc: 'Vibrant birthday video coverage for kids and adult milestone celebrations with highlight reels and social media edits.', items: ['Kids Birthday Highlights', 'Adult Milestone Films', 'Party Atmosphere Recaps', 'Reels & Shorts Edits'] },
+      { title: 'WEDDING VIDEOGRAPHY', img: '/videography/wedd.webp', desc: 'Cinematic wedding films, bridal prep, emotional ceremony vows, and reception highlight videos filmed in 4K.', items: ['Cinematic Wedding Highlights', 'Bridal Prep Coverage', 'Full Ceremony Film', 'Pre-Wedding Video Story'] },
+      { title: 'BIRTHDAY VIDEOGRAPHY', img: '/videography/birth.webp', desc: 'Vibrant birthday video coverage for kids and adult milestone celebrations with highlight reels and social media edits.', items: ['Kids Birthday Highlights', 'Adult Milestone Films', 'Party Atmosphere Recaps', 'Reels & Shorts Edits'] },
+      { title: 'PRESS & MEDIA CONFERENCE COVERAGE', img: '/videography/pressphoto.webp', desc: 'Professional press conference video recording, media interviews, VIP announcements, and live news feed streaming across official media channels.', items: ['Press Conferences & Launches', 'VIP Speaker Interviews', 'News & Media Broadcast Feeds', 'Fast-Turnaround News Edits'] },
+      { title: 'MULTI-CAMERA LIVE PRODUCTION', img: '/videography/multicam.webp', desc: 'High-end multi-cam live switching for major summits, concerts, sports events, and corporate conventions filmed in 4K resolution with live vision mixing.', items: ['Live Video Switching & Mixing', 'Multi-Cam Concert & Summit Production', '4K Broadcast Recording', 'Instant Screen Playback'] },
       { title: 'EVENTS & LIVE COVERAGE', img: '/img/outdoor_events.webp', desc: 'Live event coverage, corporate summits, music concerts, and milestone celebrations filmed in 4K multi-cam format.', items: ['Multi-Cam Live Coverage', 'Conferences & Summits', 'Concerts & Shows', 'Highlight Reels'] },
       { title: 'CREATIVE & REELS', img: '/img/outdoor_commercial.webp', desc: 'High impact social media video production (TikToks, Shorts, Reels), artistic brand documentaries, and music videos.', items: ['Documentaries & Features', 'TikToks, Shorts & Instagram Reels', 'Artistic Music Videos'] },
     ],
-    checklist: ['COMMERCIAL VIDEO', 'WEDDING VIDEOGRAPHY', 'BIRTHDAY VIDEOGRAPHY', 'CORPORATE FILM', 'EVENT COVERAGE', 'DIGITAL REELS', 'DOCUMENTARY PRODUCTION'],
+    checklist: ['COMMERCIAL VIDEO', 'WEDDING VIDEOGRAPHY', 'BIRTHDAY VIDEOGRAPHY', 'PRESS & MEDIA COVERAGE', 'MULTI-CAMERA LIVE PRODUCTION', 'CORPORATE FILM', 'EVENT COVERAGE', 'DIGITAL REELS'],
   },
   'teleprompter-services': {
     num: '04',
     heroTitle: 'TELEPROMPTER',
     title: 'Teleprompter Services',
     sub: 'Camera Rigs, Presidential Podium & Stage Floor Displays',
-    img: '/img/tele.webp',
+    img: '/studio/tele.webp',
     intro: 'With over 14 years of UAE experience, Najeeb Abdul Noor is the leading Dubai Autocue Teleprompter Expert. A trusted partner for TV commercials, COP28, and large-scale international speaker events. AL ADHWA STUDIO provides both on-camera and presidential podium teleprompters.',
     services: [
       { title: 'PRESIDENTIAL PODIUM PROMPTERS', img: '/img/teleprompter_podium.webp', desc: 'Stand-alone transparent glass panels placed on either side of a lectern. Allows Presidents, CEOs, and keynote speakers to address crowds naturally — no memorization required.', items: ['Dual Reflective Glass Panels', 'Public Speeches & Summits', 'CEO & Shareholder Presentations'] },
@@ -167,7 +171,17 @@ export default function CategoryDetailPage({ params }) {
                 <div key={idx} className={styles.svcCard}>
                   {svc.img && (
                     <div className={styles.svcImgWrap}>
-                      <Image src={svc.img} alt={svc.title} fill sizes="(max-width:768px) 100vw, 33vw" unoptimized style={{ objectFit: 'cover' }} />
+                      <Image 
+                        src={svc.img} 
+                        alt={svc.title} 
+                        fill 
+                        sizes="(max-width:768px) 100vw, 33vw" 
+                        unoptimized 
+                        style={{ 
+                          objectFit: 'cover', 
+                          objectPosition: svc.img.includes('frames') ? '95% 40%' : (svc.img.includes('floor') ? '72% 35%' : 'center 35%')
+                        }} 
+                      />
                     </div>
                   )}
                   <div className={styles.svcBody}>

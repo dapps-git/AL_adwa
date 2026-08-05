@@ -26,21 +26,22 @@ export default function SchoolPhotographyPage() {
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
     fetch(`${API_URL}/gallery`)
-      .then(r => r.json())
+      .then(r => (r.ok ? r.json() : []))
       .then(d => {
-        if (Array.isArray(d) && d.length > 0) {
+        if (isMounted && Array.isArray(d) && d.length > 0) {
           const schoolFilter = d.filter(i => 
             Boolean(i.imageUrl && i.imageUrl.trim()) &&
             ((i.category || '').toLowerCase().includes('school') || (i.title || '').toLowerCase().includes('school'))
           );
           if (schoolFilter.length > 0) {
-            // DB uploaded school photos come FIRST
             setImages([...schoolFilter, ...STUDENT_GALLERY_IMAGES]);
           }
         }
       })
       .catch(() => {});
+    return () => { isMounted = false; };
   }, []);
 
   return (
@@ -93,11 +94,11 @@ export default function SchoolPhotographyPage() {
           <div className={styles.lightboxContent} onClick={e => e.stopPropagation()}>
             <button className={styles.lightboxClose} onClick={() => setLightbox(null)}>✕</button>
             <div className={styles.lightboxImgWrap}>
-              <Image src={lightbox.imageUrl} alt={lightbox.title} fill sizes="90vw" unoptimized priority />
+              <Image src={lightbox.imageUrl} alt={lightbox.title || 'School Photography'} fill sizes="90vw" unoptimized priority />
             </div>
             <div className={styles.lightboxMeta}>
               <span className={styles.lightboxCat}>School Photography</span>
-              <h3 className={styles.lightboxTitle}>{lightbox.title}</h3>
+              {lightbox.title && <h3 className={styles.lightboxTitle}>{lightbox.title}</h3>}
             </div>
           </div>
         </div>

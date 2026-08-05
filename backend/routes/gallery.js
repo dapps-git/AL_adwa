@@ -1,85 +1,113 @@
-const express   = require('express');
-const router    = express.Router();
-const multer    = require('multer');
-const Gallery   = require('../models/Gallery');
-const protect   = require('../middleware/auth');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const multer = require('multer');
 const cloudinary = require('../config/cloudinary');
 
-// Multer — store in memory, then stream to Cloudinary
+// Inline / Fallback Gallery Item Schema
+const gallerySchema = new mongoose.Schema({
+  title: { type: String, default: '' },
+  category: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  description: { type: String, default: '' },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const Gallery = mongoose.models.Gallery || mongoose.model('Gallery', gallerySchema);
+
+// Multer memory storage for direct Cloudinary streaming
 const storage = multer.memoryStorage();
-const upload  = multer({
-  storage,
-  limits: { fileSize: 20 * 1024 * 1024 }, // 20 MB max
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) cb(null, true);
-    else cb(new Error('Only image files are allowed'), false);
-  },
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
 });
 
-// ── ADMIN: Upload image to Cloudinary ─────────────────────
-router.post('/upload', protect, upload.single('image'), async (req, res) => {
-  try {
-    if (!req.file) return res.status(400).json({ message: 'No image file provided' });
-
-    // Stream buffer → Cloudinary (fast direct upload, CDN handles webp/compression on delivery)
-    const result = await new Promise((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        {
-          folder: 'aladhwa_gallery',
-          resource_type: 'image',
-        },
-        (err, result) => { if (err) reject(err); else resolve(result); }
-      );
-      stream.end(req.file.buffer);
-    });
-
-    // Apply Cloudinary's dynamic fast delivery transformations (f_auto = auto WebP/AVIF, q_auto = smart compression)
-    let optimizedUrl = result.secure_url;
-    if (optimizedUrl.includes('/upload/')) {
-      optimizedUrl = optimizedUrl.replace('/upload/', '/upload/f_auto,q_auto,w_1920,c_limit/');
-    }
-
-    res.json({ imageUrl: optimizedUrl, publicId: result.public_id });
-  } catch (err) {
-    console.error('Cloudinary upload error:', err.message);
-    res.status(500).json({ message: err.message || 'Upload failed' });
-  }
-});
-
-// ── PUBLIC: GET all gallery images ────────────────────────
+// GET /api/gallery — Fetch all gallery items sorted by newest first
 router.get('/', async (req, res) => {
   try {
-    const images = await Gallery.find().sort({ order: 1, createdAt: -1 });
-    res.json(images || []);
+    const items = await Gallery.find().sort({ createdAt: -1 });
+    res.json(items);
   } catch (err) {
-    console.error('Gallery fetch error:', err.message);
-    res.json([]);
+    console.error('Fetch gallery error:', err);
+    res.status(500).json({ error: 'Failed to fetch gallery items' });
   }
 });
 
-// ── ADMIN: CREATE gallery image ───────────────────────────
-router.post('/', protect, async (req, res) => {
+// POST /api/gallery — Create new gallery item with URL
+router.post('/', async (req, res) => {
   try {
-    const image = await Gallery.create(req.body);
-    res.status(201).json(image);
-  } catch (err) { res.status(400).json({ message: err.message }); }
+    const { title, category, imageUrl, url, description } = req.body;
+    const finalUrl = imageUrl || url;
+
+    if (!category || !finalUrl) {
+      return res.status(400).json({ error: 'Category and Image URL are required' });
+    }
+
+    const newItem = new Gallery({
+      title: title || '',
+      category,
+      imageUrl: finalUrl,
+      description: description || ''
+    });
+
+    await newItem.save();
+    res.status(201).json(newItem);
+  } catch (err) {
+    console.error('Create gallery error:', err);
+    res.status(500).json({ error: 'Failed to save gallery item' });
+  }
 });
 
-// ── ADMIN: UPDATE gallery image ───────────────────────────
-router.put('/:id', protect, async (req, res) => {
+// POST /api/gallery/upload — Direct File Upload to Cloudinary with WebP Compression
+router.post('/upload', upload.single('image'), async (req, res) => {
   try {
-    const image = await Gallery.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!image) return res.status(404).json({ message: 'Image not found' });
-    res.json(image);
-  } catch (err) { res.status(400).json({ message: err.message }); }
+    const { category, title, description } = req.body;
+
+    if (!category) {
+      return res.status(400).json({ error: 'Category is required' });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ error: 'Image file is required' });
+    }
+
+    // Convert Buffer to Base64 URI for Cloudinary upload
+    const b64 = Buffer.from(req.file.buffer).toString('base64');
+    const dataURI = `data:${req.file.mimetype};base64,${b64}`;
+
+    const uploadResult = await cloudinary.uploader.upload(dataURI, {
+      folder: 'aladhwa_gallery',
+      transformation: [
+        { width: 1920, crop: 'limit' },
+        { quality: 'auto', fetch_format: 'auto' }
+      ]
+    });
+
+    const newItem = new Gallery({
+      title: title || '',
+      category,
+      imageUrl: uploadResult.secure_url,
+      description: description || ''
+    });
+
+    await newItem.save();
+    res.status(201).json(newItem);
+  } catch (err) {
+    console.error('Cloudinary upload error:', err);
+    res.status(500).json({ error: 'Failed to upload image to Cloudinary' });
+  }
 });
 
-// ── ADMIN: DELETE gallery image ───────────────────────────
-router.delete('/:id', protect, async (req, res) => {
+// DELETE /api/gallery/:id — Delete gallery item by ID
+router.delete('/:id', async (req, res) => {
   try {
-    await Gallery.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Image deleted' });
-  } catch (err) { res.status(500).json({ message: err.message }); }
+    const { id } = req.params;
+    await Gallery.findByIdAndDelete(id);
+    res.json({ message: 'Gallery item deleted successfully' });
+  } catch (err) {
+    console.error('Delete gallery item error:', err);
+    res.status(500).json({ error: 'Failed to delete gallery item' });
+  }
 });
 
 module.exports = router;

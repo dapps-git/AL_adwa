@@ -1,0 +1,264 @@
+.main {
+  background: var(--cream);
+  padding-top: 70px;
+}
+
+/* ── HERO HEADER ────────────────────────────── */
+.heroSection {
+  padding: 3.5rem 0 1.5rem;
+  text-align: center;
+  background: var(--cream);
+}
+
+.heroHeader {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  font-weight: 600;
+  color: #1C1917;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+
+.divider {
+  width: 50px;
+  height: 2px;
+  background: var(--terracotta);
+  margin: 1rem auto 1.2rem;
+}
+
+.tagline {
+  font-size: 1.1rem;
+  color: #55504B;
+  line-height: 1.6;
+}
+
+/* ── MAIN STORY SECTION ─────────────────────── */
+.contentSection {
+  padding: 4.5rem 0;
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.imgCol {
+  position: relative;
+}
+
+.imgWrapMain {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+.badgeBox {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: var(--terracotta);
+  color: #FFFFFF;
+  padding: 1.2rem 1.6rem;
+  border-radius: 4px;
+  box-shadow: 0 12px 30px rgba(193, 68, 14, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 280px;
+}
+
+.badgeNum {
+  font-family: var(--font-cormorant), serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.badgeText {
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.headingSec {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1C1917;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.paragraph {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #4A443E;
+}
+
+.ctaRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ── KEY CATEGORIES SECTION ─────────────── */
+.statsSection {
+  background: var(--cream);
+  padding: 3.5rem 0 4.5rem;
+  border-top: 1px solid var(--cream-border);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  background: var(--cream);
+  border: 1px solid var(--cream-border);
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--terracotta);
+}
+
+.statIcon {
+  font-size: 2rem;
+}
+
+.statCard h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1C1917;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.statCard p {
+  font-size: 0.82rem;
+  color: #66605B;
+  line-height: 1.55;
+}
+
+/* ── BOTTOM CTA STRIP ───────────────────────── */
+.ctaStrip {
+  background: #1C1917;
+  color: #FFFFFF;
+  padding: 3.5rem 0;
+  text-align: center;
+}
+
+.ctaInner {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ctaInner h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.ctaInner p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+}
+
+.ctaBtn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.8rem 2.2rem;
+  background: var(--terracotta);
+  color: #FFFFFF;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.ctaBtn:hover {
+  background: #8B3A1A;
+  transform: translateY(-2px);
+}
+
+/* ── RESPONSIVE ────────────────────────────── */
+@media (max-width: 960px) {
+  .storyGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .badgeBox {
+    bottom: -15px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 650px) {
+  .main { padding-top: 60px; }
+  .heroSection { padding: 2.5rem 0 1.5rem; }
+  .title { font-size: 2.2rem; }
+  .tagline { font-size: 0.92rem; }
+  .contentSection { padding: 2.5rem 0; }
+  .statsGrid { grid-template-columns: 1fr; gap: 1rem; }
+  .badgeBox {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+  .ctaInner h2 { font-size: 1.5rem; }
+}

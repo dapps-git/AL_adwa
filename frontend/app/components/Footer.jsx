@@ -92,7 +92,7 @@ export default function Footer() {
           <div className={styles.lineSmall} />
           <nav className={styles.navLinks}>
             <a href="/">HOME</a>
-            <a href="/#about">ABOUT</a>
+            <a href="/about">ABOUT</a>
             <a href="/#categories">CATEGORIES</a>
             <a href="/gallery">OUR WORK</a>
             <a href="/school-photography">SCHOOL GALLERY</a>

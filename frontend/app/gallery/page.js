@@ -8,11 +8,11 @@ import styles from './page.module.css';
 
 const CATEGORIES = [
   'All Work',
-  'School Photography',
-  'Studio Services & Printing',
   'Outdoor Photography',
   'Outdoor Videography',
   'Teleprompter Services',
+  'Studio Services & Printing',
+  'School Photography',
 ];
 
 const DEFAULT_GALLERY_IMAGES = [
@@ -29,18 +29,21 @@ export default function GalleryPage() {
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
     fetch(`${API_URL}/gallery`)
-      .then(r => r.json())
+      .then(r => (r.ok ? r.json() : []))
       .then(d => {
-        if (Array.isArray(d) && d.length > 0) {
+        if (isMounted && Array.isArray(d) && d.length > 0) {
           const valid = d.filter(i => Boolean(i.imageUrl && i.imageUrl.trim()));
           if (valid.length > 0) {
-            // Put DB uploaded images first, followed by default placeholders
             setImages([...valid, ...DEFAULT_GALLERY_IMAGES]);
           }
         }
       })
-      .catch(err => console.error('[Gallery] Fetch error:', err));
+      .catch(() => {
+        // Fallback to default images if API is unreachable or blocked
+      });
+    return () => { isMounted = false; };
   }, []);
 
   const filtered = active === 'All Work' 
@@ -84,7 +87,7 @@ export default function GalleryPage() {
                 </a>
               </div>
 
-              {/* RIGHT COLUMN: Bento Mosaic Grid (0px Border Radius) */}
+              {/* RIGHT COLUMN: Bento Mosaic Grid */}
               <div className={styles.rightCol}>
                 {filtered.length === 0 ? (
                   <div className={styles.emptyGalleryState}>
@@ -110,7 +113,7 @@ export default function GalleryPage() {
                         />
                         <div className={styles.cardOverlay}>
                           <span className={styles.catBadge}>{img.category}</span>
-                          <h3 className={styles.cardTitle}>{img.title}</h3>
+                          {img.title && <h3 className={styles.cardTitle}>{img.title}</h3>}
                         </div>
                       </div>
                     ))}
@@ -128,11 +131,11 @@ export default function GalleryPage() {
           <div className={styles.lightboxContent} onClick={e => e.stopPropagation()}>
             <button className={styles.lightboxClose} onClick={() => setLightbox(null)}>✕</button>
             <div className={styles.lightboxImgWrap}>
-              <Image src={lightbox.imageUrl || '/img/gallery.webp'} alt={lightbox.title} fill sizes="90vw" unoptimized priority />
+              <Image src={lightbox.imageUrl || '/img/gallery.webp'} alt={lightbox.title || 'Gallery image'} fill sizes="90vw" unoptimized priority />
             </div>
             <div className={styles.lightboxMeta}>
               <span className={styles.lightboxCat}>{lightbox.category}</span>
-              <h3 className={styles.lightboxTitle}>{lightbox.title}</h3>
+              {lightbox.title && <h3 className={styles.lightboxTitle}>{lightbox.title}</h3>}
             </div>
           </div>
         </div>

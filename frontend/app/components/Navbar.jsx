@@ -70,7 +70,7 @@ export default function Navbar() {
         {/* ── RIGHT NAV LINKS & CTA ────────────────── */}
         <nav className={styles.navLinks} aria-label="Main navigation">
           <a href="/" className={styles.navLink}>Home</a>
-          <a href="/#about" className={styles.navLink}>About Us</a>
+          <a href="/about" className={styles.navLink}>About Us</a>
           
           {/* Services Dropdown */}
           <div 
@@ -129,7 +129,7 @@ export default function Navbar() {
       {/* ── MOBILE DRAWER ─────────────────────────── */}
       <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`} id="mobile-menu">
         <a href="/" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>Home</a>
-        <a href="/#about" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>About Us</a>
+        <a href="/about" className={styles.drawerLink} onClick={() => setMenuOpen(false)}>About Us</a>
         
         {/* Mobile Services Accordion */}
         <div className={styles.mobileServicesSection}>

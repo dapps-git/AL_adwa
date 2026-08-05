@@ -5,36 +5,36 @@ import styles from './Categories.module.css';
 
 const pillars = [
   {
-    id: 'cat-studio',
-    num: '01',
-    title: 'Studio Services & Printing',
-    sub: 'Indoor Photography & Custom Gifts',
-    img: '/img/indoor.webp',
-    href: '/categories/studio-services',
-  },
-  {
     id: 'cat-outdoor-photo',
-    num: '02',
+    num: '01',
     title: 'Outdoor Photography',
     sub: 'Portrait, Travel, Commercial · Wedding Photography · Birthday Photography',
-    img: '/img/com.webp',
+    img: '/studio/outdoorphoto.webp',
     href: '/categories/outdoor-photography',
   },
   {
     id: 'cat-outdoor-video',
-    num: '03',
+    num: '02',
     title: 'Outdoor Videography',
     sub: 'Commercial, Events & Digital · Wedding Videography · Birthday Videography',
-    img: '/img/outdoor.webp',
+    img: '/studio/outdoorvideo.webp',
     href: '/categories/outdoor-videography',
   },
   {
     id: 'cat-teleprompter',
-    num: '04',
+    num: '03',
     title: 'Teleprompter Services',
     sub: 'Camera Rigs, Presidential & Floor Monitors',
-    img: '/img/tele.webp',
+    img: '/studio/tele.webp',
     href: '/categories/teleprompter-services',
+  },
+  {
+    id: 'cat-studio',
+    num: '04',
+    title: 'Studio Services & Printing',
+    sub: 'Indoor Photography & Custom Gifts',
+    img: '/studio/studio.webp',
+    href: '/categories/studio-services',
   },
 ];
 

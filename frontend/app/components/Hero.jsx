@@ -18,9 +18,11 @@ export default function Hero() {
       {/* ── CENTERED OVERLAY CONTENT ───────────────── */}
       <div className={styles.heroContainer}>
         <div className={styles.heroContent}>
-          <h1 className={styles.mainTitle}>Premium Media &amp; Studio Production</h1>
+          <h1 className={styles.mainTitle}>
+            Premium Media &amp;<br />Studio Production
+          </h1>
           <p className={styles.subTitle}>
-            Studio Photography, Videography &amp; Autocue Teleprompter Solutions with State-of-the-Art Facilities
+            Studio Photography, Videography &amp;<br />Autocue Teleprompter Solutions<br />with State-of-the-Art Facilities
           </p>
           <div className={styles.btnRow}>
             <a href="/#categories" className="btn-terracotta">Explore Services ↗</a>

@@ -156,6 +156,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .btn-outline:hover {
   background: var(--charcoal);
   color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(42, 39, 32, 0.15);
 }
 
 .btn-terracotta {
@@ -174,6 +176,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .btn-terracotta:hover {
   background: var(--terracotta-dark);
   border-color: var(--terracotta-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(181, 101, 42, 0.3);
 }
 
 .btn-white {
@@ -191,6 +195,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .btn-white:hover {
   background: var(--white);
   color: var(--charcoal);
+  transform: translateY(-2px);
+}
+
+/* ── PULSING BADGE KEYFRAMES ───────────────────── */
+@keyframes pulseGlow {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  70% { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.pulse-whatsapp {
+  animation: pulseGlow 2.5s infinite ease-in-out;
 }
 
 /* ── CUSTOM SCROLLBAR ────────────────────────── */
