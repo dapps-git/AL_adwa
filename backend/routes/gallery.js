@@ -15,11 +15,11 @@ const gallerySchema = new mongoose.Schema({
 
 const Gallery = mongoose.models.Gallery || mongoose.model('Gallery', gallerySchema);
 
-// Multer memory storage for direct Cloudinary streaming
+// Multer memory storage — accepts any file field name up to 15MB
 const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 15 * 1024 * 1024 } // 15MB limit
+  limits: { fileSize: 15 * 1024 * 1024 }
 });
 
 // GET /api/gallery — Fetch all gallery items sorted by newest first
@@ -36,16 +36,17 @@ router.get('/', async (req, res) => {
 // POST /api/gallery — Create new gallery item with URL
 router.post('/', async (req, res) => {
   try {
-    const { title, category, imageUrl, url, description } = req.body;
+    const { title, category, imageUrl, url, description } = req.body || {};
     const finalUrl = imageUrl || url;
+    const cat = category || 'Studio Services & Printing';
 
-    if (!category || !finalUrl) {
-      return res.status(400).json({ error: 'Category and Image URL are required' });
+    if (!finalUrl) {
+      return res.status(400).json({ error: 'Image URL is required' });
     }
 
     const newItem = new Gallery({
       title: title || '',
-      category,
+      category: cat,
       imageUrl: finalUrl,
       description: description || ''
     });
@@ -58,18 +59,24 @@ router.post('/', async (req, res) => {
   }
 });
 
-// POST /api/gallery/upload — Direct File / Base64 Upload to Cloudinary with WebP Compression
-router.post('/upload', upload.single('image'), async (req, res) => {
+// POST /api/gallery/upload — Universal File / Base64 Upload to Cloudinary with WebP Compression
+router.post('/upload', upload.any(), async (req, res) => {
   try {
-    const { category, title, description, image, imageUrl } = req.body || {};
-    const cat = category || 'Studio Services & Printing';
+    const body = req.body || {};
+    const category = body.category || body.cat || 'Studio Services & Printing';
+    const title = body.title || '';
+    const description = body.description || '';
 
     let uploadResult;
 
-    if (req.file && req.file.buffer) {
+    // Check files array from upload.any() or req.file
+    const file = (req.files && req.files.length > 0) ? req.files[0] : req.file;
+
+    if (file && file.buffer) {
       // Multipart file upload
-      const b64 = Buffer.from(req.file.buffer).toString('base64');
-      const dataURI = `data:${req.file.mimetype};base64,${b64}`;
+      const b64 = Buffer.from(file.buffer).toString('base64');
+      const mime = file.mimetype || 'image/jpeg';
+      const dataURI = `data:${mime};base64,${b64}`;
       uploadResult = await cloudinary.uploader.upload(dataURI, {
         folder: 'aladhwa_gallery',
         transformation: [
@@ -77,9 +84,9 @@ router.post('/upload', upload.single('image'), async (req, res) => {
           { quality: 'auto', fetch_format: 'auto' }
         ]
       });
-    } else if (image || imageUrl) {
+    } else if (body.image || body.imageUrl || body.url || body.file || body.img) {
       // Base64 or URL upload
-      const targetImg = image || imageUrl;
+      const targetImg = body.image || body.imageUrl || body.url || body.file || body.img;
       uploadResult = await cloudinary.uploader.upload(targetImg, {
         folder: 'aladhwa_gallery',
         transformation: [
@@ -88,14 +95,14 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         ]
       });
     } else {
-      return res.status(400).json({ error: 'Image file or base64 data is required' });
+      return res.status(400).json({ error: 'No image file or image data was attached to request' });
     }
 
     const newItem = new Gallery({
-      title: title || '',
-      category: cat,
+      title,
+      category,
       imageUrl: uploadResult.secure_url,
-      description: description || ''
+      description
     });
 
     await newItem.save();
