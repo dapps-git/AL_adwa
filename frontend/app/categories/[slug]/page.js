@@ -1,10 +1,9 @@
 'use client';
-import { use, useEffect, useState } from 'react';
+import { use } from 'react';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import CategoryWhatsAppFloat from '../../components/CategoryWhatsAppFloat';
-import { API_URL } from '../../config';
 import styles from './page.module.css';
 
 // ── STATIC CATEGORY METADATA ──────────────────────────
@@ -18,7 +17,7 @@ const CATEGORIES = {
     intro: 'Al Adhwa Studio provides high quality indoor photography sessions, document photos meeting official government standards, custom printed gifts, framing, photocopying, document lamination, scanning, and full office document support from our Muwailah, Sharjah studio.',
     services: [
       { title: 'PASSPORT & EMIRATES ID PHOTOS', img: '/studio/passport.jpg', desc: 'High-quality, professionally sized passport photos meeting all official requirements for UAE Emirates ID, Visa, and all international passports. Fast, reliable service ready immediately.' },
-      { title: 'CUSTOM PHOTO FRAMES & WALL ART', img: '/studio/frames.webp', desc: 'High quality wooden, metallic, and canvas photo framing for family portraits, certificates, art prints, and decorative wall displays.' },
+      { title: 'CANVAS PRINTING & WALL ART', img: '/studio/canvas.webp', desc: 'High quality stretched canvas photo printing and premium wall art displays for family portraits, artwork, and home decor.' },
       { title: 'ROCK SLATE PHOTO PRINTING', img: '/studio/rock.webp', desc: 'Unique natural rock slate photo printing with vibrant color finish — handcrafted durable stone keepsakes for gifts and desk displays.' },
       { title: 'CORPORATE HEADSHOTS', img: '/studio/corporateheadshots.jpg', desc: 'Professional headshot photography for LinkedIn, company websites, executive profiles, or marketing materials in studio lighting.' },
       { title: 'FAMILY PHOTO SHOOT', img: '/studio/familyshoot.jpg', desc: 'Warm indoor studio sessions capturing beautiful, timeless family moments. Custom packages with high-resolution digital copies and framed prints.' },
@@ -36,7 +35,7 @@ const CATEGORIES = {
       { title: 'CV / RESUME MAKING', img: '/studio/resume.jpg', desc: 'Professional and polished CV crafting aligned with modern ATS and HR standards to help you stand out.' },
       { title: 'POUCH LAMINATION & DOCS', img: '/studio/pouchlamination.jpg', desc: 'Pouch lamination, document scanning, high-speed photocopying/xerox, and company seal stamps at one convenient location.' },
     ],
-    checklist: ['EMIRATES ID PHOTO','PASSPORT PHOTO','CUSTOM PHOTO FRAMES','ROCK SLATE PRINTING','FAMILY PHOTO','PRODUCT SHOOT','CORPORATE HEADSHOTS','MUG PRINTING','MAGIC MUGS','T-SHIRT PRINTING','PILLOW PRINTING','KEY CHAIN PRINTING','MOBILE COVER PRINTING','WATER BOTTLE PRINTING','CAP PRINTING','POLAROIDS','BUSINESS CARDS','GRAPHIC DESIGN','CV/RESUME TYPING','POUCH LAMINATION','PHOTOCOPY/XEROX'],
+    checklist: ['EMIRATES ID PHOTO','PASSPORT PHOTO','CANVAS PRINTING','ROCK SLATE PRINTING','FAMILY PHOTO','PRODUCT SHOOT','CORPORATE HEADSHOTS','MUG PRINTING','MAGIC MUGS','T-SHIRT PRINTING','PILLOW PRINTING','KEY CHAIN PRINTING','MOBILE COVER PRINTING','WATER BOTTLE PRINTING','CAP PRINTING','POLAROIDS','BUSINESS CARDS','GRAPHIC DESIGN','CV/RESUME TYPING','POUCH LAMINATION','PHOTOCOPY/XEROX'],
   },
   'outdoor-photography': {
     num: '02',
@@ -69,7 +68,6 @@ const CATEGORIES = {
       { title: 'PRESS & MEDIA CONFERENCE COVERAGE', img: '/videography/pressphoto.webp', desc: 'Professional press conference video recording, media interviews, VIP announcements, and live news feed streaming across official media channels.', items: ['Press Conferences & Launches', 'VIP Speaker Interviews', 'News & Media Broadcast Feeds', 'Fast-Turnaround News Edits'] },
       { title: 'MULTI-CAMERA LIVE PRODUCTION', img: '/videography/multicam.webp', desc: 'High-end multi-cam live switching for major summits, concerts, sports events, and corporate conventions filmed in 4K resolution with live vision mixing.', items: ['Live Video Switching & Mixing', 'Multi-Cam Concert & Summit Production', '4K Broadcast Recording', 'Instant Screen Playback'] },
       { title: 'EVENTS & LIVE COVERAGE', img: '/img/outdoor_events.webp', desc: 'Live event coverage, corporate summits, music concerts, and milestone celebrations filmed in 4K multi-cam format.', items: ['Multi-Cam Live Coverage', 'Conferences & Summits', 'Concerts & Shows', 'Highlight Reels'] },
-      { title: 'CREATIVE & REELS', img: '/img/outdoor_commercial.webp', desc: 'High impact social media video production (TikToks, Shorts, Reels), artistic brand documentaries, and music videos.', items: ['Documentaries & Features', 'TikToks, Shorts & Instagram Reels', 'Artistic Music Videos'] },
     ],
     checklist: ['COMMERCIAL VIDEO', 'WEDDING VIDEOGRAPHY', 'BIRTHDAY VIDEOGRAPHY', 'PRESS & MEDIA COVERAGE', 'MULTI-CAMERA LIVE PRODUCTION', 'CORPORATE FILM', 'EVENT COVERAGE', 'DIGITAL REELS'],
   },
@@ -92,29 +90,6 @@ const CATEGORIES = {
 export default function CategoryDetailPage({ params }) {
   const { slug } = use(params);
   const category = CATEGORIES[slug];
-  const [dynamicItems, setDynamicItems] = useState([]);
-
-  useEffect(() => {
-    if (!category) return;
-    fetch(`${API_URL}/gallery?t=${Date.now()}`, { cache: 'no-store' })
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          const catTitle = (category.title || '').toLowerCase();
-          const slugClean = (slug || '').replace(/-/g, ' ');
-          const filtered = data.filter((item) => {
-            const itemCat = (item.category || '').toLowerCase();
-            return (
-              itemCat === catTitle ||
-              itemCat.includes(slugClean) ||
-              catTitle.includes(itemCat)
-            );
-          });
-          setDynamicItems(filtered);
-        }
-      })
-      .catch(() => setDynamicItems([]));
-  }, [category, slug]);
 
   if (!category) return (
     <>
@@ -140,30 +115,6 @@ export default function CategoryDetailPage({ params }) {
               <div className={styles.dividerLine} />
               <p className={styles.categoryIntroText}>{category.intro}</p>
             </div>
-
-            {/* ── DYNAMIC BACKEND CATEGORY UPLOADS ───────────────────── */}
-            {dynamicItems.length > 0 && (
-              <div style={{ marginBottom: '3.5rem' }}>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', textTransform: 'uppercase', marginBottom: '1.5rem', color: '#1C1917', textAlign: 'center' }}>
-                  Uploaded Category Showcase ({dynamicItems.length})
-                </h3>
-                <div className={styles.servicesGrid}>
-                  {dynamicItems.map((item, idx) => (
-                    <div key={item._id || idx} className={styles.svcCard}>
-                      {item.imageUrl && (
-                        <div className={styles.svcImgWrap}>
-                          <Image src={item.imageUrl} alt={item.description || category.title} fill sizes="(max-width:768px) 100vw, 33vw" unoptimized style={{ objectFit: 'cover' }} />
-                        </div>
-                      )}
-                      <div className={styles.svcBody}>
-                        <h4 className={styles.svcTitle}>{item.category}</h4>
-                        {item.description && <p className={styles.svcDesc}>{item.description}</p>}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* ── STANDARD SERVICES GRID ───────────────────────── */}
             <div className={styles.servicesGrid}>

@@ -12,43 +12,51 @@
   align-items: center;
 }
 
-/* LEFT COLUMN: Single Image — hidden on mobile */
+/* LEFT COLUMN: Image Container with Fixed Aspect Ratio */
 .imgCol {
   width: 100%;
 }
 
-/* Mobile-only image inside textCol */
-.mobileImgWrap {
-  display: none;
-  width: 100%;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-  border: 1px solid var(--cream-border);
-  margin-bottom: 1.5rem;
-}
-
-.mobileSchoolImg {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
 .imgWrap {
+  position: relative;
   width: 100%;
-  border-radius: 6px;
+  aspect-ratio: 4/3;
+  border-radius: 0 !important;
   overflow: hidden;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--cream-border);
   background: #FFFFFF;
 }
 
-.schoolImg {
+/* Mobile-only image inside textCol */
+.mobileImgWrap {
+  position: relative;
+  display: none;
   width: 100%;
-  height: auto !important;
-  display: block;
-  object-fit: contain;
+  aspect-ratio: 4/3;
+  border-radius: 0 !important;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  border: 1px solid var(--cream-border);
+  margin-bottom: 1.5rem;
+}
+
+/* Smooth opacity cross-fade layers */
+.slideLayer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.activeLayer {
+  opacity: 1;
+  z-index: 2;
+}
+
+.schoolImg, .mobileSchoolImg {
+  border-radius: 0 !important;
 }
 
 /* RIGHT COLUMN: Text */

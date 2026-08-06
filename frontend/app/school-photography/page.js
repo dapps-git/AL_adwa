@@ -8,10 +8,12 @@ import styles from './page.module.css';
 
 export default function SchoolPhotographyPage() {
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
+    setLoading(true);
     fetch(`${API_URL}/gallery?t=${Date.now()}`, { cache: 'no-store' })
       .then(r => (r.ok ? r.json() : []))
       .then(d => {
@@ -23,7 +25,10 @@ export default function SchoolPhotographyPage() {
           setImages(schoolFilter);
         }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
     return () => { isMounted = false; };
   }, []);
 
@@ -31,7 +36,7 @@ export default function SchoolPhotographyPage() {
     <>
       <Navbar />
       <main className={styles.main}>
-        {/* ── DEDICATED GALLERY SHOWCASE (IMAGE ONLY) ────────── */}
+        {/* ── DEDICATED GALLERY SHOWCASE (CLEAN IMAGE ONLY) ────────── */}
         <section className={styles.gallerySection}>
           <div className="container">
             <div className={styles.sectionHeaderCenter}>
@@ -40,7 +45,16 @@ export default function SchoolPhotographyPage() {
               <div className={styles.dividerLine} />
             </div>
 
-            {images.length === 0 ? (
+            {loading ? (
+              /* ── SKELETON SHIMMER LOADING GRID ────────── */
+              <div className={styles.galleryGrid}>
+                {[1, 2, 3, 4, 5, 6].map(n => (
+                  <div key={n} className={styles.skeletonCard}>
+                    <div className={styles.skeletonShimmer} />
+                  </div>
+                ))}
+              </div>
+            ) : images.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '4rem 1rem', background: '#FFFFFF', border: '1px dashed var(--cream-border)' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', color: '#1C1917', marginBottom: '0.4rem' }}>No school photography uploaded yet</h3>
                 <p style={{ fontSize: '0.85rem', color: '#666' }}>Upload school photos with category "School Photography" in the Admin Panel to display here.</p>
@@ -62,10 +76,6 @@ export default function SchoolPhotographyPage() {
                         unoptimized
                         style={{ objectFit: 'cover' }}
                       />
-                    </div>
-                    <div className={styles.cardBody}>
-                      <span className={styles.cardCat}>{item.category || 'School Photography'}</span>
-                      <h3 className={styles.cardTitle}>{item.title || 'Student Photography'}</h3>
                     </div>
                   </div>
                 ))}
@@ -89,10 +99,6 @@ export default function SchoolPhotographyPage() {
                 unoptimized
                 priority
               />
-            </div>
-            <div className={styles.lightboxMeta}>
-              <span className={styles.lightboxCat}>{lightbox.category || 'School Photography'}</span>
-              <h3 className={styles.lightboxTitle}>{lightbox.title || 'Student Photography'}</h3>
             </div>
           </div>
         </div>

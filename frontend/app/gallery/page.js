@@ -17,11 +17,13 @@ const CATEGORIES = [
 
 export default function GalleryPage() {
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [active, setActive] = useState('All Work');
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
+    setLoading(true);
     fetch(`${API_URL}/gallery?t=${Date.now()}`, { cache: 'no-store' })
       .then(r => (r.ok ? r.json() : []))
       .then(d => {
@@ -30,7 +32,10 @@ export default function GalleryPage() {
           setImages(valid);
         }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
     return () => { isMounted = false; };
   }, []);
 
@@ -42,7 +47,20 @@ export default function GalleryPage() {
     <>
       <Navbar />
       <main className={styles.main}>
-        {/* ── STICKY FILTER TABS BAR ───────────────── */}
+        {/* ── TOP CENTERED HEADER SECTION ──────────────────────── */}
+        <section className={styles.headerSection}>
+          <div className="container">
+            <div className={styles.headerCenter}>
+              <span className={styles.eyebrow}>Visual Showcase</span>
+              <h1 className={styles.title}>OUR GALLERY</h1>
+              <a href="https://wa.me/971557544582" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
+                BOOK NOW
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── STICKY CLEAN TEXT FILTER BAR ───────────────── */}
         <section className={styles.filterSection}>
           <div className="container">
             <div className={styles.filterRow}>
@@ -59,56 +77,48 @@ export default function GalleryPage() {
           </div>
         </section>
 
-        {/* ── EDITORIAL SPLIT GALLERY ── */}
+        {/* ── FULL WIDTH GALLERY PHOTO GRID ── */}
         <section className={styles.gallerySection}>
           <div className="container">
-            <div className={styles.editorialRow}>
-              {/* LEFT COLUMN: Editorial Title & Description */}
-              <div className={styles.leftCol}>
-                <span className={styles.eyebrow}>Visual Showcase</span>
-                <h1 className={styles.title}>OUR<br />GALLERY</h1>
-                <p className={styles.desc}>
-                  Explore our curated portfolio of studio photography, outdoor sessions, video productions &amp; teleprompter setups across the UAE.
-                </p>
-                <a href="https://wa.me/971557544582" target="_blank" rel="noopener noreferrer" className={styles.bookBtn}>
-                  BOOK NOW
-                </a>
-              </div>
-
-              {/* RIGHT COLUMN: Bento Mosaic Grid */}
-              <div className={styles.rightCol}>
-                {filtered.length === 0 ? (
-                  <div className={styles.emptyGalleryState}>
-                    <p className={styles.emptyText}>No gallery images available.</p>
-                    <span className={styles.emptySub}>Upload photos from Admin Panel to display here.</span>
+            {loading ? (
+              /* ── SKELETON SHIMMER LOADING GRID ────────── */
+              <div className={styles.galleryGrid}>
+                {[1, 2, 3, 4, 5, 6].map(n => (
+                  <div key={n} className={styles.skeletonCard}>
+                    <div className={styles.skeletonShimmer} />
                   </div>
-                ) : (
-                  <div className={styles.bentoGrid}>
-                    {filtered.map((img, idx) => (
-                      <div
-                        key={img._id || idx}
-                        className={styles.card}
-                        onClick={() => setLightbox(img)}
-                      >
-                        <Image
-                          src={img.imageUrl}
-                          alt={img.title || 'Gallery image'}
-                          fill
-                          sizes="(max-width:768px) 100vw, 33vw"
-                          unoptimized
-                          style={{ objectFit: 'cover' }}
-                          className={styles.img}
-                        />
-                        <div className={styles.cardOverlay}>
-                          <span className={styles.catBadge}>{img.category}</span>
-                          {img.title && <h3 className={styles.cardTitle}>{img.title}</h3>}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                ))}
               </div>
-            </div>
+            ) : filtered.length === 0 ? (
+              <div className={styles.emptyGalleryState}>
+                <p className={styles.emptyText}>No gallery images available.</p>
+                <span className={styles.emptySub}>Upload photos from Admin Panel to display here.</span>
+              </div>
+            ) : (
+              <div className={styles.galleryGrid}>
+                {filtered.map((img, idx) => (
+                  <div
+                    key={img._id || idx}
+                    className={styles.card}
+                    onClick={() => setLightbox(img)}
+                  >
+                    <Image
+                      src={img.imageUrl}
+                      alt={img.title || 'Gallery image'}
+                      fill
+                      sizes="(max-width:768px) 100vw, 33vw"
+                      unoptimized
+                      style={{ objectFit: 'cover' }}
+                      className={styles.img}
+                    />
+                    <div className={styles.cardOverlay}>
+                      <span className={styles.catBadge}>{img.category}</span>
+                      {img.title && <h3 className={styles.cardTitle}>{img.title}</h3>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>

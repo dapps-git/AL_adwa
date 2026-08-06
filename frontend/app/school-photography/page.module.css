@@ -153,19 +153,40 @@
   }
 }
 
+.skeletonCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 0 !important;
+  background: #EFEBE4;
+  overflow: hidden;
+}
+
+.skeletonShimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+  animation: schoolShimmerAnimation 1.5s infinite;
+}
+
+@keyframes schoolShimmerAnimation {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 .card {
   background: #FFFFFF;
-  border-radius: 3px;
+  border-radius: 0 !important;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
   cursor: pointer;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
   animation: schoolCardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .card:hover {
-  transform: scale(1.03) translateY(-4px);
-  box-shadow: 0 14px 28px rgba(0,0,0,0.14);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.12);
 }
 
 .imgWrap {

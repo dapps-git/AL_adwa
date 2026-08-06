@@ -1,12 +1,29 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTypewriter } from '../hooks/useTypewriter';
 import styles from './SchoolPhotography.module.css';
+
+const schoolImages = [
+  { src: '/studentgallery/student.webp', alt: 'School Photography Student Portrait 1' },
+  { src: '/studentgallery/student1.webp', alt: 'School Photography Student Portrait 2' },
+  { src: '/studentgallery/student2.webp', alt: 'School Photography Student Portrait 3' },
+];
 
 export default function SchoolPhotography() {
   const fullTitle = 'SCHOOL PHOTOGRAPHY';
   const { ref, typedText, isVisible } = useTypewriter(fullTitle, 65, 0.2);
   const isDone = typedText.length === fullTitle.length;
+
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  // Slow 4.5-second rotation with ultra-smooth 1.8s cross-fade transition
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % schoolImages.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section
@@ -17,18 +34,26 @@ export default function SchoolPhotography() {
       <div className="container">
         <div className={styles.grid}>
 
-          {/* LEFT COLUMN: Image — Desktop only */}
+          {/* LEFT COLUMN: Image Container with Slow Cross-Fade Slideshow */}
           <div className={styles.imgCol}>
             <div className={styles.imgWrap}>
-              <Image
-                src="/studentgallery/student.webp"
-                alt="AL ADHWA Studio School Photography"
-                width={700}
-                height={500}
-                unoptimized
-                priority
-                className={styles.schoolImg}
-              />
+              {schoolImages.map((img, idx) => (
+                <div
+                  key={img.src}
+                  className={`${styles.slideLayer} ${idx === activeIdx ? styles.activeLayer : ''}`}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width:768px) 100vw, 50vw"
+                    unoptimized
+                    priority={idx === 0}
+                    style={{ objectFit: 'cover' }}
+                    className={styles.schoolImg}
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
@@ -38,16 +63,24 @@ export default function SchoolPhotography() {
               {typedText}
             </h2>
 
-            {/* Mobile-only image — shown between title and text on small screens */}
+            {/* Mobile-only image slideshow */}
             <div className={styles.mobileImgWrap}>
-              <Image
-                src="/studentgallery/student.webp"
-                alt="AL ADHWA Studio School Photography"
-                width={700}
-                height={400}
-                unoptimized
-                className={styles.mobileSchoolImg}
-              />
+              {schoolImages.map((img, idx) => (
+                <div
+                  key={`mob-${img.src}`}
+                  className={`${styles.slideLayer} ${idx === activeIdx ? styles.activeLayer : ''}`}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="100vw"
+                    unoptimized
+                    style={{ objectFit: 'cover' }}
+                    className={styles.mobileSchoolImg}
+                  />
+                </div>
+              ))}
             </div>
 
             <p className={styles.bodyText}>
@@ -66,4 +99,3 @@ export default function SchoolPhotography() {
     </section>
   );
 }
-
