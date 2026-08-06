@@ -11,6 +11,7 @@
   transition: all 0.35s ease;
 }
 
+/* Glassy Frosted Effect on Scroll */
 .scrolled {
   background: rgba(255, 255, 255, 0.65) !important;
   backdrop-filter: blur(24px) saturate(200%) !important;
@@ -20,9 +21,9 @@
 }
 
 .navInner {
-  max-width: 1380px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0.35rem 2.5rem; /* Keeps total navbar height slim and compact */
+  padding: 0.35rem 2rem; /* Keeps overall navbar height compact */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,26 +36,25 @@
 }
 
 .logoImg {
-  height: 73px;
+  height: 78px;
   width: auto;
   object-fit: contain;
-  transform: scale(1.48); /* Visually increases logo size by 5px more without expanding navbar height */
+  transform: scale(1.54); /* Visually increases logo size without expanding navbar height */
   transform-origin: left center;
 }
 
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 0.95rem;
-  margin-right: 14rem; /* Shifts CONTACT text completely left onto light warm background */
+  gap: 1.8rem;
 }
 
 .navLink {
-  font-size: 0.65rem;
+  font-size: 0.66rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #4A2B19; /* Rich Warm Brown */
+  color: #4A2B19; /* Default Warm Brown */
   text-decoration: none;
   transition: color 0.25s ease;
   position: relative;
@@ -64,17 +64,39 @@
   color: var(--terracotta);
 }
 
+/* On Homepage before scrolling: Text is crisp WHITE */
+.homeTransparentNav .navLink {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.homeTransparentNav .navLink:hover {
+  color: #F5E6D3 !important;
+}
+
+/* On Scroll: Text switches to rich Warm BROWN */
+.scrolled .navLink {
+  color: #4A2B19 !important;
+  text-shadow: none !important;
+}
+
+.scrolled .navLink:hover {
+  color: var(--terracotta) !important;
+}
+
+/* WhatsApp Button: Zero border radius, placed in the dark brown wood pillar area on far right */
 .waBtn {
   display: inline-block;
-  padding: 0.5rem 1.25rem;
+  padding: 0.6rem 1.4rem;
   background: var(--terracotta);
   color: #FFFFFF !important;
-  border-radius: 999px;
-  font-size: 0.6rem;
+  border-radius: 0 !important;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
+  margin-left: 1.5rem;
   transition: all 0.25s ease;
 }
 
@@ -99,6 +121,14 @@
   height: 2px;
   background: #1C1917;
   transition: all 0.3s ease;
+}
+
+.homeTransparentNav .hamburger span {
+  background: #FFFFFF;
+}
+
+.scrolled .hamburger span {
+  background: #1C1917;
 }
 
 /* Mobile Drawer */

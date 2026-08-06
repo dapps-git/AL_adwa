@@ -11,8 +11,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const isLightNav = scrolled || !isHomePage;
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
@@ -21,15 +19,18 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`${styles.navbar} ${isLightNav ? styles.scrolled : ''}`} id="navbar">
+    <header 
+      className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} ${isHomePage && !scrolled ? styles.homeTransparentNav : ''}`} 
+      id="navbar"
+    >
       <div className={styles.navInner}>
         {/* ── LEFT LOGO ───────────────────────────── */}
         <a href="/" className={styles.logoWrap} id="brand-logo">
           <Image
             src="/img/logo.webp?v=2"
             alt="AL ADHWA Studio"
-            width={220}
-            height={60}
+            width={240}
+            height={68}
             priority
             unoptimized
             className={styles.logoImg}
