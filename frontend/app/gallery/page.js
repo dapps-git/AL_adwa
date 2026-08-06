@@ -15,16 +15,8 @@ const CATEGORIES = [
   'School Photography',
 ];
 
-const DEFAULT_GALLERY_IMAGES = [
-  { _id: 'g0', title: 'Studio Production & Setup', imageUrl: '/img/gallery.webp', category: 'Studio Services & Printing' },
-  { _id: 'g1', title: 'Outdoor Commercial Photography', imageUrl: '/img/gallery1.webp', category: 'Outdoor Photography' },
-  { _id: 'g2', title: 'Teleprompter Broadcast Rig', imageUrl: '/img/gallery2.webp', category: 'Teleprompter Services' },
-  { _id: 'g3', title: 'Corporate Video & Editing', imageUrl: '/img/gallery3.webp', category: 'Outdoor Videography' },
-  { _id: 'g4', title: 'Custom Printed Gifts & Framing', imageUrl: '/img/gallery4.webp', category: 'Studio Services & Printing' },
-];
-
 export default function GalleryPage() {
-  const [images, setImages] = useState(DEFAULT_GALLERY_IMAGES);
+  const [images, setImages] = useState([]);
   const [active, setActive] = useState('All Work');
   const [lightbox, setLightbox] = useState(null);
 
@@ -33,16 +25,12 @@ export default function GalleryPage() {
     fetch(`${API_URL}/gallery?t=${Date.now()}`, { cache: 'no-store' })
       .then(r => (r.ok ? r.json() : []))
       .then(d => {
-        if (isMounted && Array.isArray(d) && d.length > 0) {
+        if (isMounted && Array.isArray(d)) {
           const valid = d.filter(i => Boolean(i.imageUrl && i.imageUrl.trim()));
-          if (valid.length > 0) {
-            setImages([...valid, ...DEFAULT_GALLERY_IMAGES]);
-          }
+          setImages(valid);
         }
       })
-      .catch(() => {
-        // Fallback to default images if API is unreachable or blocked
-      });
+      .catch(() => {});
     return () => { isMounted = false; };
   }, []);
 
@@ -91,8 +79,8 @@ export default function GalleryPage() {
               <div className={styles.rightCol}>
                 {filtered.length === 0 ? (
                   <div className={styles.emptyGalleryState}>
-                    <p className={styles.emptyText}>No gallery images for this category.</p>
-                    <span className={styles.emptySub}>Select another category to view work.</span>
+                    <p className={styles.emptyText}>No gallery images available.</p>
+                    <span className={styles.emptySub}>Upload photos from Admin Panel to display here.</span>
                   </div>
                 ) : (
                   <div className={styles.bentoGrid}>
@@ -103,7 +91,7 @@ export default function GalleryPage() {
                         onClick={() => setLightbox(img)}
                       >
                         <Image
-                          src={img.imageUrl || '/img/gallery.webp'}
+                          src={img.imageUrl}
                           alt={img.title || 'Gallery image'}
                           fill
                           sizes="(max-width:768px) 100vw, 33vw"
@@ -131,7 +119,7 @@ export default function GalleryPage() {
           <div className={styles.lightboxContent} onClick={e => e.stopPropagation()}>
             <button className={styles.lightboxClose} onClick={() => setLightbox(null)}>✕</button>
             <div className={styles.lightboxImgWrap}>
-              <Image src={lightbox.imageUrl || '/img/gallery.webp'} alt={lightbox.title || 'Gallery image'} fill sizes="90vw" unoptimized priority />
+              <Image src={lightbox.imageUrl} alt={lightbox.title || 'Gallery image'} fill sizes="90vw" unoptimized priority />
             </div>
             <div className={styles.lightboxMeta}>
               <span className={styles.lightboxCat}>{lightbox.category}</span>

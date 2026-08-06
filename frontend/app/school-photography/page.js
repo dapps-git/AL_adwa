@@ -6,38 +6,21 @@ import Footer from '../components/Footer';
 import { API_URL } from '../config';
 import styles from './page.module.css';
 
-const STUDENT_GALLERY_IMAGES = [
-  { _id: 'sg0', imageUrl: '/studentgallery/student.webp', title: 'School Photography' },
-  { _id: 'sg1', imageUrl: '/studentgallery/image.webp', title: 'School Photography' },
-  { _id: 'sg2', imageUrl: '/studentgallery/image1.webp', title: 'School Photography' },
-  { _id: 'sg3', imageUrl: '/studentgallery/image2.webp', title: 'School Photography' },
-  { _id: 'sg4', imageUrl: '/studentgallery/image3.webp', title: 'School Photography' },
-  { _id: 'sg5', imageUrl: '/studentgallery/image4.webp', title: 'School Photography' },
-  { _id: 'sg6', imageUrl: '/studentgallery/image5.webp', title: 'School Photography' },
-  { _id: 'sg7', imageUrl: '/studentgallery/image7.webp', title: 'School Photography' },
-  { _id: 'sg8', imageUrl: '/studentgallery/image8.webp', title: 'School Photography' },
-  { _id: 'sg9', imageUrl: '/studentgallery/image9.webp', title: 'School Photography' },
-  { _id: 'sg10', imageUrl: '/studentgallery/image10.webp', title: 'School Photography' },
-  { _id: 'sg11', imageUrl: '/studentgallery/image11.webp', title: 'School Photography' },
-];
-
 export default function SchoolPhotographyPage() {
-  const [images, setImages] = useState(STUDENT_GALLERY_IMAGES);
+  const [images, setImages] = useState([]);
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
-    fetch(`${API_URL}/gallery`)
+    fetch(`${API_URL}/gallery?t=${Date.now()}`, { cache: 'no-store' })
       .then(r => (r.ok ? r.json() : []))
       .then(d => {
-        if (isMounted && Array.isArray(d) && d.length > 0) {
+        if (isMounted && Array.isArray(d)) {
           const schoolFilter = d.filter(i => 
             Boolean(i.imageUrl && i.imageUrl.trim()) &&
             ((i.category || '').toLowerCase().includes('school') || (i.title || '').toLowerCase().includes('school'))
           );
-          if (schoolFilter.length > 0) {
-            setImages([...schoolFilter, ...STUDENT_GALLERY_IMAGES]);
-          }
+          setImages(schoolFilter);
         }
       })
       .catch(() => {});
@@ -57,48 +40,59 @@ export default function SchoolPhotographyPage() {
               <div className={styles.dividerLine} />
             </div>
 
-            <div className={styles.galleryGrid}>
-              {images.map((img, idx) => (
-                <div key={img._id || idx} className={styles.card} onClick={() => setLightbox(img)}>
-                  <div className={styles.imgWrap}>
-                    <Image
-                      src={img.imageUrl}
-                      alt={img.title || 'Student Photography'}
-                      fill
-                      sizes="(max-width:768px) 100vw, 33vw"
-                      unoptimized
-                      style={{ objectFit: 'cover' }}
-                    />
+            {images.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '4rem 1rem', background: '#FFFFFF', border: '1px dashed var(--cream-border)' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', color: '#1C1917', marginBottom: '0.4rem' }}>No school photography uploaded yet</h3>
+                <p style={{ fontSize: '0.85rem', color: '#666' }}>Upload school photos with category "School Photography" in the Admin Panel to display here.</p>
+              </div>
+            ) : (
+              <div className={styles.galleryGrid}>
+                {images.map((item, idx) => (
+                  <div
+                    key={item._id || idx}
+                    className={styles.card}
+                    onClick={() => setLightbox(item)}
+                  >
+                    <div className={styles.imgWrap}>
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.title || 'Student Photography'}
+                        fill
+                        sizes="(max-width:768px) 100vw, 33vw"
+                        unoptimized
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                    <div className={styles.cardBody}>
+                      <span className={styles.cardCat}>{item.category || 'School Photography'}</span>
+                      <h3 className={styles.cardTitle}>{item.title || 'Student Photography'}</h3>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── BOOKING CTA ───────────────────────── */}
-        <section className={styles.ctaStrip}>
-          <div className="container">
-            <div className={styles.ctaInner}>
-              <h2>Partner With AL ADHWA Studio for Your Next School Event</h2>
-              <p>Schedule a mobile studio setup or request custom package pricing for your educational institution.</p>
-              <a href="/#contact" className="btn-terracotta">Contact Our Team ↗</a>
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>
 
-      {/* ── LIGHTBOX MODAL ───────────────────────── */}
+      {/* ── LIGHTBOX MODAL ─────────────────────────── */}
       {lightbox && (
         <div className={styles.lightboxBackdrop} onClick={() => setLightbox(null)}>
           <div className={styles.lightboxContent} onClick={e => e.stopPropagation()}>
             <button className={styles.lightboxClose} onClick={() => setLightbox(null)}>✕</button>
             <div className={styles.lightboxImgWrap}>
-              <Image src={lightbox.imageUrl} alt={lightbox.title || 'School Photography'} fill sizes="90vw" unoptimized priority />
+              <Image
+                src={lightbox.imageUrl}
+                alt={lightbox.title || 'Student Photography'}
+                fill
+                sizes="90vw"
+                unoptimized
+                priority
+              />
             </div>
             <div className={styles.lightboxMeta}>
-              <span className={styles.lightboxCat}>School Photography</span>
-              {lightbox.title && <h3 className={styles.lightboxTitle}>{lightbox.title}</h3>}
+              <span className={styles.lightboxCat}>{lightbox.category || 'School Photography'}</span>
+              <h3 className={styles.lightboxTitle}>{lightbox.title || 'Student Photography'}</h3>
             </div>
           </div>
         </div>
