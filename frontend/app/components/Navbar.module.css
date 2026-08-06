@@ -7,23 +7,23 @@
   background: transparent;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border-bottom: none;
-  transition: all 0.35s ease;
+  border-bottom: none !important;
+  transition: all 0.3s ease;
 }
 
-/* Glassy Frosted Effect on Scroll */
+/* Cream Background on Scroll with NO Glassy Effect and NO Border Line */
 .scrolled {
-  background: rgba(255, 255, 255, 0.65) !important;
-  backdrop-filter: blur(24px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.08) !important;
+  background: var(--cream) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
 }
 
 .navInner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0.35rem 2rem; /* Keeps overall navbar height compact */
+  padding: 0.6rem 2rem; /* Slim, compact navbar height */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,13 +33,16 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  height: 44px; /* Fixed anchor height so navbar container never expands */
+  overflow: visible;
 }
 
 .logoImg {
-  height: 78px;
+  height: 76px;
   width: auto;
   object-fit: contain;
-  transform: scale(1.54); /* Visually increases logo size without expanding navbar height */
+  margin-top: -8px;
+  transform: scale(1.42);
   transform-origin: left center;
 }
 
@@ -54,7 +57,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #4A2B19; /* Default Warm Brown */
+  color: #4A2B19; /* Warm Brown */
   text-decoration: none;
   transition: color 0.25s ease;
   position: relative;
@@ -74,7 +77,7 @@
   color: #F5E6D3 !important;
 }
 
-/* On Scroll: Text switches to rich Warm BROWN */
+/* On Scroll: Cream background with rich Warm BROWN text */
 .scrolled .navLink {
   color: #4A2B19 !important;
   text-shadow: none !important;
@@ -84,10 +87,10 @@
   color: var(--terracotta) !important;
 }
 
-/* WhatsApp Button: Zero border radius, placed in the dark brown wood pillar area on far right */
+/* WhatsApp Button: Zero border radius, placed in the dark brown area on far right */
 .waBtn {
   display: inline-block;
-  padding: 0.6rem 1.4rem;
+  padding: 0.55rem 1.3rem;
   background: var(--terracotta);
   color: #FFFFFF !important;
   border-radius: 0 !important;
@@ -138,7 +141,7 @@
   background: rgba(245, 240, 232, 0.98);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid var(--cream-border);
+  border-top: none !important;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease;

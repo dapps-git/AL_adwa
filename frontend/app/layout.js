@@ -37,9 +37,12 @@ export const metadata = {
   authors: [{ name: 'AL ADHWA Studio' }],
   creator: 'AL ADHWA Studio',
   icons: {
-    icon: '/img/logo.webp',
-    shortcut: '/img/logo.webp',
-    apple: '/img/logo.webp',
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/img/logo.webp', type: 'image/webp' },
+    ],
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
   },
   openGraph: {
     title: 'AL ADHWA Studio | Photography, Videography & Teleprompter – Sharjah, UAE',

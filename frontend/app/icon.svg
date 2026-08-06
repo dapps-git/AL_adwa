@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1A10"/>
+      <stop offset="100%" stop-color="#140B07"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E89B74"/>
+      <stop offset="100%" stop-color="#C86D51"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Rounded Square Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bgGrad)"/>
+  <rect x="16" y="16" width="480" height="480" rx="84" fill="none" stroke="url(#goldGrad)" stroke-width="12" opacity="0.6"/>
+
+  <!-- Camera Body Silhouette -->
+  <path d="M160 140 H220 L240 100 H272 L292 140 H352 C376 140 396 160 396 184 V340 C396 364 376 384 352 384 H160 C136 384 116 364 116 340 V184 C116 160 136 140 160 140 Z" 
+        fill="none" 
+        stroke="url(#goldGrad)" 
+        stroke-width="24" 
+        stroke-linejoin="round"
+  />
+
+  <!-- Camera Lens Outer Circle -->
+  <circle cx="256" cy="262" r="82" fill="none" stroke="url(#goldGrad)" stroke-width="22"/>
+
+  <!-- Stylized Letter 'A' inside Lens -->
+  <text x="256" y="292" 
+        font-family="'Cormorant Garamond', serif, sans-serif" 
+        font-size="110" 
+        font-weight="700" 
+        fill="url(#goldGrad)" 
+        text-anchor="middle" 
+        letter-spacing="-2">A</text>
+
+  <!-- Flash Light Dot -->
+  <circle cx="346" cy="184" r="14" fill="url(#goldGrad)"/>
+</svg>
