@@ -343,8 +343,18 @@
 /* ── RESPONSIVE ────────────────────────────── */
 @media (max-width: 900px) {
   .filterRow {
-    justify-content: flex-start;
-    gap: 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem 0.5rem;
+    align-items: center;
+    justify-items: center;
+  }
+  .filterBtn {
+    font-size: 0.7rem;
+    text-align: center;
+    white-space: normal;
+    padding: 0.2rem 0;
+    line-height: 1.25;
   }
   .galleryGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -360,8 +370,13 @@
     font-size: 2.2rem;
     margin-bottom: 0.8rem;
   }
+  .filterRow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem 0.4rem;
+  }
   .filterBtn {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
   }
   .galleryGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -370,6 +385,13 @@
 }
 
 @media (max-width: 480px) {
+  .filterRow {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem 0.3rem;
+  }
+  .filterBtn {
+    font-size: 0.65rem;
+  }
   .galleryGrid {
     grid-template-columns: 1fr;
     gap: 10px;

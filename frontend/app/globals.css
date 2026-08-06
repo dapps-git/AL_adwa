@@ -250,3 +250,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+/* Global Image Protection CSS */
+img, picture, canvas {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-touch-callout: none !important;
+}
