@@ -23,7 +23,7 @@ export const metadata = {
     default: 'AL ADHWA Studio | Photography, Videography & Teleprompter – Sharjah, UAE',
     template: '%s | AL ADHWA Studio',
   },
-  description: 'Al Adhwa Studio (Est. 2014) in Muwailah, Sharjah — UAE premier studio for indoor photography, outdoor shoots, commercial videography, broadcast teleprompter services, custom gift printing, and document services.',
+  description: 'Al Adhwa Studio (Est. 2014) in Muweilah, Sharjah — UAE premier studio for indoor photography, outdoor shoots, commercial videography, broadcast teleprompter services, custom gift printing, and document services.',
   keywords: [
     'AL ADHWA Studio',
     'Photography Studio Sharjah',
@@ -81,7 +81,7 @@ const jsonLdSchema = {
   email: 'info@aladhwastudio.com',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Muwailah',
+    streetAddress: 'Muweilah',
     addressLocality: 'Sharjah',
     addressCountry: 'AE',
   },

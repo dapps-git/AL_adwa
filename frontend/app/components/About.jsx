@@ -42,7 +42,7 @@ export default function About() {
             {/* Location pill */}
             <div className={styles.locationPill}>
               <span>📍</span>
-              <span>Muwailah, Sharjah, UAE</span>
+              <span>Muweilah, Sharjah, UAE</span>
             </div>
           </div>
 
@@ -77,7 +77,7 @@ export default function About() {
               <div className={styles.divider} />
               <div className={styles.contactItem}>
                 <span className={styles.cLabel}>Studio Address</span>
-                <span className={styles.cVal}>P.O Box 95161, Muwailah, Sharjah</span>
+                <span className={styles.cVal}>P.O Box 95161, Muweilah, Sharjah</span>
               </div>
             </div>
           </div>

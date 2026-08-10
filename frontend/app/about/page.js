@@ -163,7 +163,7 @@ export default function AboutPage() {
           <div className="container">
             <div className={styles.ctaInner}>
               <h2>Ready to Bring Your Vision to Life?</h2>
-              <p>Connect with our creative team for custom package pricing or studio availability in Muwailah, Sharjah.</p>
+              <p>Connect with our creative team for custom package pricing or studio availability in Muweilah, Sharjah.</p>
               <a href="https://wa.me/971557544582" target="_blank" rel="noopener noreferrer" className={styles.ctaBtn}>
                 Chat on WhatsApp ↗
               </a>

@@ -14,7 +14,7 @@ const CATEGORIES = {
     title: 'Studio Services & Printing',
     sub: 'Indoor Photography & Custom Printed Gifts',
     img: '/studio/studio.webp',
-    intro: 'Al Adhwa Studio provides high quality indoor photography sessions, document photos meeting official government standards, custom printed gifts, framing, photocopying, document lamination, scanning, and full office document support from our Muwailah, Sharjah studio.',
+    intro: 'Al Adhwa Studio provides high quality indoor photography sessions, document photos meeting official government standards, custom printed gifts, framing, photocopying, document lamination, scanning, and full office document support from our Muweilah, Sharjah studio.',
     services: [
       { title: 'PASSPORT & EMIRATES ID PHOTOS', img: '/studio/passport.jpg', desc: 'High-quality, professionally sized passport photos meeting all official requirements for UAE Emirates ID, Visa, and all international passports. Fast, reliable service ready immediately.' },
       { title: 'CANVAS PRINTING & WALL ART', img: '/studio/canvas.webp', desc: 'High quality stretched canvas photo printing and premium wall art displays for family portraits, artwork, and home decor.' },
@@ -67,7 +67,7 @@ const CATEGORIES = {
       { title: 'BIRTHDAY VIDEOGRAPHY', img: '/videography/birth.webp', desc: 'Vibrant birthday video coverage for kids and adult milestone celebrations with highlight reels and social media edits.', items: ['Kids Birthday Highlights', 'Adult Milestone Films', 'Party Atmosphere Recaps', 'Reels & Shorts Edits'] },
       { title: 'PRESS & MEDIA CONFERENCE COVERAGE', img: '/videography/pressphoto.webp', desc: 'Professional press conference video recording, media interviews, VIP announcements, and live news feed streaming across official media channels.', items: ['Press Conferences & Launches', 'VIP Speaker Interviews', 'News & Media Broadcast Feeds', 'Fast-Turnaround News Edits'] },
       { title: 'MULTI-CAMERA LIVE PRODUCTION', img: '/videography/multicam.webp', desc: 'High-end multi-cam live switching for major summits, concerts, sports events, and corporate conventions filmed in 4K resolution with live vision mixing.', items: ['Live Video Switching & Mixing', 'Multi-Cam Concert & Summit Production', '4K Broadcast Recording', 'Instant Screen Playback'] },
-      { title: 'EVENTS & LIVE COVERAGE', img: '/img/outdoor_events.webp', desc: 'Live event coverage, corporate summits, music concerts, and milestone celebrations filmed in 4K multi-cam format.', items: ['Multi-Cam Live Coverage', 'Conferences & Summits', 'Concerts & Shows', 'Highlight Reels'] },
+      { title: 'EVENTS & LIVE COVERAGE', img: '/image.webp', desc: 'Live event coverage, corporate summits, music concerts, and milestone celebrations filmed in 4K multi-cam format.', items: ['Multi-Cam Live Coverage', 'Conferences & Summits', 'Concerts & Shows', 'Highlight Reels'] },
     ],
     checklist: ['COMMERCIAL VIDEO', 'WEDDING VIDEOGRAPHY', 'BIRTHDAY VIDEOGRAPHY', 'PRESS & MEDIA COVERAGE', 'MULTI-CAMERA LIVE PRODUCTION', 'CORPORATE FILM', 'EVENT COVERAGE', 'DIGITAL REELS'],
   },
