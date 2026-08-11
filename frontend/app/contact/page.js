@@ -59,7 +59,7 @@ export default function ContactPage() {
                 <h4 className={styles.blockLabel}>STUDIO ADDRESS</h4>
                 <p className={styles.blockVal}>
                   AL ADHWA STUDIO, P.O BOX: 95161<br />
-                  Muweilah, Sharjah, United Arab Emirates
+                  Muwaileh, Sharjah, United Arab Emirates
                 </p>
               </div>
 

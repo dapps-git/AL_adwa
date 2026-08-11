@@ -74,7 +74,7 @@ export default function Navbar() {
         </a>
         <div className={styles.drawerContact}>
           <p>+971 6 5586870</p>
-          <p>Muweilah, Sharjah, UAE</p>
+          <p>Muwaileh, Sharjah, UAE</p>
         </div>
       </div>
     </header>

@@ -65,7 +65,7 @@ export default function Contact() {
               <p className={styles.infoVal}>
                 AL ADHWA STUDIO<br />
                 P.O BOX: 95161<br />
-                Muweilah, Sharjah, United Arab Emirates
+                Muwaileh, Sharjah, United Arab Emirates
               </p>
             </div>
           </div>

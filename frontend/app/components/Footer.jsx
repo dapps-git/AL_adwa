@@ -130,7 +130,7 @@ export default function Footer() {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                 <circle cx="12" cy="10" r="3"/>
               </svg>
-              <span>Muweilah, Sharjah, UAE</span>
+              <span>Muwaileh, Sharjah, UAE</span>
             </a>
             <a href="mailto:info@aladhwastudio.com" className={styles.locItemRow}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--terracotta)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -157,7 +157,7 @@ export default function Footer() {
 
       {/* ── Bottom Bar ────────────────────────────── */}
       <div className={styles.bottomBar}>
-        <p>© 2014–2026 AL ADHWA STUDIO | MUWEILAH, SHARJAH, UAE</p>
+        <p>© 2014–2026 AL ADHWA STUDIO | MUWAILEH, SHARJAH, UAE</p>
       </div>
     </footer>
   );

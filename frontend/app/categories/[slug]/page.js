@@ -14,7 +14,7 @@ const CATEGORIES = {
     title: 'Studio Services & Printing',
     sub: 'Indoor Photography & Custom Printed Gifts',
     img: '/studio/studio.webp',
-    intro: 'Al Adhwa Studio provides high quality indoor photography sessions, document photos meeting official government standards, custom printed gifts, framing, photocopying, document lamination, scanning, and full office document support from our Muweilah, Sharjah studio.',
+    intro: 'Al Adhwa Studio provides high quality indoor photography sessions, document photos meeting official government standards, custom printed gifts, framing, photocopying, document lamination, scanning, and full office document support from our Muwaileh, Sharjah studio.',
     services: [
       { title: 'PASSPORT & EMIRATES ID PHOTOS', img: '/studio/passport.jpg', desc: 'High-quality, professionally sized passport photos meeting all official requirements for UAE Emirates ID, Visa, and all international passports. Fast, reliable service ready immediately.' },
       { title: 'CANVAS PRINTING & WALL ART', img: '/studio/canvas.webp', desc: 'High quality stretched canvas photo printing and premium wall art displays for family portraits, artwork, and home decor.' },
