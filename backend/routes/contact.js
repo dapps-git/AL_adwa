@@ -1,3 +1,4 @@
+// ── AL ADHWA Studio Contact Router (Hostinger Business Email Enabled) ─────
 const express = require('express');
 const router  = express.Router();
 const nodemailer = require('nodemailer');
