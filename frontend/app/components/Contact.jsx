@@ -207,7 +207,7 @@ export default function Contact() {
       <div className={`container ${styles.mapContainer}`}>
         <div className={styles.mapHeader}>
           <span className={styles.mapLabel}>Find Our Studio Location</span>
-          <h3 className={styles.mapTitle}>VISIT AL ADHWA STUDIO IN SHARJAH</h3>
+          <h3 className={styles.mapTitle}>VISIT AL ADHWA STUDIO IN MUWAILEH, SHARJAH</h3>
         </div>
         <div className={styles.mapFrameWrap}>
           <iframe
