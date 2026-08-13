@@ -3,40 +3,45 @@ const express = require('express');
 const router  = express.Router();
 const nodemailer = require('nodemailer');
 
-// ── Nodemailer transporter ──────────────────────────────────
-function createTransporter() {
+function getTransporters() {
   const host = process.env.SMTP_HOST || 'smtp.hostinger.com';
-  const port = Number(process.env.SMTP_PORT) || 465;
-  const secure = process.env.SMTP_SECURE !== undefined ? process.env.SMTP_SECURE === 'true' : (port === 465);
   const user = process.env.SMTP_USER || 'info@aladhwastudio.com';
   const pass = process.env.SMTP_PASS || 'Aladhwastudio@125';
 
-  return {
-    transporter: nodemailer.createTransport({
-      host,
-      port,
-      secure,
-      auth: { user, pass },
-      tls: { rejectUnauthorized: false },
-    }),
-    user
-  };
+  const t465 = nodemailer.createTransport({
+    host,
+    port: 465,
+    secure: true,
+    auth: { user, pass },
+    tls: { rejectUnauthorized: false },
+    connectionTimeout: 10000,
+  });
+
+  const t587 = nodemailer.createTransport({
+    host,
+    port: 587,
+    secure: false,
+    auth: { user, pass },
+    tls: { rejectUnauthorized: false },
+    connectionTimeout: 10000,
+  });
+
+  return { t465, t587, user };
 }
 
 // ── POST /api/contact ───────────────────────────────────────
 router.post('/', async (req, res) => {
   try {
-    const { name, email, service, message } = req.body;
+    const { name, email, service, message } = req.body || {};
 
     if (!name || !email || !message) {
       return res.status(400).json({ ok: false, message: 'Name, email, and message are required.' });
     }
 
     const toEmail = process.env.CONTACT_TO || 'info@aladhwastudio.com';
-    const { transporter, user } = createTransporter();
+    const { t465, t587, user } = getTransporters();
 
-    // ── Email to studio (notification) ──
-    await transporter.sendMail({
+    const mailOptions = {
       from:    `"AL ADHWA Studio Website" <${user}>`,
       to:      toEmail,
       replyTo: email,
@@ -60,11 +65,20 @@ router.post('/', async (req, res) => {
           </div>
         </div>
       `,
-    });
+    };
+
+    let activeTransporter = t465;
+    try {
+      await t465.sendMail(mailOptions);
+    } catch (err465) {
+      console.warn('Port 465 failed, trying Port 587...', err465.message);
+      activeTransporter = t587;
+      await t587.sendMail(mailOptions);
+    }
 
     // ── Auto-reply to sender ──
     try {
-      await transporter.sendMail({
+      await activeTransporter.sendMail({
         from:    `"AL ADHWA Studio" <${user}>`,
         to:      email,
         subject: `Thank you for reaching AL ADHWA Studio, ${name}!`,
@@ -96,7 +110,11 @@ router.post('/', async (req, res) => {
     return res.json({ ok: true, message: 'Message sent successfully.' });
   } catch (err) {
     console.error('Contact email error:', err);
-    return res.status(500).json({ ok: false, message: err.message || 'Failed to send email. Please try again.' });
+    return res.status(500).json({
+      ok: false,
+      message: err.message || 'Failed to send email. Please try again.',
+      code: err.code || 'UNKNOWN'
+    });
   }
 });
 
