@@ -8,15 +8,18 @@ function createTransporter() {
   const port = Number(process.env.SMTP_PORT) || 465;
   const secure = process.env.SMTP_SECURE !== undefined ? process.env.SMTP_SECURE === 'true' : (port === 465);
   const user = process.env.SMTP_USER || 'info@aladhwastudio.com';
-  const pass = process.env.SMTP_PASS || '';
+  const pass = process.env.SMTP_PASS || 'Aladhwastudio@125';
 
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure,
-    auth: { user, pass },
-    tls: { rejectUnauthorized: false },
-  });
+  return {
+    transporter: nodemailer.createTransport({
+      host,
+      port,
+      secure,
+      auth: { user, pass },
+      tls: { rejectUnauthorized: false },
+    }),
+    user
+  };
 }
 
 // ── POST /api/contact ───────────────────────────────────────
@@ -29,11 +32,11 @@ router.post('/', async (req, res) => {
     }
 
     const toEmail = process.env.CONTACT_TO || 'info@aladhwastudio.com';
-    const transporter = createTransporter();
+    const { transporter, user } = createTransporter();
 
     // ── Email to studio (notification) ──
     await transporter.sendMail({
-      from:    `"AL ADHWA Studio Website" <${process.env.SMTP_USER}>`,
+      from:    `"AL ADHWA Studio Website" <${user}>`,
       to:      toEmail,
       replyTo: email,
       subject: `📩 New Contact Inquiry — ${service || 'General'} | ${name}`,
@@ -59,36 +62,40 @@ router.post('/', async (req, res) => {
     });
 
     // ── Auto-reply to sender ──
-    await transporter.sendMail({
-      from:    `"AL ADHWA Studio" <${process.env.SMTP_USER}>`,
-      to:      email,
-      subject: `Thank you for reaching AL ADHWA Studio, ${name}!`,
-      html: `
-        <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
-          <div style="background:#C1440E;padding:24px 32px;">
-            <h1 style="color:#fff;margin:0;font-size:22px;letter-spacing:1px;">AL ADHWA STUDIO</h1>
-            <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">Sharjah, United Arab Emirates</p>
+    try {
+      await transporter.sendMail({
+        from:    `"AL ADHWA Studio" <${user}>`,
+        to:      email,
+        subject: `Thank you for reaching AL ADHWA Studio, ${name}!`,
+        html: `
+          <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
+            <div style="background:#C1440E;padding:24px 32px;">
+              <h1 style="color:#fff;margin:0;font-size:22px;letter-spacing:1px;">AL ADHWA STUDIO</h1>
+              <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px;">Sharjah, United Arab Emirates</p>
+            </div>
+            <div style="padding:32px;background:#fff;border:1px solid #eee;">
+              <p>Dear <strong>${name}</strong>,</p>
+              <p>Thank you for contacting <strong>AL ADHWA Studio</strong>. We have received your inquiry and one of our team members will get back to you shortly.</p>
+              <p>In the meantime, feel free to explore our services at <a href="https://aladhwastudio.com" style="color:#C1440E;">aladhwastudio.com</a>.</p>
+              <br/>
+              <p style="margin:0;">Warm regards,</p>
+              <p style="margin:4px 0 0;font-weight:600;">AL ADHWA Studio Team</p>
+              <p style="margin:4px 0 0;font-size:12px;color:#888;">📞 +971 52 5331575 &nbsp;|&nbsp; 📧 info@aladhwastudio.com</p>
+            </div>
+            <div style="padding:16px 32px;background:#f8f6f3;text-align:center;font-size:11px;color:#aaa;">
+              AL ADHWA Studio — P.O BOX: 95161, Muwaileh, Sharjah, UAE
+            </div>
           </div>
-          <div style="padding:32px;background:#fff;border:1px solid #eee;">
-            <p>Dear <strong>${name}</strong>,</p>
-            <p>Thank you for contacting <strong>AL ADHWA Studio</strong>. We have received your inquiry and one of our team members will get back to you shortly.</p>
-            <p>In the meantime, feel free to explore our services at <a href="https://aladhwastudio.com" style="color:#C1440E;">aladhwastudio.com</a>.</p>
-            <br/>
-            <p style="margin:0;">Warm regards,</p>
-            <p style="margin:4px 0 0;font-weight:600;">AL ADHWA Studio Team</p>
-            <p style="margin:4px 0 0;font-size:12px;color:#888;">📞 +971 52 5331575 &nbsp;|&nbsp; 📧 info@aladhwastudio.com</p>
-          </div>
-          <div style="padding:16px 32px;background:#f8f6f3;text-align:center;font-size:11px;color:#aaa;">
-            AL ADHWA Studio — P.O BOX: 95161, Muwaileh, Sharjah, UAE
-          </div>
-        </div>
-      `,
-    });
+        `,
+      });
+    } catch (autoReplyErr) {
+      console.warn('Auto-reply email could not be delivered to sender:', autoReplyErr.message);
+    }
 
     return res.json({ ok: true, message: 'Message sent successfully.' });
   } catch (err) {
     console.error('Contact email error:', err);
-    return res.status(500).json({ ok: false, message: 'Failed to send email. Please try again.' });
+    return res.status(500).json({ ok: false, message: err.message || 'Failed to send email. Please try again.' });
   }
 });
 
