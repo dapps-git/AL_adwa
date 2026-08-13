@@ -17,6 +17,12 @@ export default function Contact() {
   const handle = async (e) => {
     e.preventDefault();
     setError('');
+
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setError('Please fill in your Name, Email, and Requirements/Message.');
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch(`${API_URL}/contact`, {
