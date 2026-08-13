@@ -4,14 +4,17 @@ const nodemailer = require('nodemailer');
 
 // ── Nodemailer transporter ──────────────────────────────────
 function createTransporter() {
+  const host = process.env.SMTP_HOST || 'smtp.hostinger.com';
+  const port = Number(process.env.SMTP_PORT) || 465;
+  const secure = process.env.SMTP_SECURE !== undefined ? process.env.SMTP_SECURE === 'true' : (port === 465);
+  const user = process.env.SMTP_USER || 'info@aladhwastudio.com';
+  const pass = process.env.SMTP_PASS || '';
+
   return nodemailer.createTransport({
-    host:   process.env.SMTP_HOST   || 'mail.aladhwastudio.com',
-    port:   Number(process.env.SMTP_PORT) || 465,
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-      user: process.env.SMTP_USER || 'info@aladhwastudio.com',
-      pass: process.env.SMTP_PASS || '',
-    },
+    host,
+    port,
+    secure,
+    auth: { user, pass },
     tls: { rejectUnauthorized: false },
   });
 }
@@ -76,7 +79,7 @@ router.post('/', async (req, res) => {
             <p style="margin:4px 0 0;font-size:12px;color:#888;">📞 +971 52 5331575 &nbsp;|&nbsp; 📧 info@aladhwastudio.com</p>
           </div>
           <div style="padding:16px 32px;background:#f8f6f3;text-align:center;font-size:11px;color:#aaa;">
-            AL ADHWA Studio — P.O BOX: 95161, Muwailah, Sharjah, UAE
+            AL ADHWA Studio — P.O BOX: 95161, Muwaileh, Sharjah, UAE
           </div>
         </div>
       `,
