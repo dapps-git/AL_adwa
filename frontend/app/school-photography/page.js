@@ -56,8 +56,7 @@ export default function SchoolPhotographyPage() {
               </div>
             ) : images.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '4rem 1rem', background: '#FFFFFF', border: '1px dashed var(--cream-border)' }}>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', color: '#1C1917', marginBottom: '0.4rem' }}>No school photography uploaded yet</h3>
-                <p style={{ fontSize: '0.85rem', color: '#666' }}>Upload school photos with category "School Photography" in the Admin Panel to display here.</p>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', color: '#1C1917', marginBottom: '0' }}>No school photography uploaded yet</h3>
               </div>
             ) : (
               <div className={styles.galleryGrid}>

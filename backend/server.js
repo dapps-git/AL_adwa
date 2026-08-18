@@ -14,7 +14,11 @@ try { mongoose = require('mongoose'); } catch (e) {}
 // Universal CORS & No-Cache Middleware — Runs on every single request
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  if (origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, token, x-access-token');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -22,7 +26,7 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    return res.status(204).end();
   }
   next();
 });
@@ -96,6 +100,7 @@ function safeLoadRoute(routePath, modulePath) {
   }
 }
 
+safeLoadRoute('/api/auth', './routes/auth');
 safeLoadRoute('/api/contact', './routes/contact');
 safeLoadRoute('/api/categories', './routes/categories');
 safeLoadRoute('/api/blogs', './routes/blogs');

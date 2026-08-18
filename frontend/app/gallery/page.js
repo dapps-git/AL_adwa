@@ -92,7 +92,6 @@ export default function GalleryPage() {
             ) : filtered.length === 0 ? (
               <div className={styles.emptyGalleryState}>
                 <p className={styles.emptyText}>No gallery images available.</p>
-                <span className={styles.emptySub}>Upload photos from Admin Panel to display here.</span>
               </div>
             ) : (
               <div className={styles.galleryGrid}>
