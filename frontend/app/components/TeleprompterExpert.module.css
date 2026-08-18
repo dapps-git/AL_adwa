@@ -128,11 +128,12 @@
   }
   .imgCol {
     width: 100%;
-    max-width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
   }
   .imgWrap {
     width: 100%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/4;
   }
   .textCol {
     padding: 0 1.5rem;

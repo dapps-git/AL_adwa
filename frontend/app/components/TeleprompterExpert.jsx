@@ -25,7 +25,7 @@ export default function TeleprompterExpert() {
                 fill
                 sizes="(max-width:768px) 100vw, 45vw"
                 unoptimized
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
               />
               <div className={styles.badge}>13+ YEARS IN UAE</div>
             </div>
