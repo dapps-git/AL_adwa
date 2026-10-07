@@ -105,7 +105,7 @@ export default function Contact() {
               <p className={styles.infoLabel}>Email Addresses</p>
               <p className={styles.infoVal}>
                 Official: <a href="mailto:info@aladhwastudio.com" className={styles.link}>info@aladhwastudio.com</a><br />
-                General: <a href="mailto:studios.sfk@gmail.com" className={styles.link}>studios.sfk@gmail.com</a>
+                General: <a href="mailto:abdulnajeeb@gmail.com" className={styles.link}>abdulnajeeb@gmail.com</a>
               </p>
             </div>
           </div>

@@ -5,11 +5,12 @@ import styles from './CategoryWhatsAppFloat.module.css';
 export default function CategoryWhatsAppFloat({ slug }) {
   const isPhoto = slug === 'studio-services' || slug === 'outdoor-photography';
   
-  // Specific WhatsApp numbers requested:
-  // Studio & Outdoor Photography: 971509261376
-  // Outdoor Videography & Teleprompter: 971564627313
-  const phone = isPhoto ? '971564627313' : '971557544582';
+  // Specific WhatsApp numbers:
+  // Studio & Outdoor Photography: +971 55 7544582 (971557544582)
+  // Outdoor Videography & Teleprompter: +971 56 4627313 (971564627313)
+  const phone = isPhoto ? '971557544582' : '971564627313';
   const categoryName = isPhoto ? 'Studio & Outdoor Photography' : 'Videography & Teleprompter';
+  const formattedPhone = isPhoto ? '+971 55 7544582' : '+971 56 4627313';
   const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(`Hello AL ADHWA Studio, I would like to inquire about ${categoryName} services.`)}`;
 
   return (
@@ -32,7 +33,7 @@ export default function CategoryWhatsAppFloat({ slug }) {
           className={styles.wImg}
         />
       </div>
-      <span className={styles.tooltip}>WhatsApp ({phone})</span>
+      <span className={styles.tooltip}>WhatsApp ({formattedPhone})</span>
     </a>
   );
 }
